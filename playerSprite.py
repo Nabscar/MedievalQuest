@@ -30,13 +30,22 @@ class player(basicSprite.Sprite):
              maxHealth
              currentHealth
              damage
-             quiver
+             quive"""
+    This class will initialize the Background
+    we consider them sprites so that we can easily change them when the player chagnes Screen
+    """
+    def __init__ (self.centerPoint, image):
+        """
+        Initializes the special characteristics of the playable character
+        """
+        basicSprite.Sprite.__init__(self, centerPoint, image)
+r
              bombs
              potions
         """
         self.maxHealth = 3
         self.currentHealth = 3
-        self.damage = 1
+        self.damage     = 1
         self.quiver = False
         self.bombs = 0
         self.potions = 0
@@ -90,13 +99,9 @@ class player(basicSprite.Sprite):
         """
         self.rect.move_ip(self.xMove,self.yMove)
 
-        if pygame.sprite.spritecollideany(self, block_group):
-            """
-            If we hit a block, dont moved
-            """
-            self.rect.move_ip(0, 0)
-
         lstEnemies = pygame.sprite.spritecollide(self, enemy_group, False)
+        lstBackground = pygame.sprite.spritecollide(self, background_group, False)
+        lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if(len(lstEnemies) > 0):
             """
             We hit an Enemy!
