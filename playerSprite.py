@@ -3,12 +3,6 @@ import basicSprite
 from helpers import *
 import time
 
-POWER_UP_ONE_START = pygame.USEREVENT + 1
-POWER_UP_ONE_END = POWER_UP_ONE_START + 1
-POWER_UP_TWO_START = POWER_UP_ONE_END + 1
-POWER_UP_TWO_END = POWER_UP_TWO_START + 1
-PLAYER_DEAD = POWER_UP_TWO_END + 1
-
 class player(basicSprite.Sprite):
     """
     This is the sprite or the playable character
@@ -31,7 +25,21 @@ class player(basicSprite.Sprite):
         self.xMove = 0
         self.yMove = 0
 
-        pass
+        """
+        Initializes values for:
+             maxHealth
+             currentHealth
+             damage
+             quiver
+             bombs
+             potions
+        """
+        self.maxHealth = 3
+        self.currentHealth = 3
+        self.damage = 1
+        self.quiver = False
+        self.bombs = 0
+        self.potions = 0
 
     def MoveKeyDown(self, key):
         """
@@ -47,8 +55,6 @@ class player(basicSprite.Sprite):
             self.yMove += -self.y_dist
         elif (key == K_DOWN):
             self.yMove += self.y_dist
-
-        pass
 
     def MoveKeyUp(self, key):
         """
@@ -98,23 +104,8 @@ class player(basicSprite.Sprite):
             self.EnemyCollide(lstEnemies)
         else:
             """
-            So we move, we need to define if we hit super-power items first though
+            define naythnig else we can hit
             """
-            lstCols = pygame.sprite.spritecollide(self, power_group, True)
-
-            if (len(lstCols) > 0):
-                """
-                We hit a power-up!
-                """
-                """
-                1. define which type of power-up we hit
-                2. run this depending on what powerup we hit
-                    self.powerUpX = True
-                    pygame.event.post(pygame.event.Event(POWER_UP_X_START,{}))
-                3. Set a timer to figure out when the power-up ends, if it does
-                    pygame.time.set_timer(POWER_UP_X_END, 0)
-                    pygame.time.set_timer(POWER_UP_X_END, 3000)
-                """
         pass
 
     def EnemyCollide(self, lstEnemiesHit):
@@ -132,15 +123,10 @@ class player(basicSprite.Sprite):
             Just in case we somehow hit more than one enemy, we loop through the list
 
             Here, we need to figure out a couple of things:
-                1. on which direction did we hit the enemy
-                    If hit from top:
-                        Enemy Dies
-                    If hit from side:
-                        If the user in power_up_mode:
-                            Depending on power-up either
-                                - the enemy dies
-                                - the user loses the power-up
-                        If not in power-up mode:
-                            The player dies
+                if it has been hit, check if the user was atacking at to which side
+                    if it was an attack that hit then kill monster
+                    else take one healthpoint out of the player
+
+                    if the players health reaches 0 hes dead
             """
         pass
