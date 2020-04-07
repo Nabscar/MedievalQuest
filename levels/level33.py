@@ -2,7 +2,7 @@ import levelBase
 from helpers import load_image
 
 
-class level(levelBase.Level):
+class level33(levelBase.Level):
     """
     Class that will include this quadrant of the game
     """

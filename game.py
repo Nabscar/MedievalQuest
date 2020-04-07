@@ -1,6 +1,14 @@
 import os, sys
 import pygame
-import level001
+import \levels\level11
+import \levels\level12
+import \levels\level13
+import \levels\level21
+import \levels\level22
+import \levels\level23
+import \levels\level31
+import \levels\level32
+import \levels\level33
 import basicSprite
 from pygame.locals import *
 from helpers import *
@@ -11,13 +19,13 @@ import time
 if not pygame.font: print('Warning, fonts disabled')
 if not pygame.mixer: print('Warning, sound disabled')
 
-class PyGameMain:
+class MainQuest:
     """
     The Main PyGame Class – This class handles the main
     initialization and creating of the Game.
     """
 
-    def __init__(self, width=640,height=480):
+    def __init__(self, width=960,height=680):
         """
         Initialize PyGame
         """
@@ -32,14 +40,11 @@ class PyGameMain:
         """
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-        pass
-
     def MainLoop(self):
         """
         Load all of our Sprites
         """
         self.LoadSprites()
-
         """
         Create Background
         """
@@ -185,5 +190,5 @@ class PyGameMain:
         pass
 
 if __name__ == "__main__":
-    MainWindow = PyGameMain(500,575)
+    MainWindow = MainQuest()    
     MainWindow.MainLoop()
