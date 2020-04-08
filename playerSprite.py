@@ -27,28 +27,13 @@ class player(basicSprite.Sprite):
 
         """
         Initializes values for:
-             maxHealth
-             currentHealth
-             damage
-             quive"""
-    This class will initialize the Background
-    we consider them sprites so that we can easily change them when the player chagnes Screen
-    """
-    def __init__ (self.centerPoint, image):
-        """
-        Initializes the special characteristics of the playable character
-        """
-        basicSprite.Sprite.__init__(self, centerPoint, image)
-r
-             bombs
-             potions
-        """
         self.maxHealth = 3
         self.currentHealth = 3
         self.damage     = 1
         self.quiver = False
         self.bombs = 0
         self.potions = 0
+        """
 
     def MoveKeyDown(self, key):
         """
@@ -56,33 +41,22 @@ r
         depending on what hey they pressed, it will move once update() is called.
         """
 
-        if (key == K_RIGHT):
+        if (key == D_DOWN):
             self.xMove += self.x_dist
-        elif (key == K_LEFT):
+        elif (key == A_DOWN):
             self.xMove += -self.x_dist
-        elif (key == K_UP):
+        elif (key == W_DOWN):
             self.yMove += -self.y_dist
-        elif (key == K_DOWN):
+        elif (key == S_DOWN):
             self.yMove += self.y_dist
-
-    def MoveKeyUp(self, key):
-        """
-        This is the function that moves the x and y movement of the player to 0
-        after they let go of the key this movement ends
-        """
-
-        if (key == K_RIGHT):
-            self.xMove += -self.x_dist
-        elif (key == K_LEFT):
-            self.xMove += self.x_dist
-        elif (key == K_UP):
-            self.yMove += self.y_dist
+        elif (key == J_DOWN):
+            sword_Attack()
         elif (key == K_DOWN):
-            self.yMove += -self.y_dist
-
+            shoot_Arrow()
+        elif (key == L_DOWN):
+            place_Bomb()
         pass
-
-
+        
     def update(self, groups of sprites):
         """
         Called to update the player sprite's position and state
@@ -134,4 +108,22 @@ r
 
                     if the players health reaches 0 hes dead
             """
+        pass
+
+    def sword_Attack(self):
+        """
+        This the function that has the character attack with his sword_Attack
+        """
+        pass
+
+    def shoot_Arrow(self):
+        """
+        This the function that has the character shoots his arrow (if he has acquired them)
+        """
+        pass
+
+    def place_Bomb(self):
+        """
+        This the function that has the character place his bomb (if he has)
+        """
         pass

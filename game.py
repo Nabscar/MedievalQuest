@@ -9,6 +9,8 @@ import \levels\level23
 import \levels\level31
 import \levels\level32
 import \levels\level33
+import \levels\cave22
+import \levels\cave31
 import basicSprite
 from pygame.locals import *
 from helpers import *
@@ -190,5 +192,5 @@ class MainQuest:
         pass
 
 if __name__ == "__main__":
-    MainWindow = MainQuest()    
+    MainWindow = MainQuest()
     MainWindow.MainLoop()
