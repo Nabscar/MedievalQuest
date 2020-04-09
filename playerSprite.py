@@ -8,11 +8,11 @@ class player(basicSprite.Sprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self.centerPoint, image):
+    def __init__ (self.centerPoint, images):
         """
         Initializes the special characteristics of the playable character
         """
-        basicSprite.Sprite.__init__(self, centerPoint, image)
+        basicSprite.Sprite.__init__(self, centerPoint, images)
 
         """
         Initialize score, distance moved per turn, and how much is the current movement
@@ -56,7 +56,7 @@ class player(basicSprite.Sprite):
         elif (key == L_DOWN):
             place_Bomb()
         pass
-        
+
     def update(self, groups of sprites):
         """
         Called to update the player sprite's position and state

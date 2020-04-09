@@ -1,21 +1,12 @@
 import os, sys
 import pygame
-import \levels\level11
-import \levels\level12
-import \levels\level13
-import \levels\level21
-import \levels\level22
-import \levels\level23
-import \levels\level31
-import \levels\level32
-import \levels\level33
-import \levels\cave22
-import \levels\cave31
+import \levels\ *
 import basicSprite
 from pygame.locals import *
 from helpers import *
 from playerSprite import *
 from enemies import *
+from projectiles import *
 import time
 
 if not pygame.font: print('Warning, fonts disabled')

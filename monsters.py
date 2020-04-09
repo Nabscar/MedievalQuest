@@ -3,6 +3,11 @@ import basicSprite
 import random
 import projectiles
 
+"""
+This python script creates three classes that create the Monsters
+It should be done
+"""
+
 class Green_Monster(basicSprite.Sprite):
     """
     This is where we create the Green Monsters
@@ -12,7 +17,7 @@ class Green_Monster(basicSprite.Sprite):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
-        basicSprite.Sprite.__init__(self, centerPoint, image)
+        basicSprite.Sprite.__init__(self, centerPoint, images)
         """start the basic initialization"""
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down", "Left1", "Left2", "Right1", "Right2", "Up"]
@@ -24,20 +29,20 @@ class Green_Monster(basicSprite.Sprite):
         self.attacking = False
         """
         Initialize the direction
-        1 = up
+        1 = down
         2 = Left
         3 = right
-        4 = down
+        4 = up
         """
         self.direction = direction
         if self.direction == 1:
-            self.image = self.images[5]
+            self.image = self.images[0]
         elif self.direction == 2:
             self.image = self.images[1]
         elif self.direction == 3:
-            self.image = self.images[0]
-        elif self.direction == 4:
             self.image = self.images[3]
+        elif self.direction == 4:
+            self.image = self.images[5]
 
         self.dist = 1
 
@@ -46,7 +51,7 @@ class Green_Monster(basicSprite.Sprite):
         self.step = 1
         pass
 
-    def update(self, block_group, character_coords, centerPoint, javelin_images):
+    def update(self, block_group, character_coords, centerPoint, javelin_images, breakable_group, passage_group):
         """
         This function is the one that will move an dupdate the position of the monsters
         It is called each "cycle" of gameplay to show that they move
@@ -73,29 +78,29 @@ class Green_Monster(basicSprite.Sprite):
                 throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
         else:#If we didnt see the character, we move
-            if self.direction==1:#up
-                yMove = -self.dist
+            if self.direction==1:#down
+                yMove = self.dist
             elif self.direction==2:#Left
-                xMove = self.dist
+                xMove = -self.dist
                 if self.step == 1:
                     step = 2
                     self.image = self.images[1]
-                if self.step == 2:
+                elif self.step == 2:
                     step = 1
                     self.image = self.images[2]
-            elif self.direction==3:#Down
-                yMove = self.dist
-            elif self.direction==4:#Right
+            elif self.direction==3:#right
                 xMove = -self.dist
                 if self.step == 1:
                     step = 2
                     self.image = self.images[3]
-                if self.step == 2:
+                elif self.step == 2:
                     step = 1
                     self.image = self.images[4]
+            elif self.direction==4:#up
+                yMove = -self.dist
 
             self.rect.move_ip(xMove,yMove) #This is what actually moves the character
-            if pygame.sprite.spritecollideany(self, block_group):
+            if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group:
                 """If we hit a block, don’t move – reverse the movement"""
                 self.rect.move_ip(-xMove,-yMove)
                 self.direction += 2
@@ -120,6 +125,7 @@ class Green_Monster(basicSprite.Sprite):
         """
         This function establishes what happens when a enemy is killed
         this means he is set do dead (so update cant be called) and the image is set as a ground image
+        it is also removed from the enemy_group list
         """
         self.dead = True
         self.images = ground_image
@@ -146,27 +152,27 @@ class Bat(basicSprite.Sprite):
 
         """
         Initialize the direction
-        1 = up
+        1 = down
         2 = Left
         3 = right
-        4 = down
+        4 = up
         """
         self.direction = direction
         if self.direction == 1:
-            self.image = self.images[6]
+            self.image = self.images[0]
         elif self.direction == 2:
             self.image = self.images[2]
         elif self.direction == 3:
-            self.image = self.images[0]
-        elif self.direction == 4:
             self.image = self.images[4]
+        elif self.direction == 4:
+            self.image = self.images[6]
 
         self.dist = 1
 
         self.step = 1
         pass
 
-    def update(self, block_group, character_coords):
+    def update(self, block_group, character_coords, breakable_group, passage_group):
         """
         This function is the one that will move an dupdate the position of the monsters
         It is called each "cycle" of gameplay to show that they move
@@ -192,41 +198,41 @@ class Bat(basicSprite.Sprite):
                 self.direction = 3
 
         #either we move towards the character or we move randomly
-        if self.direction==1:#up
-            yMove = -self.dist
+        if self.direction==1:#down
+            yMove = self.dist
             if self.step == 1:
                 step = 2
-                self.image = self.images[6]
-            if self.step == 2:
+                self.image = self.images[0]
+            elif self.step == 2:
                 step = 1
-                self.image = self.images[7]
+                self.image = self.images[1]
         elif self.direction==2:#Left
             xMove = self.dist
             if self.step == 1:
                 step = 2
                 self.image = self.images[2]
-            if self.step == 2:
+            elif self.step == 2:
                 step = 1
                 self.image = self.images[3]
-        elif self.direction==3:#Down
-            yMove = self.dist
-            if self.step == 1:
-                step = 2
-                self.image = self.images[0]
-            if self.step == 2:
-                step = 1
-                self.image = self.images[1]
-        elif self.direction==4:#Right
+        elif self.direction==3:#right
             xMove = -self.dist
             if self.step == 1:
                 step = 2
                 self.image = self.images[4]
-            if self.step == 2:
+            elif self.step == 2:
                 step = 1
                 self.image = self.images[5]
+        elif self.direction==4:#up
+            yMove = -self.dist
+            if self.step == 1:
+                step = 2
+                self.image = self.images[6]
+            elif self.step == 2:
+                step = 1
+                self.image = self.images[7]
 
         self.rect.move_ip(xMove,yMove) #This is what actually moves the character
-        if pygame.sprite.spritecollideany(self, block_group):
+        if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group:
             """If we hit a block, don’t move – reverse the movement"""
             self.rect.move_ip(-xMove,-yMove)
             self.direction += 2
@@ -242,7 +248,6 @@ class Bat(basicSprite.Sprite):
         self.images = ground_image
 
         pass
-
 
 class Shooter(basicSprite.Sprite):
     """
@@ -265,20 +270,20 @@ class Shooter(basicSprite.Sprite):
         self.attacking = False
         """
         Initialize the direction
-        1 = up
+        1 = down
         2 = Left
         3 = right
-        4 = down
+        4 = up
         """
         self.direction = direction
         if self.direction == 1:
-            self.image = self.images[6]
+            self.image = self.images[0]
         elif self.direction == 2:
             self.image = self.images[2]
         elif self.direction == 3:
-            self.image = self.images[0]
-        elif self.direction == 4:
             self.image = self.images[4]
+        elif self.direction == 4:
+            self.image = self.images[6]
 
         self.dist = 1
 
@@ -287,7 +292,7 @@ class Shooter(basicSprite.Sprite):
         self.step = 1
         pass
 
-    def update(self, block_group, character_coords, centerPoint, ball_image):
+    def update(self, block_group, character_coords, centerPoint, ball_image, breakable_group, passage_group):
         """
         This function is the one that will move an dupdate the position of the monsters
         It is called each "cycle" of gameplay to show that they move
@@ -314,41 +319,41 @@ class Shooter(basicSprite.Sprite):
                 shoot_ball(centerPoint, ball_image, self.direction)
                 self.thrown = True
         else:#If we didnt see the character, we move
-            if self.direction==1:#up
-                yMove = -self.dist
+            if self.direction==1:#down
+                yMove = self.dist
                 if self.step == 1:
                     step = 2
-                    self.image = self.images[6]
-                if self.step == 2:
+                    self.image = self.images[0]
+                elif self.step == 2:
                     step = 1
-                    self.image = self.images[7]
+                    self.image = self.images[1]
             elif self.direction==2:#Left
                 xMove = self.dist
                 if self.step == 1:
                     step = 2
                     self.image = self.images[2]
-                if self.step == 2:
+                elif self.step == 2:
                     step = 1
                     self.image = self.images[3]
-            elif self.direction==3:#Down
-                yMove = self.dist
-                if self.step == 1:
-                    step = 2
-                    self.image = self.images[0]
-                if self.step == 2:
-                    step = 1
-                    self.image = self.images[1]
-            elif self.direction==4:#Right
+            elif self.direction==3:#right
                 xMove = -self.dist
                 if self.step == 1:
                     step = 2
                     self.image = self.images[4]
-                if self.step == 2:
+                elif self.step == 2:
                     step = 1
                     self.image = self.images[5]
+            elif self.direction==4:#up
+                yMove = -self.dist
+                if self.step == 1:
+                    step = 2
+                    self.image = self.images[6]
+                elif self.step == 2:
+                    step = 1
+                    self.image = self.images[7]
 
             self.rect.move_ip(xMove,yMove) #This is what actually moves the character
-            if pygame.sprite.spritecollideany(self, block_group):
+        if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group):
                 """If we hit a block, don’t move – reverse the movement"""
                 self.rect.move_ip(-xMove,-yMove)
                 self.direction += 2
