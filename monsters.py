@@ -59,18 +59,18 @@ class Green_Monster(basicSprite.Sprite):
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             dif = character_coords[0] - self.coords[0]
             if self.direction == 2 and diff > 0 and !self.thrown:#Enemy looking left and character is on the Left
-                throw_javelin(centerPoint, javelin_images)
+                throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
-            elif self.direction == 4 and diff < 0 and !self.thrown:#Enemy looking left and character is on the Left
-                throw_javelin(centerPoint, javelin_images)
+            elif self.direction == 4 and diff < 0 and !self.thrown:#Enemy looking right and character is on the right
+                throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
             dif = character_coords[1] - self.coords[1]
             if self.direction == 1 and diff < 0 and !self.thrown:#Enemy looking up and character is up
-                throw_javelin(centerPoint, javelin_images)
+                throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
             elif self.direction == 3 and diff > 0 and !self.thrown:#Enemy looking down and character is down
-                throw_javelin(centerPoint, javelin_images)
+                throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
         else:#If we didnt see the character, we move
             if self.direction==1:#up
@@ -102,11 +102,11 @@ class Green_Monster(basicSprite.Sprite):
                 self.direction %= 4
         pass
 
-    def throw_javelin(self, centerPoint, javelin_images):
+    def throw_javelin(self, centerPoint, javelin_images, direction):
         """
         This is the function that Throws the Javelin
         """
-        javelin = Javelin(centerPoint, javelin_images)
+        javelin = Javelin(centerPoint, javelin_images, direction)
         pass
 
     def javelin_fell(self):
@@ -247,43 +247,134 @@ class Bat(basicSprite.Sprite):
 class Shooter(basicSprite.Sprite):
     """
     This is where we create the Shooters
+    Pretty sure this one is done
     """
-    def __init__(self, centerPoint, image):
+    def __init__(self, centerPoint, images, direction = random.randint(1,4), (x,y)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
         basicSprite.Sprite.__init__(self, centerPoint, image)
         """start the basic initialization"""
         self.original_rect = pygame.Rect(self.rect)
-        self.image_order = ["Down1", "Down2","Left1","Left2","Right1","Right2","Up1","Up2"]
+        self.image_order = ["Down1", "Down2", "Left1", "Left2", "Right1", "Right2", "Up1", "Up2"]
 
+        self.coords = (x,y)
+
+        self.dead = False
+
+        self.attacking = False
+        """
+        Initialize the direction
+        1 = up
+        2 = Left
+        3 = right
+        4 = down
+        """
+        self.direction = direction
+        if self.direction == 1:
+            self.image = self.images[6]
+        elif self.direction == 2:
+            self.image = self.images[2]
+        elif self.direction == 3:
+            self.image = self.images[0]
+        elif self.direction == 4:
+            self.image = self.images[4]
+
+        self.dist = 1
+
+        self.thrown = False
+
+        self.step = 1
         pass
 
-    def update(self, block_group):
+    def update(self, block_group, character_coords, centerPoint, ball_image):
         """
         This function is the one that will move an dupdate the position of the monsters
         It is called each "cycle" of gameplay to show that they move
         """
+        if self.dead:
+            break
+        xMove,yMove = 0,0
 
+        """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
+            dif = character_coords[0] - self.coords[0]
+            if self.direction == 2 and diff > 0 and !self.thrown:#Enemy looking left and character is on the Left
+                shoot_ball(centerPoint, ball_image, self.direction)
+                self.thrown = True
+            elif self.direction == 4 and diff < 0 and !self.thrown:#Enemy looking right and character is on the right
+                shoot_ball(centerPoint, ball_image, self.direction)
+                self.thrown = True
+        elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
+            dif = character_coords[1] - self.coords[1]
+            if self.direction == 1 and diff < 0 and !self.thrown:#Enemy looking up and character is up
+                shoot_ball(centerPoint, ball_image, self.direction)
+                self.thrown = True
+            elif self.direction == 3 and diff > 0 and !self.thrown:#Enemy looking down and character is down
+                shoot_ball(centerPoint, ball_image, self.direction)
+                self.thrown = True
+        else:#If we didnt see the character, we move
+            if self.direction==1:#up
+                yMove = -self.dist
+                if self.step == 1:
+                    step = 2
+                    self.image = self.images[6]
+                if self.step == 2:
+                    step = 1
+                    self.image = self.images[7]
+            elif self.direction==2:#Left
+                xMove = self.dist
+                if self.step == 1:
+                    step = 2
+                    self.image = self.images[2]
+                if self.step == 2:
+                    step = 1
+                    self.image = self.images[3]
+            elif self.direction==3:#Down
+                yMove = self.dist
+                if self.step == 1:
+                    step = 2
+                    self.image = self.images[0]
+                if self.step == 2:
+                    step = 1
+                    self.image = self.images[1]
+            elif self.direction==4:#Right
+                xMove = -self.dist
+                if self.step == 1:
+                    step = 2
+                    self.image = self.images[4]
+                if self.step == 2:
+                    step = 1
+                    self.image = self.images[5]
+
+            self.rect.move_ip(xMove,yMove) #This is what actually moves the character
+            if pygame.sprite.spritecollideany(self, block_group):
+                """If we hit a block, don’t move – reverse the movement"""
+                self.rect.move_ip(-xMove,-yMove)
+                self.direction += 2
+                self.direction %= 4
         pass
 
-    def shoot(self):
+    def shoot_ball(self, centerPoint, ball_image, direction):
         """
-        This function shoots the ball at the player
+        This is the function that Throws the Javelin
         """
-
+        ball = Ball(centerPoint, ball_image, direction)
         pass
 
-    def die(self):
+    def ball_fell(self):
+        """
+        This function tells the enemy he can now throw another javelin
+        """
+        self.thrown = False
+        pass
+
+    def die(self, ground_image):
         """
         This function establishes what happens when a enemy is killed
-        it will probably mean that the enemy is deleted and his spot in the game is replaced with a blank background spot
+        this means he is set do dead (so update cant be called) and the image is set as a ground image
         """
+        self.dead = True
+        self.images = ground_image
 
         pass
-
-"""
-There is the possibility of creating more classes for more monsters
-But without the actual implementation fo the code there is no reason to
-Since the differences between them would not be seen in pseudocode
-"""
