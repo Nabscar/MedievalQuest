@@ -5,7 +5,7 @@ import projectiles
 
 """
 This python script creates three classes that create the Monsters
-It should be done
+It should only be missing Boss
 """
 
 class Troll(basicSprite.Sprite):
@@ -383,3 +383,5 @@ class Shooter(basicSprite.Sprite):
         self.images = ground_image
 
         pass
+
+class Boss(basicSprite.Sprite):
