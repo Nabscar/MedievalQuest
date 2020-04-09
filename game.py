@@ -36,7 +36,7 @@ class MainQuest:
         Set current level
         """
         self.current_level = 22
-        pass
+
 
     def MainLoop(self):
         """
@@ -173,17 +173,49 @@ class MainQuest:
 
         for y in range(len(layout)):
             for x in range(len(layout[y])):
+                 x in range(len(layout[y])):
+                """Get the center point for the rects"""
+                centerPoint = [(x*BLOCK_SIZE)+x_offset,(y*BLOCK_SIZE+y_offset)]
                 """
-                Get center points for all Sprites
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
-        """
-        Create the player sprite group
-        It will only be one sprite in the group
-        But it is still created as a group to be more easily readable
-        """
-        self.character_group =  = pygame.sprite.RenderUpdates(self.player)
+                if layout[y][x]==level.BLOCK:
+                    block = #create block
+                    self.block_group.add(block)
+                elif layout[y][x]==level.PASSAGE:
+                    passage = #create passage
+                    self.block_group.add(passage)
+                elif layout[y][x]==level.CROSSABLE:
+                    crossable = #create crossable
+                    self.block_group.add(crossable)
+                elif layout[y][x]==level.BREAKABLE:
+                    breakable = #create breakable
+                    self.block_group.add(breakable)
+                elif layout[y][x]==level.JAVELIN:
+                    javelin = #create javelin
+                    self.block_group.add(javelin)
+                elif layout[y][x]==level.BALL:
+                    ball = #create ball
+                    self.block_group.add(ball)
+                elif layout[y][x]==level.ARROW:
+                    arrow = #create arrow
+                    self.block_group.add(arrow)
+                elif layout[y][x]==level.TROLL:
+                    troll = #create troll
+                    self.block_group.add(troll)
+                elif layout[y][x]==level.SHOOTER:
+                    shooter = #create shooter
+                    self.block_group.add(shooter)
+                elif layout[y][x]==level.BAT:
+                    bat = #create bat
+                    self.block_group.add(bat)
+                elif layout[y][x]==level.BOSS:
+                    boss = #create boss
+                    self.block_group.add(boss)
+                elif layout[y][x]==level.PLAYER:
+                    player = #create player
+                    self.block_group.add(player)
 
         pass
 

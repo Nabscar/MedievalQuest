@@ -8,7 +8,7 @@ This python script creates three classes that create the Monsters
 It should be done
 """
 
-class Green_Monster(basicSprite.Sprite):
+class Troll(basicSprite.Sprite):
     """
     This is where we create the Green Monsters
     Pretty sure this one is done
