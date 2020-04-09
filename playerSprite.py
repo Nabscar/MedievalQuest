@@ -55,6 +55,8 @@ class player(basicSprite.Sprite):
             shoot_Arrow()
         elif (key == L_DOWN):
             place_Bomb()
+        elif (key == I_DOWN):
+            drink_potion()
         pass
 
     def update(self, groups of sprites):

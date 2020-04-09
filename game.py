@@ -32,12 +32,17 @@ class MainQuest:
         Create the Screen
         """
         self.screen = pygame.display.set_mode((self.width, self.height))
+        """
+        Set current level
+        """
+        self.current_level = 22
+        pass
 
     def MainLoop(self):
         """
         Load all of our Sprites
         """
-        self.LoadSprites()
+        self.LoadSprites(self.current_level)
         """
         Create Background
         """
@@ -46,7 +51,7 @@ class MainQuest:
         self.background.fill((0,0,0))
         """
         We could draw here parts that would only need to be drawn once
-        But since its a sliding platformer, that will not be necessary
+        But since levels change there is no need for that
         """
 
         pygame.display.flip()
@@ -57,61 +62,12 @@ class MainQuest:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                elif event.type == KEYDOWN:
-                    """
-                    What happens when the key is pressed
-                    """
-                    if ((event.key == K_RIGHT)
-                    or (event.key == K_LEFT)
-                    or (event.key == K_UP)
-                    or (event.key == K_DOWN)):
-                        self.player.MoveKeyDown(event.key)
-                elif event.type == KEYUP:
-                    """
-                    What happens when the key is let go
-                    """
-                    if ((event.key == K_RIGHT)
-                    or (event.key == K_LEFT)
-                    or (event.key == K_UP)
-                    or (event.key == K_DOWN)):
-                        self.player.MoveKeyUp(event.key)
-                elif event.type == POWER_UP_ONE_START:
-                    """
-                    What happens when the player gets a powerup
-                    Which powerup does the player get?
-                    """
-                    self.player.power_up_one = True
-                elif event.type == POWER_UP_ONE_END:
-                    """
-                    What happens when the loses powerup / powerup timer runs out
-                    """
-                    self.player.power_up_one = False
-                    """
-                    If the power-up has a timer, set it to 0
-                    """
-                    pygame.time.set_timer(POWER_UP_ONE_END, 0)
-                elif event.type == POWER_UP_TWO_START:
-                    """
-                    What happens when the player gets a powerup
-                    Which powerup does the player get?
-                    """
-                    self.player.power_up_two = True
-                elif event.type == POWER_UP_TWO_END:
-                    """
-                    What happens when the loses powerup / powerup timer runs out
-                    """
-                    self.player.power_up_two = False
-                    """
-                    If the power-up has a timer, set it to 0
-                    """
-                    pygame.time.set_timer(POWER_UP_TWO_END, 0)
+
                 elif event.type == PLAYER_DEAD:
                     """
-                    The player died
-                    Quit the Game
+                    What happens when the player dies
                     """
-                    print("You Lost")
-                    sys.exit()
+
                 elif event.type == WIN:
                     """
                     The player Won
@@ -119,6 +75,21 @@ class MainQuest:
                     """
                     print("You Won!")
                     sys.exit()
+
+                elif event.type == KEYDOWN:
+                    """
+                    If player didnt quit, die, or win, then he moves
+                    What happens when the key is pressed
+                    """
+                    if ((event.key == A_DOWN)
+                    or (event.key == W_DOWN)
+                    or (event.key == D_DOWN)
+                    or (event.key == S_DOWN)
+                    or (event.key == J_DOWN)
+                    or (event.key == K_DOWN)
+                    or (event.key == L_DOWN)
+                    or (event.key == I_DOWN)):
+                        self.player.MoveKeyDown(event.key)
 
                 """
                 Update the player sprite
@@ -151,20 +122,54 @@ class MainQuest:
         y_offset = (BLOCK_SIZE/2)
         """
         Load the level
+        The coding for which level is happening is the following:
+            The main nine level have 2 numbers, which show row and column
+                for example: 11 is the level in the topmost left corner
+            If there is a third number, that mean that that is teh cave that sprawns from that level
+                for example: 311 is the cave that come from level 31
         """
-        level1 = level001.level()
-        layout = level1.getLayout()
-        img_list = level1.getSprites()
+        if self.current_level == 11:
+            level = level11.level11()
+        if self.current_level == 12:
+            level = level12.level12()
+        if self.current_level == 13:
+            level = level13.level13()
+        if self.current_level == 21:
+            level = level21.level21()
+        if self.current_level == 22:
+            level = level22.level22()
+        if self.current_level == 23:
+            level = level23.level23()
+        if self.current_level == 31:
+            level = level31.level31()
+        if self.current_level == 32:
+            level = level32.level32()
+        if self.current_level == 33:
+            level = level33.level33()
+        if self.current_level == 221:
+            level = cave22.cave22()
+        if self.current_level == 311:
+            level = cave31.cave31()
+
+        layout = level.getLayout()
+        img_list = level.getSprites()
 
         """
         Create the groups:
-            - Powerups
-            - enemies
-            - Anything else needed
+            - block backgrounds
+            - crossable Backgrounds
+            - passage Backgrounds
+            - breakable Backgrounds
+            - Enemies
+            - projectiles
         """
-        self.power_up_sprites = pygame.sprite.RenderUpdates()
-        self.enemy_sprites = pygame.sprite.RenderUpdates()
-        self.block_sprites = pygame.sprite.RenderUpdates()
+        self.block_group = pygame.sprite.RenderUpdates()
+        self.crossable_group = pygame.sprite.RenderUpdates()
+        self.passage_group = pygame.sprite.RenderUpdates()
+        self.breakable_group = pygame.sprite.RenderUpdates()
+        self.enemy_group = pygame.sprite.RenderUpdates()
+        self.projectile_group = pygame.sprite.RenderUpdates()
+        self.character_group = pygame.sprite.RenderUpdates()
 
         for y in range(len(layout)):
             for x in range(len(layout[y])):
@@ -178,7 +183,7 @@ class MainQuest:
         It will only be one sprite in the group
         But it is still created as a group to be more easily readable
         """
-        self.player_sprites =  = pygame.sprite.RenderUpdates(self.player)
+        self.character_group =  = pygame.sprite.RenderUpdates(self.player)
 
         pass
 
