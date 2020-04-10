@@ -17,7 +17,6 @@ class BlockBackground(basicSprite.Sprite):
         Initializes the Blockable wall
         """
         basicSprite.Sprite.__init__(self, centerPoint, images)
-        self.next_screen = next_screen
         self.image = self.images[0]
         pass
 
