@@ -1,16 +1,31 @@
 import os, sys
+sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/Images')
+
 import pygame
-import \levels\ *
+import level11
+import level12
+import level13
+import level21
+import level22
+import level23
+import level31
+import level32
+import level33
+import cave22
+import cave31
 import basicSprite
 from pygame.locals import *
 from helpers import *
 from playerSprite import *
-from enemies import *
+from monsters import *
 from projectiles import *
 import time
 
 if not pygame.font: print('Warning, fonts disabled')
 if not pygame.mixer: print('Warning, sound disabled')
+
+BLOCK_SIZE = 24
 
 class MainQuest:
     """
@@ -42,7 +57,7 @@ class MainQuest:
         """
         Load all of our Sprites
         """
-        self.LoadSprites(self.current_level)
+        self.LoadSprites()
         """
         Create Background
         """
@@ -81,14 +96,14 @@ class MainQuest:
                     If player didnt quit, die, or win, then he moves
                     What happens when the key is pressed
                     """
-                    if ((event.key == A_DOWN)
-                    or (event.key == W_DOWN)
-                    or (event.key == D_DOWN)
-                    or (event.key == S_DOWN)
-                    or (event.key == J_DOWN)
-                    or (event.key == K_DOWN)
-                    or (event.key == L_DOWN)
-                    or (event.key == I_DOWN)):
+                    if ((event.key == K_a)
+                    or (event.key == K_w)
+                    or (event.key == K_d)
+                    or (event.key == K_s)
+                    or (event.key == K_j)
+                    or (event.key == K_k)
+                    or (event.key == K_l)
+                    or (event.key == K_i)):
                         self.player.MoveKeyDown(event.key)
 
                 """
@@ -173,27 +188,27 @@ class MainQuest:
 
         for y in range(len(layout)):
             for x in range(len(layout[y])):
-                 x in range(len(layout[y])):
                 """Get the center point for the rects"""
                 centerPoint = [(x*BLOCK_SIZE)+x_offset,(y*BLOCK_SIZE+y_offset)]
                 """
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
+                """
                 if layout[y][x]==level.BLOCK:
-                    block = #create block
+                    #block = #create block
                     self.block_group.add(block)
                 elif layout[y][x]==level.PASSAGE:
-                    passage = #create passage
+                    #passage = #create passage
                     self.block_group.add(passage)
                 elif layout[y][x]==level.CROSSABLE:
-                    crossable = #create crossable
+                    #crossable = #create crossable
                     self.block_group.add(crossable)
                 elif layout[y][x]==level.BREAKABLE:
-                    breakable = #create breakable
+                    #breakable = #create breakable
                     self.block_group.add(breakable)
                 elif layout[y][x]==level.JAVELIN:
-                    javelin = #create javelin
+                    #javelin = #create javelin
                     self.block_group.add(javelin)
                 elif layout[y][x]==level.BALL:
                     ball = #create ball
@@ -216,7 +231,7 @@ class MainQuest:
                 elif layout[y][x]==level.PLAYER:
                     player = #create player
                     self.block_group.add(player)
-
+                """
         pass
 
 if __name__ == "__main__":
