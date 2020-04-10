@@ -12,7 +12,7 @@ class BlockBackground(basicSprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self.centerPoint, images):
+    def __init__ (centerPoint, images):
         """
         Initializes the Blockable wall
         """
@@ -26,7 +26,7 @@ class Passage(basicSprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self.centerPoint, images, next_screen):
+    def __init__ (centerPoint, images, next_screen):
         """
         Initializes Passage
         """
@@ -42,7 +42,7 @@ class CrossableBackground(basicSprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self.centerPoint, image):
+    def __init__ (centerPoint, image):
         """
         Initializes Crossable Background
         """
@@ -57,7 +57,7 @@ class BreakableBackground(basicSprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self.centerPoint, images, broken = False, cave):
+    def __init__ (centerPoint, images, cave, broken = False):
         """
         Initializes breakableBackground
         """

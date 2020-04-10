@@ -3,7 +3,7 @@ import basicSprite
 from helpers import *
 import time
 
-class player(basicSprite.Sprite):
+class Player(basicSprite.Sprite):
     """
     This is the sprite or the playable character
     """

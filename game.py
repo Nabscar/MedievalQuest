@@ -179,12 +179,13 @@ class MainQuest:
             - projectiles
         """
         self.block_group = pygame.sprite.RenderUpdates()
-        self.crossable_group = pygame.sprite.RenderUpdates()
         self.passage_group = pygame.sprite.RenderUpdates()
+        self.crossable_group = pygame.sprite.RenderUpdates()
         self.breakable_group = pygame.sprite.RenderUpdates()
-        self.enemy_group = pygame.sprite.RenderUpdates()
+
+        self.monster_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
-        self.character_group = pygame.sprite.RenderUpdates()
+        self.player_group = pygame.sprite.RenderUpdates()
 
         for y in range(len(layout)):
             for x in range(len(layout[y])):
@@ -194,43 +195,59 @@ class MainQuest:
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
-                """
                 if layout[y][x]==level.BLOCK:
-                    #block = #create block
+                    block = BlockBackground(centerPoint, img_list[level.BLOCK])#create block
                     self.block_group.add(block)
-                elif layout[y][x]==level.PASSAGE:
-                    #passage = #create passage
-                    self.block_group.add(passage)
+                elif layout[y][x]==level.PASSAGE_T:
+                    passage = Passage(centerPoint, img_list[level.PASSAGE_T], (self.current_level - 10))#create passage to top
+                    self.passage_group.add(passage)
+                elif layout[y][x]==level.PASSAGE_B:
+                    passage = Passage(centerPoint, img_list[level.PASSAGE_B], (self.current_level + 10))#create passage to bottom
+                    self.passage_group.add(passage)
+                elif layout[y][x]==level.PASSAGE_L:
+                    passage = Passage(centerPoint, img_list[level.PASSAGE_L], (self.current_level - 1))#create passage to left
+                    self.passage_group.add(passage)
+                elif layout[y][x]==level.PASSAGE_R:
+                    passage = Passage(centerPoint, img_list[level.PASSAGE_R], (self.current_level + 1))#create passage to right
+                    self.passage_group.add(passage)
                 elif layout[y][x]==level.CROSSABLE:
-                    #crossable = #create crossable
-                    self.block_group.add(crossable)
+                    crossable = Crossable(centerPoint, img_list[level.CROSSABLE])#create crossable
+                    self.crossable_group.add(crossable)
                 elif layout[y][x]==level.BREAKABLE:
-                    #breakable = #create breakable
-                    self.block_group.add(breakable)
+                    breakable = Breakable(centerPoint, img_list[level.BREAKABLE], (self.current_level * 10 + 1), False) #create breakable
+                    self.breakable_group.add(breakable)
+                    """
+                    Not sure hot ot do projectiles (not even sure if they are needed here)
+
                 elif layout[y][x]==level.JAVELIN:
                     #javelin = #create javelin
-                    self.block_group.add(javelin)
+                    self.projectile_group.add(javelin)
                 elif layout[y][x]==level.BALL:
                     ball = #create ball
-                    self.block_group.add(ball)
+                    self.projectile_group.add(ball)
                 elif layout[y][x]==level.ARROW:
                     arrow = #create arrow
-                    self.block_group.add(arrow)
+                    self.projectile_group.add(arrow)
+                    """
                 elif layout[y][x]==level.TROLL:
-                    troll = #create troll
-                    self.block_group.add(troll)
+                    troll = Troll(centerPoint, img_list[level.TROLL], (x, y), direction = random.randint(1,4))#create troll
+                    self.monster_group.add(troll)
                 elif layout[y][x]==level.SHOOTER:
-                    shooter = #create shooter
-                    self.block_group.add(shooter)
+                    shooter = Shooter(centerPoint, img_list[level.SHOOTER], (x, y), direction = random.randint(1,4))#create shooter
+                    self.monster_group.add(shooter)
                 elif layout[y][x]==level.BAT:
-                    bat = #create bat
-                    self.block_group.add(bat)
+                    bat = Bat(centerPoint, img_list[level.BAT], (x, y), direction = random.randint(1,4))#create bat
+                    self.monster_group.add(bat)
+                    """
+                    NOt sure how to do boss since he is more than one block big
+
                 elif layout[y][x]==level.BOSS:
                     boss = #create boss
                     self.block_group.add(boss)
+                    """
                 elif layout[y][x]==level.PLAYER:
-                    player = #create player
-                    self.block_group.add(player)
+                    player = Player(centerPoint, ing_list[level.PLAYER])#create player
+                    self.player_group.add(player)
                 """
         pass
 
