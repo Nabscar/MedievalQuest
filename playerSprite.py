@@ -8,32 +8,38 @@ class Player(basicSprite.Sprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (centerPoint, images):
+    def __init__ (self, centerPoint, images, coords, direction):
         """
         Initializes the special characteristics of the playable character
         """
         basicSprite.Sprite.__init__(self, centerPoint, images)
 
+        self.image_order = ['Basic_Down', 'Basic_Left', 'Basic_Right', 'Basic_Up']
+        self.direction = direction
+        self.coords = coords
         """
-        Initialize score, distance moved per turn, and how much is the current movement
-        """
-        self.score = 0
-
-        self.x_dist = 1
-        self.y_dist = 1
+        if direction == 1:
+            self.current_image = self.images[0]
+        elif direction == 2:
+            self.current_image = self.images[1]
+        elif direction == 3:
+            self.current_image = self.images[2]
+        elif direction == 4:
+            self.current_image = self.images[3]
+            """
+        self.x_dist = 68
+        self.y_dist = 68
 
         self.xMove = 0
         self.yMove = 0
 
-        """
-        Initializes values for:
         self.maxHealth = 3
         self.currentHealth = 3
-        self.damage     = 1
+        self.damage = 1
         self.quiver = False
         self.bombs = 0
         self.potions = 0
-        """
+
 
     def MoveKeyDown(self, key):
         """
@@ -43,12 +49,16 @@ class Player(basicSprite.Sprite):
 
         if (key == K_d):
             self.xMove += self.x_dist
+            print("D")
         elif (key == K_a):
             self.xMove += -self.x_dist
+            print("A")
         elif (key == K_w):
             self.yMove += -self.y_dist
+            print("W")
         elif (key == K_s):
             self.yMove += self.y_dist
+            print("S")
         elif (key == K_j):
             sword_Attack()
         elif (key == K_k):
@@ -57,9 +67,9 @@ class Player(basicSprite.Sprite):
             place_Bomb()
         elif (key == K_i):
             drink_potion()
-        pass
 
-    def update(self, groups_of_sprites):
+
+    def update(self, block_group, passage_group, breakable_group, monster_group, projectile_group):
         """
         Called to update the player sprite's position and state
         (state only if we choose to have power-ups)
@@ -69,25 +79,32 @@ class Player(basicSprite.Sprite):
             If we aren't moveing just get out of here
             """
             return
-
         """
         We're moving!
         """
         self.rect.move_ip(self.xMove,self.yMove)
 
-        lstEnemies = pygame.sprite.spritecollide(self, enemy_group, False)
-        lstBackground = pygame.sprite.spritecollide(self, background_group, False)
+        lstEnemies = pygame.sprite.spritecollide(self, monster_group, False)
+        lstBackground = pygame.sprite.spritecollide(self, block_group, False)
+        lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
+        lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
         if(len(lstEnemies) > 0):
             """
             We hit an Enemy!
             """
             self.EnemyCollide(lstEnemies)
-        else:
+        #else:
             """
             define naythnig else we can hit
             """
-        pass
+
+        if pygame.sprite.spritecollideany(self,block_group):
+            """If we hit a block, stop movement"""
+            self.rect.move_ip(-self.xMove,-self.yMove)
+        self.xMove = 0
+        self.yMove = 0
+
 
     def EnemyCollide(self, lstEnemiesHit):
         """

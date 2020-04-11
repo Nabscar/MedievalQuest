@@ -9,7 +9,7 @@ class Projectile(pygame.sprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player changes Screen
     """
-    def __init__ (centerPoint, images, counter):
+    def __init__ (self, centerPoint, images, counter):
         """
         Initializes the special characteristics of the basic projectile
         """
@@ -64,7 +64,7 @@ class Projectile(pygame.sprite.Sprite):
 
 class Ball(Projectile):
 
-    def __init__ (centerPoint, images, direction, counter = 6, damage = 1):
+    def __init__ (self, centerPoint, images, direction, counter = 6, damage = 1):
         """
         Initializes the special characteristics of the ball projectile
         """
@@ -75,7 +75,7 @@ class Ball(Projectile):
 
 class Javelin(Projectile):
 
-        def __init__ (centerPoint, images, direction, counter = 10, damage = 1):
+        def __init__ (self, centerPoint, images, direction, counter = 10, damage = 1):
             """
             Initializes the special characteristics of the javelin projectile
             """
@@ -91,7 +91,7 @@ class Javelin(Projectile):
 
 class Arrow(Projectile):
 
-        def __init__ (centerPoint, image, counter = 15, damage = 1):
+        def __init__ (self, centerPoint, image, counter = 15, damage = 1):
             """
             Initializes the special characteristics of the arrow projectile
             """

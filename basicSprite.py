@@ -8,11 +8,10 @@ class Sprite(pygame.sprite.Sprite):
     """
 
     def __init__(self, centerPoint, images):
-        """
-        This will be the class that will initialize all of these basic values that were mentioned above
-        """
         pygame.sprite.Sprite.__init__(self)
         """Set the image and the rect"""
-        self.images = images
+        self.image = images
+        #x = self.images[0]
+        self.rect = images.get_rect()
         """Move the rect into the correct position"""
         self.rect.center = centerPoint
