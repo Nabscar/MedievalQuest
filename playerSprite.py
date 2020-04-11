@@ -3,12 +3,12 @@ import basicSprite
 from helpers import *
 import time
 
-class player(basicSprite.Sprite):
+class Player(basicSprite.Sprite):
     """
     This is the sprite or the playable character
     """
 
-    def __init__ (self.centerPoint, images):
+    def __init__ (centerPoint, images):
         """
         Initializes the special characteristics of the playable character
         """
@@ -41,25 +41,25 @@ class player(basicSprite.Sprite):
         depending on what hey they pressed, it will move once update() is called.
         """
 
-        if (key == D_DOWN):
+        if (key == K_d):
             self.xMove += self.x_dist
-        elif (key == A_DOWN):
+        elif (key == K_a):
             self.xMove += -self.x_dist
-        elif (key == W_DOWN):
+        elif (key == K_w):
             self.yMove += -self.y_dist
-        elif (key == S_DOWN):
+        elif (key == K_s):
             self.yMove += self.y_dist
-        elif (key == J_DOWN):
+        elif (key == K_j):
             sword_Attack()
-        elif (key == K_DOWN):
+        elif (key == K_k):
             shoot_Arrow()
-        elif (key == L_DOWN):
+        elif (key == K_l):
             place_Bomb()
-        elif (key == I_DOWN):
+        elif (key == K_i):
             drink_potion()
         pass
 
-    def update(self, groups of sprites):
+    def update(self, groups_of_sprites):
         """
         Called to update the player sprite's position and state
         (state only if we choose to have power-ups)

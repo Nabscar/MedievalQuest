@@ -13,7 +13,7 @@ class Troll(basicSprite.Sprite):
     This is where we create the Green Monsters
     Pretty sure this one is done
     """
-    def __init__(self, centerPoint, images, direction = random.randint(1,4), (x,y)):
+    def __init__ (self, centerPoint, images, coords, direction = random.randint(1,4)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
@@ -22,7 +22,7 @@ class Troll(basicSprite.Sprite):
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down", "Left1", "Left2", "Right1", "Right2", "Up"]
 
-        self.coords = (x,y)
+        self.coords = coords
 
         self.dead = False
 
@@ -57,24 +57,24 @@ class Troll(basicSprite.Sprite):
         It is called each "cycle" of gameplay to show that they move
         """
         if self.dead:
-            break
+            return
         xMove,yMove = 0,0
 
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             dif = character_coords[0] - self.coords[0]
-            if self.direction == 2 and diff > 0 and !self.thrown:#Enemy looking left and character is on the Left
+            if self.direction == 2 and diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
                 throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
-            elif self.direction == 4 and diff < 0 and !self.thrown:#Enemy looking right and character is on the right
+            elif self.direction == 4 and diff < 0 and not self.thrown:#Enemy looking right and character is on the right
                 throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
             dif = character_coords[1] - self.coords[1]
-            if self.direction == 1 and diff < 0 and !self.thrown:#Enemy looking up and character is up
+            if self.direction == 1 and diff < 0 and not self.thrown:#Enemy looking up and character is up
                 throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
-            elif self.direction == 3 and diff > 0 and !self.thrown:#Enemy looking down and character is down
+            elif self.direction == 3 and diff > 0 and not self.thrown:#Enemy looking down and character is down
                 throw_javelin(centerPoint, javelin_images, self.direction)
                 self.thrown = True
         else:#If we didnt see the character, we move
@@ -100,7 +100,7 @@ class Troll(basicSprite.Sprite):
                 yMove = -self.dist
 
             self.rect.move_ip(xMove,yMove) #This is what actually moves the character
-            if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group:
+            if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group):
                 """If we hit a block, don’t move – reverse the movement"""
                 self.rect.move_ip(-xMove,-yMove)
                 self.direction += 2
@@ -137,7 +137,7 @@ class Bat(basicSprite.Sprite):
     This is where we create the Bats
     Pretty sure this one is done
     """
-    def __init__(self, centerPoint, images, direction = random.randint(1,4), (x,y)):
+    def __init__ (self, centerPoint, images, coords, direction = random.randint(1,4)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
@@ -146,7 +146,7 @@ class Bat(basicSprite.Sprite):
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down1", "Down2", "Left1", "Left2", "Right1", "Right2", "Up1", "Up2"]
 
-        self.coords = (x,y)
+        self.coords = coords
 
         self.dead = False
 
@@ -178,7 +178,7 @@ class Bat(basicSprite.Sprite):
         It is called each "cycle" of gameplay to show that they move
         """
         if self.dead:
-            break
+            return
         xMove,yMove = 0,0
 
         self.direction = random.randint(1,4)#set random way to move
@@ -232,7 +232,7 @@ class Bat(basicSprite.Sprite):
                 self.image = self.images[7]
 
         self.rect.move_ip(xMove,yMove) #This is what actually moves the character
-        if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group:
+        if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group):
             """If we hit a block, don’t move – reverse the movement"""
             self.rect.move_ip(-xMove,-yMove)
             self.direction += 2
@@ -254,7 +254,7 @@ class Shooter(basicSprite.Sprite):
     This is where we create the Shooters
     Pretty sure this one is done
     """
-    def __init__(self, centerPoint, images, direction = random.randint(1,4), (x,y)):
+    def __init__ (self, centerPoint, images, coords, direction = random.randint(1,4)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
@@ -263,7 +263,7 @@ class Shooter(basicSprite.Sprite):
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down1", "Down2", "Left1", "Left2", "Right1", "Right2", "Up1", "Up2"]
 
-        self.coords = (x,y)
+        self.coords = coords
 
         self.dead = False
 
@@ -298,24 +298,24 @@ class Shooter(basicSprite.Sprite):
         It is called each "cycle" of gameplay to show that they move
         """
         if self.dead:
-            break
+            return
         xMove,yMove = 0,0
 
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             dif = character_coords[0] - self.coords[0]
-            if self.direction == 2 and diff > 0 and !self.thrown:#Enemy looking left and character is on the Left
+            if self.direction == 2 and diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
                 shoot_ball(centerPoint, ball_image, self.direction)
                 self.thrown = True
-            elif self.direction == 4 and diff < 0 and !self.thrown:#Enemy looking right and character is on the right
+            elif self.direction == 4 and diff < 0 and not self.thrown:#Enemy looking right and character is on the right
                 shoot_ball(centerPoint, ball_image, self.direction)
                 self.thrown = True
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
             dif = character_coords[1] - self.coords[1]
-            if self.direction == 1 and diff < 0 and !self.thrown:#Enemy looking up and character is up
+            if self.direction == 1 and diff < 0 and not self.thrown:#Enemy looking up and character is up
                 shoot_ball(centerPoint, ball_image, self.direction)
                 self.thrown = True
-            elif self.direction == 3 and diff > 0 and !self.thrown:#Enemy looking down and character is down
+            elif self.direction == 3 and diff > 0 and not self.thrown:#Enemy looking down and character is down
                 shoot_ball(centerPoint, ball_image, self.direction)
                 self.thrown = True
         else:#If we didnt see the character, we move
@@ -384,4 +384,4 @@ class Shooter(basicSprite.Sprite):
 
         pass
 
-class Boss(basicSprite.Sprite):
+#class Boss(basicSprite.Sprite):

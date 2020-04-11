@@ -9,7 +9,7 @@ class Projectile(pygame.sprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player changes Screen
     """
-    def __init__ (self.centerPoint, images, counter):
+    def __init__ (centerPoint, images, counter):
         """
         Initializes the special characteristics of the basic projectile
         """
@@ -39,11 +39,11 @@ class Projectile(pygame.sprite.Sprite):
 
         self.rect.move_ip(xMove,yMove) #This is what actually moves the projectile
         if (pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group)
-            or pygame.sprite.spritecollideany(self, character_group), or pygame.sprite.spritecollideany(self, passage_group):
+            or pygame.sprite.spritecollideany(self, character_group) or pygame.sprite.spritecollideany(self, passage_group)):
             """If we hit a block or a the player, its done, projectile should disappear"""
             self.disappear()
 
-        if (pygame.sprite.spritecollideany(self, projectile_group):
+        if (pygame.sprite.spritecollideany(self, projectile_group)):
             """
             If we hit a projectile, we want to have different effects depending on which projectiles
             For now, we have decided that it is easier (as a start point) to just have it disappear
@@ -64,7 +64,7 @@ class Projectile(pygame.sprite.Sprite):
 
 class Ball(Projectile):
 
-    def __init__ (self.centerPoint, images, direction, counter = 6, damage = 1):
+    def __init__ (centerPoint, images, direction, counter = 6, damage = 1):
         """
         Initializes the special characteristics of the ball projectile
         """
@@ -75,7 +75,7 @@ class Ball(Projectile):
 
 class Javelin(Projectile):
 
-        def __init__ (self.centerPoint, images, direction counter = 10, damage = 1):
+        def __init__ (centerPoint, images, direction, counter = 10, damage = 1):
             """
             Initializes the special characteristics of the javelin projectile
             """
@@ -91,7 +91,7 @@ class Javelin(Projectile):
 
 class Arrow(Projectile):
 
-        def __init__ (self.centerPoint, image, counter = 15, damage = 1):
+        def __init__ (centerPoint, image, counter = 15, damage = 1):
             """
             Initializes the special characteristics of the arrow projectile
             """
