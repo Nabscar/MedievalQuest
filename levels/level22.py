@@ -11,23 +11,40 @@ class level22(levelBase.Level):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
-        GROUND = 0
-        PLAYER = 1
-        TREE = 2
-        WALL = 3
-        BREAKABLE_WALL = 4
-        ENEMY1 = 5
-        ENEMY2 = 6
-        ENEMY3 = 7
-        BOSS = 8
-        pass
+        self.GROUND = 0
+        self.GRASS = 'x'
+        self.WATER = 'x'
+        self.TREE = 1
+        self.WALL = 2
+        self.BREAKABLE_WALL = 3
+        self.BROKEN_WALL = 'x'
+        self.PASSAGE_T = 5
+        self.PASSAGE_B = 'x'
+        self.PASSAGE_L = 'x'
+        self.PASSAGE_R = 'x'
+        self.BAT_V = 'x'
+        self.BAT_H = 'x'
+        self.TROLL_V = 'x'
+        self.TROLL_H = 'x'
+        self.SHOOTER_V = 'x'
+        self.SHOOTER_H = 'x'
+        self.BOSS = 'x'
+        self.PLAYER = 4
 
     def getLayout(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-
-        pass
+        return [[2, 2, 2, 2, 2, 5, 5, 1, 1, 1, 1, 1],\
+                [2, 3, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1],\
+                [1, 0, 0, 0, 0, 0 ,0 ,0, 0, 0 ,0, 1],\
+                [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0 ,1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 4, 0, 0, 1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0 ,0, 1, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
     def getSprites(self):
         """
@@ -35,4 +52,40 @@ class level22(levelBase.Level):
         it will then save them in a list to be returned so they are more easily accessible
         """
 
-        pass
+        ground= load_image('OW_Ground.png')
+        tree = load_image('Tree.png')
+        wall = load_image('BrickWall.png')
+        breakable_wall1 = load_image('BreakableWall.png')
+        breakable_wall2 = load_image('BrokenWall.png')
+        breakable_wall = [breakable_wall1, breakable_wall2]
+
+        basic_player_down = load_image('King_Side_Down.png')
+        basic_player_left = load_image('King_Side_Left.png')
+        basic_player_right = load_image('King_Side_Right.png')
+        basic_player_up = load_image('King_Side_Up.png')
+
+        """
+        basic_player_attack_up = load_image('monster_scared_01.png')
+        basic_player_attack_left = load_image('monster_scared_01.png')
+        basic_player_attack_down = load_image('monster_scared_01.png')
+        basic_player_attack_right = load_image('monster_scared_01.png')
+
+        quiver_player_up = load_image('monster_scared_01.png')
+        quiver_player_left = load_image('monster_scared_01.png')
+        quiver_player_down = load_image('monster_scared_01.png')
+        quiver_player_right = load_image('monster_scared_01.png')
+
+        quiver_player_attack_up = load_image('monster_scared_01.png')
+        quiver_player_attack_left = load_image('monster_scared_01.png')
+        quiver_player_attack_down = load_image('monster_scared_01.png')
+        quiver_player_attack_right = load_image('monster_scared_01.png')
+
+        quiver_player_shoot_up = load_image('monster_scared_01.png')
+        quiver_player_shoot_left = load_image('monster_scared_01.png')
+        quiver_player_shoot_down = load_image('monster_scared_01.png')
+        quiver_player_shoot_right = load_image('monster_scared_01.png')
+        """
+        player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up]
+        passage = load_image('OW_Ground.png')
+
+        return [ground, tree, wall, breakable_wall1, basic_player_up, passage]

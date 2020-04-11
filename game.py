@@ -1,6 +1,5 @@
 import os, sys
 sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
-sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/Images')
 
 import pygame
 import level11
@@ -17,15 +16,17 @@ import cave31
 import basicSprite
 from pygame.locals import *
 from helpers import *
-from playerSprite import *
-from monsters import *
-from projectiles import *
+from playerSprite import Player
+from monsters import Troll, Bat, Shooter
+from projectiles import Javelin, Ball, Arrow
+from backgrounds import BreakableBackground, Passage
+from basicSprite import Sprite
 import time
 
 if not pygame.font: print('Warning, fonts disabled')
 if not pygame.mixer: print('Warning, sound disabled')
 
-BLOCK_SIZE = 24
+BLOCK_SIZE = 68
 
 class MainQuest:
     """
@@ -33,7 +34,7 @@ class MainQuest:
     initialization and creating of the Game.
     """
 
-    def __init__(self, width=960,height=680):
+    def __init__(self, width=816,height=680):
         """
         Initialize PyGame
         """
@@ -61,7 +62,7 @@ class MainQuest:
         """
         Create Background
         """
-        elf.background = pygame.Surface(self.screen.get_size())
+        self.background = pygame.Surface(self.screen.get_size())
         self.background = self.background.convert()
         self.background.fill((0,0,0))
         """
@@ -74,22 +75,27 @@ class MainQuest:
         Main Loop of game
         """
         while 1:
+
+            self.player_group.clear(self.screen,self.background)
+            self.monster_group.clear(self.screen,self.background)
+            self.projectile_group.clear(self.screen, self.background)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-                elif event.type == PLAYER_DEAD:
+                #elif event.type == PLAYER_DEAD:
                     """
                     What happens when the player dies
                     """
 
-                elif event.type == WIN:
+                #elif event.type == WIN:
                     """
                     The player Won
                     Quit the Game
                     """
-                    print("You Won!")
-                    sys.exit()
+                    #print("You Won!")
+                    #sys.exit()
 
                 elif event.type == KEYDOWN:
                     """
@@ -110,22 +116,26 @@ class MainQuest:
                 Update the player sprite
                 """
 
-                """
-                Do the drawing of the moved sprites in the Screen
-                The idea here would be that the player would always be in the center of the x axis
-                Based on the players coordinates, the game would read the squares around the player and print those
-                That way, the player can move back and forwards, and always have screen to play
-                That is the reason nothing was permanently drawn on the Screen
-                Every x time (which we would determine by playing but would probably be shorter than a second
-                it is currently set to 0.05 seconds, but its an easy change)
-                The whole screen would reprint, and depending on how the player moved, the screen would move
-                Besides, the enemies coordinates would also need to change, not only in respect to the player
-                but also in respect to the background
-                """
+                self.player.update(self.block_group, self.passage_group, self.breakable_group, self.monster_group, self.projectile_group)
+
+                """Do the Drawing"""
+                textpos = 0
+                self.screen.blit(self.background, (0, 0))
+
+
+                reclist = self.block_group.draw(self.screen)
+                reclist += self.passage_group.draw(self.screen)
+                reclist += self.crossable_group.draw(self.screen)
+                reclist +=  self.breakable_group.draw(self.screen)
+                reclist +=  self.monster_group.draw(self.screen)
+                reclist +=  self.projectile_group.draw(self.screen)
+                reclist +=  self.player_group.draw(self.screen)
+
+                pygame.display.update(reclist)
 
                 time.sleep (0.05)
                 #This time can be changed depending on what we establish as the best time
-        pass
+
 
 
     def LoadSprites(self):
@@ -185,7 +195,6 @@ class MainQuest:
 
         self.monster_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
-        self.player_group = pygame.sprite.RenderUpdates()
 
         for y in range(len(layout)):
             for x in range(len(layout[y])):
@@ -195,9 +204,27 @@ class MainQuest:
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
-                if layout[y][x]==level.BLOCK:
-                    block = BlockBackground(centerPoint, img_list[level.BLOCK])#create block
-                    self.block_group.add(block)
+                if layout[y][x]==level.GROUND:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                elif layout[y][x]==level.GRASS:
+                    grass = Sprite(centerPoint, img_list[level.GRASS])
+                    self.crossable_group.add(grass)
+                elif layout[y][x]==level.WATER:
+                    water = Sprite(centerPoint, img_list[level.WATER])
+                    self.block_group.add(water)
+                elif layout[y][x]==level.TREE:
+                    tree = Sprite(centerPoint, img_list[level.TREE])
+                    self.block_group.add(tree)
+                elif layout[y][x]==level.WALL:
+                    wall = Sprite(centerPoint, img_list[level.WALL])
+                    self.block_group.add(wall)
+                elif layout[y][x]==level.BREAKABLE_WALL:
+                    breakableWall = BreakableBackground(centerPoint, img_list[level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
+                    self.breakable_group.add(breakableWall)
+                elif layout[y][x]==level.BROKEN_WALL:
+                    breakableWall = BreakableBackground(centerPoint, img_list[level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
+                    self.breakable_group.add(breakable)
                 elif layout[y][x]==level.PASSAGE_T:
                     passage = Passage(centerPoint, img_list[level.PASSAGE_T], (self.current_level - 10))#create passage to top
                     self.passage_group.add(passage)
@@ -210,14 +237,44 @@ class MainQuest:
                 elif layout[y][x]==level.PASSAGE_R:
                     passage = Passage(centerPoint, img_list[level.PASSAGE_R], (self.current_level + 1))#create passage to right
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.CROSSABLE:
-                    crossable = Crossable(centerPoint, img_list[level.CROSSABLE])#create crossable
-                    self.crossable_group.add(crossable)
-                elif layout[y][x]==level.BREAKABLE:
-                    breakable = Breakable(centerPoint, img_list[level.BREAKABLE], (self.current_level * 10 + 1), False) #create breakable
-                    self.breakable_group.add(breakable)
-                    """
-                    Not sure hot ot do projectiles (not even sure if they are needed here)
+                elif layout[y][x]==level.BAT_V:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    bat = Bat(centerPoint, img_list[level.BAT_V], (x, y), 1)#create bat
+                    self.monster_group.add(bat)
+                elif layout[y][x]==level.BAT_H:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    bat = Bat(centerPoint, img_list[level.BAT_H], (x, y), 2)#create bat
+                    self.monster_group.add(bat)
+                elif layout[y][x]==level.TROLL_V:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    troll = Troll(centerPoint, img_list[level.TROLL_V], (x, y), 1)#create troll
+                    self.monster_group.add(troll)
+                elif layout[y][x]==level.TROLL_H:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    troll = Troll(centerPoint, img_list[level.TROLL_H], (x, y), 2)#create troll
+                    self.monster_group.add(troll)
+                elif layout[y][x]==level.SHOOTER_V:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    shooter = Shooter(centerPoint, img_list[level.SHOOTER_V], (x, y), 1)#create shooter
+                    self.monster_group.add(shooter)
+                elif layout[y][x]==level.SHOOTER_H:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    shooter = Shooter(centerPoint, img_list[level.SHOOTER_H], (x, y), 2)#create shooter
+                    self.monster_group.add(shooter)
+                elif layout[y][x]==level.PLAYER:
+                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    self.crossable_group.add(ground)
+                    self.player = Player(centerPoint, img_list[level.PLAYER], (x,y), 4)
+
+
+                """
+                    Not sure how ot do projectiles (not even sure if they are needed here)
 
                 elif layout[y][x]==level.JAVELIN:
                     #javelin = #create javelin
@@ -228,28 +285,16 @@ class MainQuest:
                 elif layout[y][x]==level.ARROW:
                     arrow = #create arrow
                     self.projectile_group.add(arrow)
-                    """
-                elif layout[y][x]==level.TROLL:
-                    troll = Troll(centerPoint, img_list[level.TROLL], (x, y), direction = random.randint(1,4))#create troll
-                    self.monster_group.add(troll)
-                elif layout[y][x]==level.SHOOTER:
-                    shooter = Shooter(centerPoint, img_list[level.SHOOTER], (x, y), direction = random.randint(1,4))#create shooter
-                    self.monster_group.add(shooter)
-                elif layout[y][x]==level.BAT:
-                    bat = Bat(centerPoint, img_list[level.BAT], (x, y), direction = random.randint(1,4))#create bat
-                    self.monster_group.add(bat)
-                    """
+
                     NOt sure how to do boss since he is more than one block big
 
                 elif layout[y][x]==level.BOSS:
                     boss = #create boss
                     self.block_group.add(boss)
                     """
-                elif layout[y][x]==level.PLAYER:
-                    player = Player(centerPoint, ing_list[level.PLAYER])#create player
-                    self.player_group.add(player)
-                """
-        pass
+
+        self.player_group=pygame.sprite.RenderUpdates(self.player)
+
 
 if __name__ == "__main__":
     MainWindow = MainQuest()

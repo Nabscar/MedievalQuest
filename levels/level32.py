@@ -12,14 +12,16 @@ class level32(levelBase.Level):
         Initialize which character value belongs to which type of block/character in the level file
         """
         GROUND = 0
-        PLAYER = 1
-        TREE = 2
-        WALL = 3
-        BREAKABLE_WALL = 4
-        ENEMY1 = 5
-        ENEMY2 = 6
-        ENEMY3 = 7
-        BOSS = 8
+        GRASS = 1
+        WATER = 2
+        TREE = 3
+        WALL = 5
+        BREAKABLE_WALL = 6
+        BAT = 7
+        SHOOTER = 8
+        TROLL = 9
+        PLAYER = 10
+        PASSAGE = 11
         pass
 
     def getLayout(self):
