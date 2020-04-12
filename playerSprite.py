@@ -88,23 +88,36 @@ class Player(basicSprite.multipleSprite):
         self.rect.move_ip(self.xMove,self.yMove)
 
         lstEnemies = pygame.sprite.spritecollide(self, monster_group, False)
-        lstBackground = pygame.sprite.spritecollide(self, block_group, False)
-        lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
-        lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
-        lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
         if(len(lstEnemies) > 0):
             """
             We hit an Enemy!
             """
             self.EnemyCollide(lstEnemies)
-        #else:
-            """
-            define naythnig else we can hit
-            """
+
 
         if pygame.sprite.spritecollideany(self,block_group):
             """If we hit a block, stop movement"""
             self.rect.move_ip(-self.xMove,-self.yMove)
+
+        lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
+        if (len(lstPassages) > 0):
+            """If we hit a passage, move player"""
+            print("PASSAGE")
+            return lstPassages[0].next_screen
+
+
+        lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
+        if (len(lstBreakable) > 0):
+            if lstBreakable[0].broken:
+                return lstBreakable[0].next_screen
+            else:
+                self.rect.move_ip(-self.xMove,-self.yMove)
+
+        lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
+        if (len(lstProjectiles) > 0):
+           self.rect.move_ip(-self.xMove,-self.yMove)
+           self.currentHealth -= 1
+
         self.xMove = 0
         self.yMove = 0
 

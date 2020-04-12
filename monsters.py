@@ -137,7 +137,7 @@ class Bat(basicSprite.multipleSprite):
     This is where we create the Bats
     Pretty sure this one is done
     """
-    def __init__ (self, centerPoint, images, coords, direction = random.randint(1,4)):
+    def __init__ (self, centerPoint, image, coords, direction = random.randint(1,4)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
@@ -254,7 +254,7 @@ class Shooter(basicSprite.multipleSprite):
     This is where we create the Shooters
     Pretty sure this one is done
     """
-    def __init__ (self, centerPoint, images, coords, direction = random.randint(1,4)):
+    def __init__ (self, centerPoint, image, coords, direction = random.randint(1,4)):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """

@@ -11,25 +11,41 @@ class level23(levelBase.Level):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
-        GROUND = 0
-        TREE = 1
-        WALL = 2
-        BOMB = 3
-        PLAYER = 4
-        PASSAGE = 5
-        pass
+
+        levelBase.Level.__init__(self)
+
+        self.GROUND = 0
+        self.TREE = 1
+        self.WALL = 2
+        self.BOMB = 3
+        self.PLAYER_OW = 4
+        self.PASSAGE_B = 5
+
 
     def getLayout(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-
-        pass
+        return [[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
+                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],\
+                [1, 1, 0, 0, 0, 0 ,0 ,0, 0, 0 ,1, 1],\
+                [1, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 1, 1],\
+                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
+                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
+                [1, 1, 0, 3, 0, 0, 0, 0, 0 ,0, 1, 1],\
+                [1, 1, 0, 0, 0, 0, 4, 0, 0, 0, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 0, 4, 0, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1]]
 
     def getSprites(self):
         """
         Using helpers.py this method will load the png files saved in the data folder
         it will then save them in a list to be returned so they are more easily accessible
         """
-
-        pass
+        ground= load_image('OW_Ground.png')
+        tree = load_image('Tree.png')
+        wall = load_image('BrickWall.png')
+        bomb = load_image('Bomb.png')
+        player = self.kingOWImages()
+        passage = load_image('OW_Ground.png')
+        return[ground, tree, wall, bomb, player, passage]

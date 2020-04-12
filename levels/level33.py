@@ -11,21 +11,34 @@ class level33(levelBase.Level):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
-        GROUND = 0
-        GRASS = 1
-        WATER = 2
-        TREE = 3
-        TROLL = 4
-        PLAYER = 5
-        PASSAGE = 6
+
+        levelBase.Level.__init__(self)
+
+        self.GROUND = 0
+        self.GRASS = 1
+        self.WATER = 2
+        self.TREE = 3
+        self.TROLL_V = 4
+        self.TROLL_H = 5
+        self.PLAYER_OW = 6
+        self.PASSAGE_L = 7
+        self.PASSAGE_T = 8
         pass
 
     def getLayout(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-
-        pass
+        return [[1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 3, 3],\
+                [2, 2, 2, 2, 3, 0, 0, 0, 0, 0, 3, 3],\
+                [2, 2, 2, 2, 3, 0, 0, 0, 0, 0, 3, 3],\
+                [3, 3, 3, 3, 3, 0 ,0 ,5, 0, 0, 3, 3],\
+                [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [7, 0, 0, 4, 0, 0, 0, 0, 0 ,0, 3, 3],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
 
     def getSprites(self):
         """
@@ -33,4 +46,12 @@ class level33(levelBase.Level):
         it will then save them in a list to be returned so they are more easily accessible
         """
 
-        pass
+        ground = load_image('OW_Ground.png')
+        grass = load_image('Grass.png')
+        water = load_image('Water.png')
+        tree = load_image('Tree.png')
+        troll = self.trollImages()
+        player = self.kingOWImages()
+        passage = load_image('OW_Ground.png')
+
+        return [ground, grass, water, tree, troll, troll, player, passage, passage]

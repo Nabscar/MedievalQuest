@@ -11,23 +11,35 @@ class level31(levelBase.Level):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
-        GROUND = 0
-        GRASS = 1
-        WATER = 2
-        TREE = 3
-        WALL = 4
-        BREAKABLE_WALL = 5
-        SHOOTER = 6
-        PLAYER = 8
-        PASSAGE = 9
-        pass
+
+        levelBase.Level.__init__(self)
+
+        self.GROUND = 0
+        self.GRASS = 1
+        self.WATER = 2
+        self.TREE = 3
+        self.WALL = 4
+        self.BREAKABLE_WALL = 5
+        self.SHOOTER_V = 6
+        self.SHOOTER_H = 7
+        self.PLAYER_OW = 8
+        self.PASSAGE_T = 9
+        self.CAVEENTRANCE = 10
 
     def getLayout(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-
-        pass
+        return [[2, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3],\
+                [2, 1, 1, 1, 0, 0, 0, 0, 0, 8, 0, 3],\
+                [2, 1, 1, 0, 0, 0 ,0 ,0, 0, 0 ,0, 3],\
+                [3, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],\
+                [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
 
     def getSprites(self):
         """
@@ -35,4 +47,15 @@ class level31(levelBase.Level):
         it will then save them in a list to be returned so they are more easily accessible
         """
 
-        pass
+        ground = load_image('OW_Ground.png')
+        grass = load_image('Grass.png')
+        water = load_image('Water.png')
+        tree = load_image('Tree.png')
+        wall = load_image('BrickWall.png')
+        breakableWall = [load_image('BreakableWall.png'), load_image('BrokenWall.png')]
+        shooter = self.shooterImages()
+        player = self.kingOWImages()
+        passage = load_image('OW_Ground.png')
+        cave  = load_image('CaveEntrance.png')
+
+        return [ground, grass, water, tree, wall, breakableWall, shooter, shooter, player, passage, cave]

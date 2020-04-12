@@ -13,32 +13,32 @@ def load_image(name, colorkey=None):
         try:
             image = pygame.image.load(fullname)
         except pygame.error:
-            fullname = os.path.join('Images', 'Boss_Images')
+            fullname = os.path.join('Images', 'Misc_Images')
             fullname = os.path.join(fullname, name)
             try:
                 image = pygame.image.load(fullname)
             except pygame.error:
-                fullname = os.path.join('Images', 'Misc_Images')
+                fullname = os.path.join('Images', 'Shooter_Images')
                 fullname = os.path.join(fullname, name)
                 try:
                     image = pygame.image.load(fullname)
                 except pygame.error:
-                    fullname = os.path.join('Images', 'Shooter_Images')
+                    fullname = os.path.join('Images', 'Troll_Images')
                     fullname = os.path.join(fullname, name)
                     try:
                         image = pygame.image.load(fullname)
                     except pygame.error:
-                        fullname = os.path.join('Images', 'Troll_Images')
+                        fullname = os.path.join('Images', 'King_Images', 'King_OW')
                         fullname = os.path.join(fullname, name)
                         try:
                             image = pygame.image.load(fullname)
                         except pygame.error:
-                            fullname = os.path.join('Images', 'King_Images', 'King_OW')
+                            fullname = os.path.join('Images', 'King_Images', 'King_Cave')
                             fullname = os.path.join(fullname, name)
                             try:
                                 image = pygame.image.load(fullname)
                             except pygame.error:
-                                fullname = os.path.join('Images', 'King_Images', 'King_Cave')
+                                fullname = os.path.join('Images', 'Boss_Images')
                                 fullname = os.path.join(fullname, name)
                                 try:
                                     image = pygame.image.load(fullname)

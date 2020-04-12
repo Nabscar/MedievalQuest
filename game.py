@@ -116,7 +116,25 @@ class MainQuest:
                 Update the player sprite
                 """
 
-                self.player.update(self.block_group, self.passage_group, self.breakable_group, self.monster_group, self.projectile_group)
+                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.monster_group, self.projectile_group)
+                if num != None:
+                    self.current_level = num
+                    """
+                    Load all of our Sprites
+                    """
+                    self.LoadSprites()
+                    """
+                    Create Background
+                    """
+                    self.background = pygame.Surface(self.screen.get_size())
+                    self.background = self.background.convert()
+                    self.background.fill((0,0,0))
+                    """
+                    We could draw here parts that would only need to be drawn once
+                    But since levels change there is no need for that
+                    """
+
+                    pygame.display.flip()
 
                 """Do the Drawing"""
                 textpos = 0
@@ -136,8 +154,6 @@ class MainQuest:
                 time.sleep (0.05)
                 #This time can be changed depending on what we establish as the best time
 
-
-
     def LoadSprites(self):
         """
         Load all of the sprites that we need
@@ -153,6 +169,7 @@ class MainQuest:
             If there is a third number, that mean that that is teh cave that sprawns from that level
                 for example: 311 is the cave that come from level 31
         """
+        print(self.current_level)
         if self.current_level == 11:
             level = level11.level11()
         if self.current_level == 12:
@@ -237,6 +254,12 @@ class MainQuest:
                 elif layout[y][x]==level.PASSAGE_R:
                     passage = Passage(centerPoint, img_list[level.PASSAGE_R], (self.current_level + 1))#create passage to right
                     self.passage_group.add(passage)
+                elif layout[y][x]==level.PASSAGE_C:
+                    passage = Passage(centerPoint, img_list[level.PASSAGE_C], int(((self.current_level- 1)/10)))#create passage to right
+                    self.passage_group.add(passage)
+                elif layout[y][x]==level.CAVEENTRANCE:
+                    cave = Passage(centerPoint, img_list[level.CAVEENTRANCE], (self.current_level * 10 + 1))#create passage to right
+                    self.passage_group.add(cave)
                 elif layout[y][x]==level.BAT_V:
                     ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
