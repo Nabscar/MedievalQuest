@@ -29,7 +29,8 @@ class level22(levelBase.Level):
         self.SHOOTER_V = 'x'
         self.SHOOTER_H = 'x'
         self.BOSS = 'x'
-        self.PLAYER = 4
+        self.PLAYER_OW = 4
+        self.PLAYER_C = 'x'
 
     def getLayout(self):
         """
@@ -88,4 +89,4 @@ class level22(levelBase.Level):
         player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up]
         passage = load_image('OW_Ground.png')
 
-        return [ground, tree, wall, breakable_wall1, player, passage]
+        return [ground, tree, wall, breakable_wall, player, passage]

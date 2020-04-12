@@ -20,7 +20,7 @@ from playerSprite import Player
 from monsters import Troll, Bat, Shooter
 from projectiles import Javelin, Ball, Arrow
 from backgrounds import BreakableBackground, Passage
-from basicSprite import Sprite
+from basicSprite import singleSprite, multipleSprite
 import time
 
 if not pygame.font: print('Warning, fonts disabled')
@@ -205,19 +205,19 @@ class MainQuest:
                 Create the sprites necessary to fill the parts we just read
                 """
                 if layout[y][x]==level.GROUND:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                 elif layout[y][x]==level.GRASS:
-                    grass = Sprite(centerPoint, img_list[level.GRASS])
+                    grass = singleSprite(centerPoint, img_list[level.GRASS])
                     self.crossable_group.add(grass)
                 elif layout[y][x]==level.WATER:
-                    water = Sprite(centerPoint, img_list[level.WATER])
+                    water = singleSprite(centerPoint, img_list[level.WATER])
                     self.block_group.add(water)
                 elif layout[y][x]==level.TREE:
-                    tree = Sprite(centerPoint, img_list[level.TREE])
+                    tree = singleSprite(centerPoint, img_list[level.TREE])
                     self.block_group.add(tree)
                 elif layout[y][x]==level.WALL:
-                    wall = Sprite(centerPoint, img_list[level.WALL])
+                    wall = singleSprite(centerPoint, img_list[level.WALL])
                     self.block_group.add(wall)
                 elif layout[y][x]==level.BREAKABLE_WALL:
                     breakableWall = BreakableBackground(centerPoint, img_list[level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
@@ -238,39 +238,39 @@ class MainQuest:
                     passage = Passage(centerPoint, img_list[level.PASSAGE_R], (self.current_level + 1))#create passage to right
                     self.passage_group.add(passage)
                 elif layout[y][x]==level.BAT_V:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     bat = Bat(centerPoint, img_list[level.BAT_V], (x, y), 1)#create bat
                     self.monster_group.add(bat)
                 elif layout[y][x]==level.BAT_H:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     bat = Bat(centerPoint, img_list[level.BAT_H], (x, y), 2)#create bat
                     self.monster_group.add(bat)
                 elif layout[y][x]==level.TROLL_V:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     troll = Troll(centerPoint, img_list[level.TROLL_V], (x, y), 1)#create troll
                     self.monster_group.add(troll)
                 elif layout[y][x]==level.TROLL_H:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     troll = Troll(centerPoint, img_list[level.TROLL_H], (x, y), 2)#create troll
                     self.monster_group.add(troll)
                 elif layout[y][x]==level.SHOOTER_V:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     shooter = Shooter(centerPoint, img_list[level.SHOOTER_V], (x, y), 1)#create shooter
                     self.monster_group.add(shooter)
                 elif layout[y][x]==level.SHOOTER_H:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     shooter = Shooter(centerPoint, img_list[level.SHOOTER_H], (x, y), 2)#create shooter
                     self.monster_group.add(shooter)
                 elif layout[y][x]==level.PLAYER_OW:
-                    ground = Sprite(centerPoint, img_list[level.GROUND])
+                    ground = singleSprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
-                    self.player = Player(centerPoint, img_list[level.PLAYER], (x,y), 4)
+                    self.player = Player(centerPoint, img_list[level.PLAYER_OW], (x,y), 4)
 
 
                 """

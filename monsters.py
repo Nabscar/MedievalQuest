@@ -8,7 +8,7 @@ This python script creates three classes that create the Monsters
 It should only be missing Boss
 """
 
-class Troll(basicSprite.Sprite):
+class Troll(basicSprite.multipleSprite):
     """
     This is where we create the Green Monsters
     Pretty sure this one is done
@@ -17,7 +17,7 @@ class Troll(basicSprite.Sprite):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
-        basicSprite.Sprite.__init__(self, centerPoint, images)
+        basicSprite.multipleSprite.__init__(self, centerPoint, images)
         """start the basic initialization"""
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down", "Left1", "Left2", "Right1", "Right2", "Up"]
@@ -132,7 +132,7 @@ class Troll(basicSprite.Sprite):
 
         pass
 
-class Bat(basicSprite.Sprite):
+class Bat(basicSprite.multipleSprite):
     """
     This is where we create the Bats
     Pretty sure this one is done
@@ -141,7 +141,7 @@ class Bat(basicSprite.Sprite):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
-        basicSprite.Sprite.__init__(self, centerPoint, image)
+        basicSprite.multipleSprite.__init__(self, centerPoint, image)
         """start the basic initialization"""
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down1", "Down2", "Left1", "Left2", "Right1", "Right2", "Up1", "Up2"]
@@ -249,7 +249,7 @@ class Bat(basicSprite.Sprite):
 
         pass
 
-class Shooter(basicSprite.Sprite):
+class Shooter(basicSprite.multipleSprite):
     """
     This is where we create the Shooters
     Pretty sure this one is done
@@ -258,7 +258,7 @@ class Shooter(basicSprite.Sprite):
         """
         use the initialization of the basic Sprite and the initialize any specific thigns for this enemy
         """
-        basicSprite.Sprite.__init__(self, centerPoint, image)
+        basicSprite.multipleSprite.__init__(self, centerPoint, image)
         """start the basic initialization"""
         self.original_rect = pygame.Rect(self.rect)
         self.image_order = ["Down1", "Down2", "Left1", "Left2", "Right1", "Right2", "Up1", "Up2"]

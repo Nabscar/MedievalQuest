@@ -8,7 +8,7 @@ All the other types are used as a siple Sprite
 """
 
 
-class Passage(basicSprite.Sprite):
+class Passage(basicSprite.singleSprite):
     """
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
@@ -17,10 +17,10 @@ class Passage(basicSprite.Sprite):
         """
         Initializes Passage
         """
-        basicSprite.Sprite.__init__(self, centerPoint, images)
+        basicSprite.singleSprite.__init__(self, centerPoint, images)
         self.next_screen = next_screen
 
-class BreakableBackground(basicSprite.Sprite):
+class BreakableBackground(basicSprite.multipleSprite):
     """
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
@@ -29,7 +29,7 @@ class BreakableBackground(basicSprite.Sprite):
         """
         Initializes breakableBackground
         """
-        basicSprite.Sprite.__init__(self, centerPoint, images)
+        basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.broken = broken
         self.image_order = ["Unbroken", "Broken"]
         #self.image = self.images[0]

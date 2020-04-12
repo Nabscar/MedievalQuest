@@ -3,7 +3,7 @@ import basicSprite
 from helpers import *
 import time
 
-class Player(basicSprite.Sprite):
+class Player(basicSprite.multipleSprite):
     """
     This is the sprite or the playable character
     """
@@ -12,7 +12,7 @@ class Player(basicSprite.Sprite):
         """
         Initializes the special characteristics of the playable character
         """
-        basicSprite.Sprite.__init__(self, centerPoint, images)
+        basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.image_order = ['Basic_Down', 'Basic_Left', 'Basic_Right', 'Basic_Up']
         self.direction = direction
         self.coords = coords
@@ -49,15 +49,19 @@ class Player(basicSprite.Sprite):
         if (key == K_d):
             self.xMove += self.x_dist
             print("D")
+            self.image = self.images[2]
         elif (key == K_a):
             self.xMove += -self.x_dist
             print("A")
+            self.image = self.images[1]
         elif (key == K_w):
             self.yMove += -self.y_dist
             print("W")
+            self.image = self.images[3]
         elif (key == K_s):
             self.yMove += self.y_dist
             print("S")
+            self.image = self.images[0]
         elif (key == K_j):
             sword_Attack()
         elif (key == K_k):
