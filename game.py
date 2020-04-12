@@ -267,7 +267,7 @@ class MainQuest:
                     self.crossable_group.add(ground)
                     shooter = Shooter(centerPoint, img_list[level.SHOOTER_H], (x, y), 2)#create shooter
                     self.monster_group.add(shooter)
-                elif layout[y][x]==level.PLAYER:
+                elif layout[y][x]==level.PLAYER_OW:
                     ground = Sprite(centerPoint, img_list[level.GROUND])
                     self.crossable_group.add(ground)
                     self.player = Player(centerPoint, img_list[level.PLAYER], (x,y), 4)

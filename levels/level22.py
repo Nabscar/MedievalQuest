@@ -88,4 +88,4 @@ class level22(levelBase.Level):
         player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up]
         passage = load_image('OW_Ground.png')
 
-        return [ground, tree, wall, breakable_wall1, basic_player_up, passage]
+        return [ground, tree, wall, breakable_wall1, player, passage]

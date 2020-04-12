@@ -13,7 +13,6 @@ class Player(basicSprite.Sprite):
         Initializes the special characteristics of the playable character
         """
         basicSprite.Sprite.__init__(self, centerPoint, images)
-
         self.image_order = ['Basic_Down', 'Basic_Left', 'Basic_Right', 'Basic_Up']
         self.direction = direction
         self.coords = coords
