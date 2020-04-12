@@ -50,4 +50,5 @@ class level21(levelBase.Level):
         player = self.kingOWImages()
         potion = load_image('Potion_Health.png')
         passage = load_image('OW_Ground.png')
-        return [ground, grass, tree, troll, potion, player, passage, passage]
+        javelin = self.javelinImages()
+        return [ground, grass, tree, troll, potion, player, passage, passage, javelin]

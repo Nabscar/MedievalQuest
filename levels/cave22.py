@@ -14,7 +14,6 @@ class cave22(levelBase.Level):
 
         levelBase.Level.__init__(self)
 
-        
         self.CAVEGROUND = 0
         self.CAVEWALL = 1
         self.CAVEWALLBREAKABLE = 2

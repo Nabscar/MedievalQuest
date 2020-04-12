@@ -48,20 +48,20 @@ class Player(basicSprite.multipleSprite):
 
         if (key == K_d):
             self.xMove += self.x_dist
-            print("D")
             self.image = self.images[2]
+            self.coords = (self.coords[0] + 1, self.coords[1])
         elif (key == K_a):
             self.xMove += -self.x_dist
-            print("A")
             self.image = self.images[1]
+            self.coords = (self.coords[0] - 1, self.coords[1])
         elif (key == K_w):
             self.yMove += -self.y_dist
-            print("W")
             self.image = self.images[3]
+            self.coords = (self.coords[0], self.coords[1] - 1)
         elif (key == K_s):
             self.yMove += self.y_dist
-            print("S")
             self.image = self.images[0]
+            self.coords = (self.coords[0], self.coords[1] + 1)
         elif (key == K_j):
             sword_Attack()
         elif (key == K_k):
@@ -72,7 +72,7 @@ class Player(basicSprite.multipleSprite):
             drink_potion()
 
 
-    def update(self, block_group, passage_group, breakable_group, monster_group, projectile_group):
+    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group):
         """
         Called to update the player sprite's position and state
         (state only if we choose to have power-ups)
@@ -87,7 +87,7 @@ class Player(basicSprite.multipleSprite):
         """
         self.rect.move_ip(self.xMove,self.yMove)
 
-        lstEnemies = pygame.sprite.spritecollide(self, monster_group, False)
+        lstEnemies = pygame.sprite.spritecollide(self, troll_group, False) + pygame.sprite.spritecollide(self, shooter_group, False) + pygame.sprite.spritecollide(self, bat_group, False)
         if(len(lstEnemies) > 0):
             """
             We hit an Enemy!

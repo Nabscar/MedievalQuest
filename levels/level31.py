@@ -25,6 +25,7 @@ class level31(levelBase.Level):
         self.PLAYER_OW = 8
         self.PASSAGE_T = 9
         self.CAVEENTRANCE = 10
+        self.SHOOTER = 11
 
     def getLayout(self):
         """
@@ -57,5 +58,6 @@ class level31(levelBase.Level):
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
         cave  = load_image('CaveEntrance.png')
+        ball = self.ballImages()
 
-        return [ground, grass, water, tree, wall, breakableWall, shooter, shooter, player, passage, cave]
+        return [ground, grass, water, tree, wall, breakableWall, shooter, shooter, player, passage, cave, ball]

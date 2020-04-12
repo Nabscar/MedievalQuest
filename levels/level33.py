@@ -23,7 +23,7 @@ class level33(levelBase.Level):
         self.PLAYER_OW = 6
         self.PASSAGE_L = 7
         self.PASSAGE_T = 8
-        pass
+        self.JAVELIN = 9
 
     def getLayout(self):
         """
@@ -53,5 +53,6 @@ class level33(levelBase.Level):
         troll = self.trollImages()
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
+        javelin = self.javelinImages()
 
-        return [ground, grass, water, tree, troll, troll, player, passage, passage]
+        return [ground, grass, water, tree, troll, troll, player, passage, passage, javelin]

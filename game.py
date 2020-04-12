@@ -77,7 +77,9 @@ class MainQuest:
         while 1:
 
             self.player_group.clear(self.screen,self.background)
-            self.monster_group.clear(self.screen,self.background)
+            self.troll_group.clear(self.screen,self.background)
+            self.bat_group.clear(self.screen,self.background)
+            self.shooter_group.clear(self.screen,self.background)
             self.projectile_group.clear(self.screen, self.background)
 
             for event in pygame.event.get():
@@ -115,8 +117,18 @@ class MainQuest:
                 """
                 Update the player sprite
                 """
+                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group)
+                if (len(self.troll_group.sprites()) > 0):
+                    javelin = self.troll_group.update(self.block_group, self.player.coords, self.img_list[self.level.JAVELIN], self.breakable_group, self.passage_group)
+                    if javelin != None:
+                        self.projectile_group.add(javelin)
+                if (len(self.bat_group.sprites()) > 0):
+                    self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+                if (len(self.shooter_group.sprites()) > 0):
+                    ball = self.shooter_group.update(self.block_group, self.player.coords, self.img_list[self.level.BALL], self.breakable_group, self.passage_group)
+                if (len(self.projectile_group.sprites()) > 0):
+                    self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
-                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.monster_group, self.projectile_group)
                 if num != None:
                     self.current_level = num
                     """
@@ -145,7 +157,9 @@ class MainQuest:
                 reclist += self.passage_group.draw(self.screen)
                 reclist += self.crossable_group.draw(self.screen)
                 reclist +=  self.breakable_group.draw(self.screen)
-                reclist +=  self.monster_group.draw(self.screen)
+                reclist +=  self.troll_group.draw(self.screen)
+                reclist +=  self.bat_group.draw(self.screen)
+                reclist +=  self.shooter_group.draw(self.screen)
                 reclist +=  self.projectile_group.draw(self.screen)
                 reclist +=  self.player_group.draw(self.screen)
 
@@ -171,30 +185,30 @@ class MainQuest:
         """
         print(self.current_level)
         if self.current_level == 11:
-            level = level11.level11()
+            self.level = level11.level11()
         if self.current_level == 12:
-            level = level12.level12()
+            self.level = level12.level12()
         if self.current_level == 13:
-            level = level13.level13()
+            self.level = level13.level13()
         if self.current_level == 21:
-            level = level21.level21()
+            self.level = level21.level21()
         if self.current_level == 22:
-            level = level22.level22()
+            self.level = level22.level22()
         if self.current_level == 23:
-            level = level23.level23()
+            self.level = level23.level23()
         if self.current_level == 31:
-            level = level31.level31()
+            self.level = level31.level31()
         if self.current_level == 32:
-            level = level32.level32()
+            self.level = level32.level32()
         if self.current_level == 33:
-            level = level33.level33()
+            self.level = level33.level33()
         if self.current_level == 221:
-            level = cave22.cave22()
+            self.level = cave22.cave22()
         if self.current_level == 311:
-            level = cave31.cave31()
+            self.level = cave31.cave31()
 
-        layout = level.getLayout()
-        img_list = level.getSprites()
+        self.layout = self.level.getLayout()
+        self.img_list = self.level.getSprites()
 
         """
         Create the groups:
@@ -210,108 +224,110 @@ class MainQuest:
         self.crossable_group = pygame.sprite.RenderUpdates()
         self.breakable_group = pygame.sprite.RenderUpdates()
 
-        self.monster_group = pygame.sprite.RenderUpdates()
+        self.troll_group = pygame.sprite.RenderUpdates()
+        self.bat_group = pygame.sprite.RenderUpdates()
+        self.shooter_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
 
-        for y in range(len(layout)):
-            for x in range(len(layout[y])):
+        for y in range(len(self.layout)):
+            for x in range(len(self.layout[y])):
                 """Get the center point for the rects"""
                 centerPoint = [(x*BLOCK_SIZE)+x_offset,(y*BLOCK_SIZE+y_offset)]
                 """
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
-                if layout[y][x]==level.GROUND:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                if self.layout[y][x]==self.level.GROUND:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                elif layout[y][x]==level.GRASS:
-                    grass = singleSprite(centerPoint, img_list[level.GRASS])
+                elif self.layout[y][x]==self.level.GRASS:
+                    grass = singleSprite(centerPoint, self.img_list[self.level.GRASS])
                     self.crossable_group.add(grass)
-                elif layout[y][x]==level.WATER:
-                    water = singleSprite(centerPoint, img_list[level.WATER])
+                elif self.layout[y][x]==self.level.WATER:
+                    water = singleSprite(centerPoint, self.img_list[self.level.WATER])
                     self.block_group.add(water)
-                elif layout[y][x]==level.TREE:
-                    tree = singleSprite(centerPoint, img_list[level.TREE])
+                elif self.layout[y][x]==self.level.TREE:
+                    tree = singleSprite(centerPoint, self.img_list[self.level.TREE])
                     self.block_group.add(tree)
-                elif layout[y][x]==level.WALL:
-                    wall = singleSprite(centerPoint, img_list[level.WALL])
+                elif self.layout[y][x]==self.level.WALL:
+                    wall = singleSprite(centerPoint, self.img_list[self.level.WALL])
                     self.block_group.add(wall)
-                elif layout[y][x]==level.BREAKABLE_WALL:
-                    breakableWall = BreakableBackground(centerPoint, img_list[level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
                     self.breakable_group.add(breakableWall)
-                elif layout[y][x]==level.BROKEN_WALL:
-                    breakableWall = BreakableBackground(centerPoint, img_list[level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
+                elif self.layout[y][x]==self.level.BROKEN_WALL:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
                     self.breakable_group.add(breakable)
-                elif layout[y][x]==level.PASSAGE_T:
-                    passage = Passage(centerPoint, img_list[level.PASSAGE_T], (self.current_level - 10))#create passage to top
+                elif self.layout[y][x]==self.level.PASSAGE_T:
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_T], (self.current_level - 10))#create passage to top
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.PASSAGE_B:
-                    passage = Passage(centerPoint, img_list[level.PASSAGE_B], (self.current_level + 10))#create passage to bottom
+                elif self.layout[y][x]==self.level.PASSAGE_B:
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_B], (self.current_level + 10))#create passage to bottom
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.PASSAGE_L:
-                    passage = Passage(centerPoint, img_list[level.PASSAGE_L], (self.current_level - 1))#create passage to left
+                elif self.layout[y][x]==self.level.PASSAGE_L:
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_L], (self.current_level - 1))#create passage to left
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.PASSAGE_R:
-                    passage = Passage(centerPoint, img_list[level.PASSAGE_R], (self.current_level + 1))#create passage to right
+                elif self.layout[y][x]==self.level.PASSAGE_R:
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_R], (self.current_level + 1))#create passage to right
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.PASSAGE_C:
-                    passage = Passage(centerPoint, img_list[level.PASSAGE_C], int(((self.current_level- 1)/10)))#create passage to right
+                elif self.layout[y][x]==self.level.PASSAGE_C:
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_C], int(((self.current_level- 1)/10)))#create passage to right
                     self.passage_group.add(passage)
-                elif layout[y][x]==level.CAVEENTRANCE:
-                    cave = Passage(centerPoint, img_list[level.CAVEENTRANCE], (self.current_level * 10 + 1))#create passage to right
+                elif self.layout[y][x]==self.level.CAVEENTRANCE:
+                    cave = Passage(centerPoint, self.img_list[self.level.CAVEENTRANCE], (self.current_level * 10 + 1))#create passage to right
                     self.passage_group.add(cave)
-                elif layout[y][x]==level.BAT_V:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                elif self.layout[y][x]==self.level.BAT_V:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    bat = Bat(centerPoint, img_list[level.BAT_V], (x, y), 1)#create bat
-                    self.monster_group.add(bat)
-                elif layout[y][x]==level.BAT_H:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    bat = Bat(centerPoint, self.img_list[self.level.BAT_V], (x, y), 1)#create bat
+                    self.bat_group.add(bat)
+                elif self.layout[y][x]==self.level.BAT_H:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    bat = Bat(centerPoint, img_list[level.BAT_H], (x, y), 2)#create bat
-                    self.monster_group.add(bat)
-                elif layout[y][x]==level.TROLL_V:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    bat = Bat(centerPoint, self.img_list[self.level.BAT_H], (x, y), 2)#create bat
+                    self.bat_group.add(bat)
+                elif self.layout[y][x]==self.level.TROLL_V:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    troll = Troll(centerPoint, img_list[level.TROLL_V], (x, y), 1)#create troll
-                    self.monster_group.add(troll)
-                elif layout[y][x]==level.TROLL_H:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    troll = Troll(centerPoint, self.img_list[self.level.TROLL_V], (x, y), 1)#create troll
+                    self.troll_group.add(troll)
+                elif self.layout[y][x]==self.level.TROLL_H:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    troll = Troll(centerPoint, img_list[level.TROLL_H], (x, y), 2)#create troll
-                    self.monster_group.add(troll)
-                elif layout[y][x]==level.SHOOTER_V:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    troll = Troll(centerPoint, self.img_list[self.level.TROLL_H], (x, y), 2)#create troll
+                    self.troll_group.add(troll)
+                elif self.layout[y][x]==self.level.SHOOTER_V:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    shooter = Shooter(centerPoint, img_list[level.SHOOTER_V], (x, y), 1)#create shooter
-                    self.monster_group.add(shooter)
-                elif layout[y][x]==level.SHOOTER_H:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    shooter = Shooter(centerPoint, self.img_list[self.level.SHOOTER_V], (x, y), 1)#create shooter
+                    self.shooter_group.add(shooter)
+                elif self.layout[y][x]==self.level.SHOOTER_H:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    shooter = Shooter(centerPoint, img_list[level.SHOOTER_H], (x, y), 2)#create shooter
-                    self.monster_group.add(shooter)
-                elif layout[y][x]==level.PLAYER_OW:
-                    ground = singleSprite(centerPoint, img_list[level.GROUND])
+                    shooter = Shooter(centerPoint, self.img_list[self.level.SHOOTER_H], (x, y), 2)#create shooter
+                    self.shooter_group.add(shooter)
+                elif self.layout[y][x]==self.level.PLAYER_OW:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    self.player = Player(centerPoint, img_list[level.PLAYER_OW], (x,y), 4)
+                    self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
 
 
                 """
                     Not sure how ot do projectiles (not even sure if they are needed here)
 
-                elif layout[y][x]==level.JAVELIN:
+                elif self.layout[y][x]==self.level.JAVELIN:
                     #javelin = #create javelin
                     self.projectile_group.add(javelin)
-                elif layout[y][x]==level.BALL:
+                elif self.layout[y][x]==self.level.BALL:
                     ball = #create ball
                     self.projectile_group.add(ball)
-                elif layout[y][x]==level.ARROW:
+                elif self.layout[y][x]==self.level.ARROW:
                     arrow = #create arrow
                     self.projectile_group.add(arrow)
 
                     NOt sure how to do boss since he is more than one block big
 
-                elif layout[y][x]==level.BOSS:
+                elif self.layout[y][x]==self.level.BOSS:
                     boss = #create boss
                     self.block_group.add(boss)
                     """

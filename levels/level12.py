@@ -22,6 +22,7 @@ class level12(levelBase.Level):
         self.PLAYER_OW = 5
         self.PASSAGE_L = 6
         self.PASSAGE_B = 7
+        self.JAVELIN = 8
 
 
     def getLayout(self):
@@ -51,4 +52,5 @@ class level12(levelBase.Level):
         potion = load_image('Potion_Health.png')
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
-        return [ground, tree, grass, troll, potion, player, passage, passage]
+        javelin = self.javelinImages()
+        return [ground, tree, grass, troll, potion, player, passage, passage, javelin]

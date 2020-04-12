@@ -46,6 +46,8 @@ class Level:
         self.CAVEWALLBREAKABLE = 'x'
         self.STONE = 'x'
         self.PASSAGE_C = 'x'
+        self.JAVELIN = 'x'
+        self.BALL = 'x'
 
     def trollImages(self):
         """
@@ -53,6 +55,11 @@ class Level:
         """
         return [load_image('Troll_Down.png'), load_image('Troll_Left1.png'), load_image('Troll_Left2.png'), load_image('Troll_Right1.png'), load_image('Troll_Right2.png'), load_image('Troll_Up.png')]
 
+    def javelinImages(self):
+        """
+        Returns a list of javelin images
+        """
+        return[load_image('Javelin_Down.png'), load_image('Javelin_Left.png'), load_image('Javelin_Right.png'), load_image('Javelin_Up.png')]
 
     def shooterImages(self):
         """
@@ -61,6 +68,11 @@ class Level:
         return [load_image('Shooter_Down1.png'), load_image('Shooter_Down2.png'), load_image('Shooter_Left1.png'), load_image('Shooter_Left2.png'),
                 load_image('Shooter_Right1.png'), load_image('Shooter_Right2.png'), load_image('Shooter_Up1.png'), load_image('Shooter_Up2.png')]
 
+    def ballImages(self):
+        """
+        Returns a list of ball images
+        """
+        return load_image('Shooter_Projectile.png')
 
     def batImages(self):
         """
