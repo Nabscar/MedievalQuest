@@ -13,12 +13,13 @@ class Passage(basicSprite.singleSprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self, centerPoint, images, next_screen):
+    def __init__ (self, centerPoint, images, next_screen, side):
         """
         Initializes Passage
         """
         basicSprite.singleSprite.__init__(self, centerPoint, images)
         self.next_screen = next_screen
+        self.side = side
 
 class BreakableBackground(basicSprite.multipleSprite):
     """

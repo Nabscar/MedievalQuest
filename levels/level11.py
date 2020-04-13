@@ -7,12 +7,12 @@ class level11(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
         self.GROUND = 0
         self.GRASS = 1
@@ -25,7 +25,7 @@ class level11(levelBase.Level):
         self.PASSAGE_R = 8
         self.JAVELIN = 9
 
-    def getLayout(self):
+    def getLayoutLeft(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
@@ -38,6 +38,21 @@ class level11(levelBase.Level):
                 [3, 0, 5, 0, 0, 0, 0, 0, 0 ,0, 0, 3],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],\
+                [3, 7, 7, 7, 3, 3, 3, 3, 3, 3, 3, 3]]
+
+    def getLayoutTop(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[2, 2, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3],\
+                [1, 1, 1, 0, 0, 0 ,0 ,0, 0, 0 ,0, 3],\
+                [3, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 8],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],\
+                [3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 8],\
+                [3, 0, 5, 0, 0, 0, 0, 0, 0 ,0, 0, 3],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],\
+                [3, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3],\
                 [3, 7, 7, 7, 3, 3, 3, 3, 3, 3, 3, 3]]
 
     def getSprites(self):

@@ -103,7 +103,7 @@ class Player(basicSprite.multipleSprite):
         if (len(lstPassages) > 0):
             """If we hit a passage, move player"""
             print("PASSAGE")
-            return lstPassages[0].next_screen
+            return lstPassages[0].next_screen, lstPassages[0].side
 
 
         lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)

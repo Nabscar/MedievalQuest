@@ -21,7 +21,7 @@ class cave22(levelBase.Level):
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
 
-    def getLayout(self):
+    def getLayoutCave(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """

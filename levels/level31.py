@@ -7,12 +7,12 @@ class level31(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
         self.GROUND = 0
         self.GRASS = 1
@@ -25,9 +25,24 @@ class level31(levelBase.Level):
         self.PLAYER_OW = 8
         self.PASSAGE_T = 9
         self.CAVEENTRANCE = 10
-        self.SHOOTER = 11
+        self.BALL = 11
 
-    def getLayout(self):
+    def getLayoutLeft(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[2, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3],\
+                [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3],\
+                [2, 1, 1, 0, 0, 0 ,0 ,0, 0, 0 ,0, 3],\
+                [3, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 5],\
+                [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+
+    def getLayoutBottom(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
@@ -39,6 +54,21 @@ class level31(levelBase.Level):
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],\
                 [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+
+    def getLayoutCave(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[2, 3, 3, 3, 3, 3, 3, 3, 9, 9, 9, 3],\
+                [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3],\
+                [2, 1, 1, 0, 0, 0 ,0 ,0, 0, 0 ,0, 3],\
+                [3, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],\
+                [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
+                [3, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
                 [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
                 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
 

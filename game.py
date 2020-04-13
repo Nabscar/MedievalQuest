@@ -58,7 +58,7 @@ class MainQuest:
         """
         Load all of our Sprites
         """
-        self.LoadSprites()
+        self.LoadSprites("T")
         """
         Create Background
         """
@@ -130,11 +130,11 @@ class MainQuest:
                     self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
                 if num != None:
-                    self.current_level = num
+                    self.current_level = num[0]
                     """
                     Load all of our Sprites
                     """
-                    self.LoadSprites()
+                    self.LoadSprites(num[1])
                     """
                     Create Background
                     """
@@ -168,7 +168,7 @@ class MainQuest:
                 time.sleep (0.05)
                 #This time can be changed depending on what we establish as the best time
 
-    def LoadSprites(self):
+    def LoadSprites(self, side):
         """
         Load all of the sprites that we need
         Calculate the Center Point Offset
@@ -185,29 +185,42 @@ class MainQuest:
         """
         print(self.current_level)
         if self.current_level == 11:
-            self.level = level11.level11()
+            self.level = level11.level11(side)
         if self.current_level == 12:
-            self.level = level12.level12()
+            self.level = level12.level12(side)
         if self.current_level == 13:
-            self.level = level13.level13()
+            self.level = level13.level13(side)
         if self.current_level == 21:
-            self.level = level21.level21()
+            self.level = level21.level21(side)
         if self.current_level == 22:
-            self.level = level22.level22()
+            self.level = level22.level22(side)
         if self.current_level == 23:
-            self.level = level23.level23()
+            self.level = level23.level23(side)
         if self.current_level == 31:
-            self.level = level31.level31()
+            self.level = level31.level31(side)
         if self.current_level == 32:
-            self.level = level32.level32()
+            self.level = level32.level32(side)
         if self.current_level == 33:
-            self.level = level33.level33()
+            self.level = level33.level33(side)
         if self.current_level == 221:
-            self.level = cave22.cave22()
+            self.level = cave22.cave22(side)
         if self.current_level == 311:
-            self.level = cave31.cave31()
+            self.level = cave31.cave31(side)
 
-        self.layout = self.level.getLayout()
+
+        if side == "T":
+            self.layout = self.level.getLayoutTop()
+        elif side == "B":
+            self.layout = self.level.getLayoutBottom()
+        elif side == "L":
+            self.layout = self.level.getLayoutLeft()
+        elif side == "R":
+            self.layout = self.level.getLayoutRight()
+        elif side == "C":
+            self.layout = self.level.getLayoutCave()
+        else:
+            self.layout = self.level.getLayoutTop()
+
         self.img_list = self.level.getSprites()
 
         """
@@ -259,22 +272,22 @@ class MainQuest:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
                     self.breakable_group.add(breakable)
                 elif self.layout[y][x]==self.level.PASSAGE_T:
-                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_T], (self.current_level - 10))#create passage to top
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_T], (self.current_level - 10), "T")#create passage to top
                     self.passage_group.add(passage)
                 elif self.layout[y][x]==self.level.PASSAGE_B:
-                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_B], (self.current_level + 10))#create passage to bottom
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_B], (self.current_level + 10), "B")#create passage to bottom
                     self.passage_group.add(passage)
                 elif self.layout[y][x]==self.level.PASSAGE_L:
-                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_L], (self.current_level - 1))#create passage to left
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_L], (self.current_level - 1), "L")#create passage to left
                     self.passage_group.add(passage)
                 elif self.layout[y][x]==self.level.PASSAGE_R:
-                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_R], (self.current_level + 1))#create passage to right
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_R], (self.current_level + 1), "R")#create passage to right
                     self.passage_group.add(passage)
                 elif self.layout[y][x]==self.level.PASSAGE_C:
-                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_C], int(((self.current_level- 1)/10)))#create passage to right
+                    passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_C], int(((self.current_level- 1)/10)), "C")#create passage to right
                     self.passage_group.add(passage)
                 elif self.layout[y][x]==self.level.CAVEENTRANCE:
-                    cave = Passage(centerPoint, self.img_list[self.level.CAVEENTRANCE], (self.current_level * 10 + 1))#create passage to right
+                    cave = Passage(centerPoint, self.img_list[self.level.CAVEENTRANCE], (self.current_level * 10 + 1), "C")#create passage to right
                     self.passage_group.add(cave)
                 elif self.layout[y][x]==self.level.BAT_V:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])

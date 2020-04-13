@@ -14,10 +14,11 @@ class Level:
         this function"""
         pass
 
-    def __init__ (self):
+    def __init__ (self, side):
         """
         General initializer that start the constants
         """
+        self.side = side
 
         self.GROUND = 'x'
         self.GRASS = 'x'
