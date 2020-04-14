@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction):
+    def __init__ (self, centerPoint, images, coords, direction, bombs = 0, potions = 0, health = 6):
         """
         Initializes the special characteristics of the playable character
         """
@@ -33,11 +33,11 @@ class Player(basicSprite.multipleSprite):
         self.yMove = 0
 
         self.maxHealth = 6
-        self.currentHealth = 6
+        self.currentHealth = health
         self.damage = 1
         self.quiver = False
-        self.bombs = 0
-        self.potions = 0
+        self.bombs = bombs
+        self.potions = potions
 
 
     def MoveKeyDown(self, key):
@@ -72,7 +72,7 @@ class Player(basicSprite.multipleSprite):
             drink_potion()
 
 
-    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group):
+    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group):
         """
         Called to update the player sprite's position and state
         (state only if we choose to have power-ups)
@@ -101,7 +101,6 @@ class Player(basicSprite.multipleSprite):
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if (len(lstPassages) > 0):
             """If we hit a passage, move player"""
-            print("PASSAGE")
             return lstPassages[0].next_screen, lstPassages[0].side
 
 
@@ -116,6 +115,15 @@ class Player(basicSprite.multipleSprite):
         if (len(lstProjectiles) > 0):
            self.rect.move_ip(-self.xMove,-self.yMove)
            self.currentHealth -= 1
+
+        lstPotions = pygame.sprite.spritecollide(self, potion_group, False)
+        if(len(lstPotions) > 0):
+            if self.potions < 6:
+                self.potions += 3
+            else:
+                self.potions = 9
+            self.rect.move_ip(- self.xMove,-self.yMove)
+            return "Potions"
 
         self.xMove = 0
         self.yMove = 0

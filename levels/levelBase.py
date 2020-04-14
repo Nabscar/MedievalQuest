@@ -55,12 +55,13 @@ class Level:
         self.POTION = 'x'
         self.POTIONNUM = 'x'
         self.HEART = 'x'
+        self.PICKPOTION = 'x'
 
     def numberImages(self):
         """
         Returns a list of troll images
         """
-        return [load_image('Number0.png'), load_image('Number1.png'), load_image('Number2.png')]
+        return [load_image('Number0.png'), load_image('Number1.png'), load_image('Number2.png'), load_image('Number3.png'), load_image('Number4.png'), load_image('Number5.png'), load_image('Number6.png'), load_image('Number7.png'), load_image('Number8.png'), load_image('Number9.png')]
 
     def trollImages(self):
         """

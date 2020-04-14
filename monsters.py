@@ -60,17 +60,13 @@ class Troll(basicSprite.multipleSprite):
             return
         xMove,yMove = 0,0
 
-        print(character_coords)
-        print(self.coords)
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             diff = character_coords[1] - self.coords[1]
             if diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
-                print("LEFT")
                 javelin = self.throw_javelin(self.rect.center, javelin_images, 2)
                 self.thrown = True
             elif diff < 0 and not self.thrown:#Enemy looking right and character is on the right
-                print("RIGHT")
                 javelin = self.throw_javelin(self.rect.center, javelin_images, 3)
                 self.thrown = True
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
@@ -126,7 +122,6 @@ class Troll(basicSprite.multipleSprite):
         """
         This is the function that Throws the Javelin
         """
-        print("JAVELIIIIIN")
         javelin = Javelin(centerPoint, javelin_images, 5, self.direction)
         return javelin
 

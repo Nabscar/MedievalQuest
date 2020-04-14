@@ -38,6 +38,7 @@ class MainQuest:
         Initialize PyGame
         """
         pygame.init()
+        self.started = False
         """
         Set the window Size
         """
@@ -74,6 +75,7 @@ class MainQuest:
         Main Loop of game
         """
         while 1:
+            self.started = True
 
             self.player_group.clear(self.screen,self.background)
             self.troll_group.clear(self.screen,self.background)
@@ -116,7 +118,7 @@ class MainQuest:
                 """
                 Update the player sprite
                 """
-                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group)
+                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group)
                 if (len(self.troll_group.sprites()) > 0):
                     javelin = self.troll_group.update(self.block_group, self.player.coords, self.img_list[self.level.JAVELIN], self.breakable_group, self.passage_group)
                     if javelin != None:
@@ -132,13 +134,16 @@ class MainQuest:
                 Update the inventory
                 """
                 self.bomb_number.update(self.player.bombs)
+                print("\t" + str(self.potion_number))
                 self.potion_number.update(self.player.potions)
                 self.heart1_group.update(self.player.currentHealth - 3)
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
 
-
-                if num != None:
+                if num == "Potions":
+                    self.potion_number.update(self.img_list[self.level.GROUND])
+                    self.potion_group.empty()
+                elif num != None:
                     self.current_level = num[0]
                     """
                     Load all of our Sprites
@@ -177,11 +182,9 @@ class MainQuest:
                 reclist +=  self.heart1_group.draw(self.screen)
                 reclist +=  self.heart2_group.draw(self.screen)
                 reclist +=  self.heart3_group.draw(self.screen)
+                reclist += self.potion_group.draw(self.screen)
 
                 pygame.display.update(reclist)
-
-                time.sleep (0.05)
-                #This time can be changed depending on what we establish as the best time
 
     def LoadSprites(self, side):
         """
@@ -198,7 +201,6 @@ class MainQuest:
             If there is a third number, that mean that that is teh cave that sprawns from that level
                 for example: 311 is the cave that come from level 31
         """
-        print(self.current_level)
         if self.current_level == 11:
             self.level = level11.level11(side)
         if self.current_level == 12:
@@ -237,13 +239,7 @@ class MainQuest:
         self.img_list = self.level.getSprites()
 
         """
-        Create the groups:
-            - block backgrounds
-            - crossable Backgrounds
-            - passage Backgrounds
-            - breakable Backgrounds
-            - Enemies
-            - projectiles
+        Create the groups
         """
         self.block_group = pygame.sprite.RenderUpdates()
         self.passage_group = pygame.sprite.RenderUpdates()
@@ -259,6 +255,7 @@ class MainQuest:
         self.bat_group = pygame.sprite.RenderUpdates()
         self.shooter_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
+        self.potion_group = pygame.sprite.RenderUpdates()
 
         for y in range(len(self.layout)):
             for x in range(len(self.layout[y])):
@@ -340,7 +337,15 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.PLAYER_OW:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
+                    if self.started:
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
+                    else:
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
+                elif self.layout[y][x]==self.level.PICKPOTION:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
+                    self.crossable_group.add(ground)
+                    potion = Potion(centerPoint, self.img_list[self.level.PICKPOTION])
+                    self.potion_group.add(potion)
                 elif self.layout[y][x]==self.level.BLANK:
                     blank = singleSprite(centerPoint, self.img_list[self.level.BLANK])
                     self.inventory_group.add(blank)
@@ -370,7 +375,7 @@ class MainQuest:
                     Not sure how ot do projectiles (not even sure if they are needed here)
 
                 elif self.layout[y][x]==self.level.JAVELIN:
-                    #javelin = #create javelin
+                    javelin = #create javelin
                     self.projectile_group.add(javelin)
                 elif self.layout[y][x]==self.level.BALL:
                     ball = #create ball

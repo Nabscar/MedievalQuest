@@ -74,7 +74,7 @@ class Potion(singleSprite):
         self.timer = 5
         self.gone = False
 
-    def gone(self, ground_image):
+    def update(self, ground_image):
         self.gone = True
         self.images = ground_image
 
@@ -84,8 +84,25 @@ class Numbers(multipleSprite):
     """
     def __init__(self, centerPoint, images, number):
         multipleSprite.__init__(self, centerPoint, images)
-        self.current = number
 
     def update(self, number):
-        self.current = number
-        self.image = self.images[self.current]
+        if number == 0:
+            self.image = self.images[0]
+        elif number == 1:
+            self.image = self.image[1]
+        elif number == 2:
+            self.image - self.image[2]
+        elif number == 3:
+            self.image = self.images[3]
+        elif number == 4:
+            self.image = self.images[4]
+        elif number == 5:
+            self.image = self.images[5]
+        elif number == 6:
+            self.image = self.images[6]
+        elif number == 7:
+            self.image = self.images[7]
+        elif number == 8:
+            self.image = self.images[8]
+        elif number == 9:
+            self.image = self.images[9]

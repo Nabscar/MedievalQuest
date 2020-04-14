@@ -18,11 +18,19 @@ class level12(levelBase.Level):
         self.TREE = 1
         self.GRASS = 2
         self.TROLL_V = 3
-        self.POTION = 4
+        self.PICKPOTION = 4
         self.PLAYER_OW = 5
         self.PASSAGE_L = 6
         self.PASSAGE_B = 7
         self.JAVELIN = 8
+        self.BLANK = 9
+        self.BOMB = 10
+        self.BOMBNUM = 11
+        self.POTION = 12
+        self.POTIONNUM= 13
+        self.HEART1 = 14
+        self.HEART2 = 15
+        self.HEART3 = 16
 
 
     def getLayoutTop(self):
@@ -38,7 +46,8 @@ class level12(levelBase.Level):
                 [6, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 2, 1],\
                 [1, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],\
                 [1, 2, 2, 0, 0, 0, 5, 0, 1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1]]
+                [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getLayoutRight(self):
         """
@@ -53,7 +62,8 @@ class level12(levelBase.Level):
                 [6, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 2, 1],\
                 [1, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],\
                 [1, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1]]
+                [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getSprites(self):
         """
@@ -68,4 +78,10 @@ class level12(levelBase.Level):
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
         javelin = self.javelinImages()
-        return [ground, tree, grass, troll, potion, player, passage, passage, javelin]
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+
+        return [ground, tree, grass, troll, potion, player, passage, passage, javelin, blank, bomb, nums, potion, nums, heart, heart, heart]
