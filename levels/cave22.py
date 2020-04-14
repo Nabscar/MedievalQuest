@@ -20,6 +20,14 @@ class cave22(levelBase.Level):
         self.BOMB = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
+        self.BLANK = 6
+        self.BOMB = 7
+        self.BOMBNUM = 8
+        self.POTION = 9
+        self.POTIONNUM= 10
+        self.HEART1 = 11
+        self.HEART2 = 12
+        self.HEART3 = 13
 
     def getLayoutCave(self):
         """
@@ -34,7 +42,8 @@ class cave22(levelBase.Level):
                 [1, 1, 0, 3, 0, 0, 0, 0, 0 ,0, 1, 1],\
                 [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
                 [1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
+                [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
 
     def getSprites(self):
         """
@@ -48,5 +57,10 @@ class cave22(levelBase.Level):
         bowAndQuiver = load_image('Tree.png')
         player = self.kingCaveImages()
         passage = load_image('CaveFloor.png')
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
-        return [ground, wall, BreakableWall, bowAndQuiver, player, passage]
+        return [ground, wall, BreakableWall, bowAndQuiver, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

@@ -23,6 +23,14 @@ class level21(levelBase.Level):
         self.PASSAGE_T = 6
         self.PASSAGE_B = 7
         self.JAVELIN  = 8
+        self.BLANK = 9
+        self.BOMB = 10
+        self.BOMBNUM = 11
+        self.POTION = 12
+        self.POTIONNUM= 13
+        self.HEART1 = 14
+        self.HEART2 = 15
+        self.HEART3 = 16
 
     def getLayoutBottom(self):
         """
@@ -37,7 +45,8 @@ class level21(levelBase.Level):
                 [2, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 2],\
                 [2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2],\
                 [2, 2, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2],\
-                [2, 2, 1, 1, 1, 1, 1, 1, 7, 7, 7, 2]]
+                [2, 2, 1, 1, 1, 1, 1, 1, 7, 7, 7, 2],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getLayoutTop(self):
         """
@@ -52,7 +61,8 @@ class level21(levelBase.Level):
                 [2, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 2],\
                 [2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2],\
                 [2, 2, 0, 0, 0, 0, 0, 0 ,0, 5, 0, 2],\
-                [2, 2, 1, 1, 1, 1, 1, 1, 7, 7, 7, 2]]
+                [2, 2, 1, 1, 1, 1, 1, 1, 7, 7, 7, 2],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getSprites(self):
         """

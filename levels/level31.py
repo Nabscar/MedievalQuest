@@ -26,6 +26,14 @@ class level31(levelBase.Level):
         self.PASSAGE_T = 9
         self.CAVEENTRANCE = 10
         self.BALL = 11
+        self.BLANK = 11
+        self.BOMB = 12
+        self.BOMBNUM = 13
+        self.POTION = 14
+        self.POTIONNUM= 15
+        self.HEART1 = 16
+        self.HEART2 = 17
+        self.HEART3 = 18
 
     def getLayoutLeft(self):
         """
@@ -40,7 +48,8 @@ class level31(levelBase.Level):
                 [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
                 [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [11, 12, 13, 11, 14, 15, 11, 11, 16, 17, 18, 11]]
 
     def getLayoutBottom(self):
         """
@@ -55,7 +64,8 @@ class level31(levelBase.Level):
                 [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
                 [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [11, 12, 13, 11, 14, 15, 11, 11, 16, 17, 18, 11]]
 
     def getLayoutCave(self):
         """
@@ -70,7 +80,8 @@ class level31(levelBase.Level):
                 [3, 6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 4],\
                 [3, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4],\
                 [3, 10, 0, 7, 0, 0, 0, 0 ,0, 0, 0, 3],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [11, 12, 13, 11, 14, 15, 11, 11, 16, 17, 18, 11]]
 
     def getSprites(self):
         """
@@ -89,5 +100,10 @@ class level31(levelBase.Level):
         passage = load_image('OW_Ground.png')
         cave  = load_image('CaveEntrance.png')
         ball = self.ballImages()
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
-        return [ground, grass, water, tree, wall, breakableWall, shooter, shooter, player, passage, cave, ball]
+        return [ground, grass, water, tree, wall, breakableWall, shooter, shooter, player, passage, cave, ball, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

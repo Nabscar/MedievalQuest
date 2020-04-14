@@ -20,6 +20,14 @@ class level23(levelBase.Level):
         self.BOMB = 3
         self.PLAYER_OW = 4
         self.PASSAGE_B = 5
+        self.BLANK = 6
+        self.BOMB = 7
+        self.BOMBNUM = 8
+        self.POTION = 9
+        self.POTIONNUM= 10
+        self.HEART1 = 11
+        self.HEART2 = 12
+        self.HEART3 = 13
 
     def getLayoutTop(self):
         """
@@ -34,7 +42,8 @@ class level23(levelBase.Level):
                 [1, 1, 0, 3, 0, 0, 0, 0, 0 ,0, 1, 1],\
                 [1, 1, 0, 0, 0, 0, 4, 0, 0, 0, 1, 1],\
                 [1, 1, 1, 1, 1, 1, 1, 0, 4, 0, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1]]
+                [1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1],\
+                [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
 
     def getSprites(self):
         """
@@ -47,4 +56,10 @@ class level23(levelBase.Level):
         bomb = load_image('Bomb.png')
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
-        return[ground, tree, wall, bomb, player, passage]
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+
+        return[ground, tree, wall, bomb, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

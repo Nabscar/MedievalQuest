@@ -24,6 +24,13 @@ class level33(levelBase.Level):
         self.PASSAGE_L = 7
         self.PASSAGE_T = 8
         self.JAVELIN = 9
+        self.BOMB = 10
+        self.BOMBNUM = 11
+        self.POTION = 12
+        self.POTIONNUM= 13
+        self.HEART1 = 14
+        self.HEART2 = 15
+        self.HEART3 = 16
 
     def getLayoutRight(self):
         """
@@ -38,7 +45,8 @@ class level33(levelBase.Level):
                 [7, 0, 0, 4, 0, 0, 0, 0, 0 ,0, 3, 3],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
                 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getLayoutBottom(self):
         """
@@ -53,7 +61,8 @@ class level33(levelBase.Level):
                 [7, 0, 0, 4, 0, 0, 0, 0, 0 ,0, 3, 3],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
                 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [9, 10, 11, 9, 12, 13, 9, 9, 14, 15, 16, 9]]
 
     def getSprites(self):
         """
@@ -69,5 +78,10 @@ class level33(levelBase.Level):
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
         javelin = self.javelinImages()
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
-        return [ground, grass, water, tree, troll, troll, player, passage, passage, javelin]
+        return [ground, grass, water, tree, troll, troll, player, passage, passage, javelin, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

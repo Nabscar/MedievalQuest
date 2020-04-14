@@ -28,6 +28,14 @@ class level32(levelBase.Level):
         self.PASSAGE_R = 11
         self.BALL = 12
         self.JAVELIN = 13
+        self.BLANK = 14
+        self.BOMB = 15
+        self.BOMBNUM = 16
+        self.POTION = 17
+        self.POTIONNUM= 18
+        self.HEART1 = 19
+        self.HEART2 = 20
+        self.HEART3 = 21
 
     def getLayoutRight(self):
         """
@@ -42,7 +50,8 @@ class level32(levelBase.Level):
                 [4, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 11],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [3, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1, 1],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [14, 15, 16, 14, 17, 18, 14, 14, 19, 20, 21, 14]]
 
     def getLayoutLeft(self):
         """
@@ -57,7 +66,8 @@ class level32(levelBase.Level):
                 [4, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 11],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 1],\
                 [3, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1, 1],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [14, 15, 16, 14, 17, 18, 14, 14, 19, 20, 21, 14]]
 
     def getLayoutBottom(self):
         """
@@ -72,7 +82,8 @@ class level32(levelBase.Level):
                 [4, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 11],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 1],\
                 [3, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1, 1],\
-                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [14, 15, 16, 14, 17, 18, 14, 14, 19, 20, 21, 14]]
 
     def getSprites(self):
         """
@@ -93,5 +104,10 @@ class level32(levelBase.Level):
         passage = load_image('OW_Ground.png')
         ball = self.ballImages()
         javelin = self.javelinImages()
+        blank = load_image("Blank.png")
+        bomb = load_image("Bomb.png")
+        nums = self.numberImages()
+        potion = load_image("Potion_Health.png")
+        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
-        return [ground, grass, water, tree, wall, breakableWall, bat, shooter, troll, player, passage, passage, ball, javelin]
+        return [ground, grass, water, tree, wall, breakableWall, bat, shooter, troll, player, passage, passage, ball, javelin, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

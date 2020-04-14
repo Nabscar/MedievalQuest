@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
 
 
 import pygame
@@ -136,7 +136,6 @@ class MainQuest:
                 Update the inventory
                 """
                 self.bomb_number.update(self.player.bombs)
-                print("\t" + str(self.potion_number))
                 self.potion_number.update(self.player.potions)
                 self.heart1_group.update(self.player.currentHealth - 3)
                 self.heart2_group.update(self.player.currentHealth - 1)
