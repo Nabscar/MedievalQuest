@@ -1,5 +1,7 @@
 import os, sys
-sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
+
+
 import pygame
 import level11
 import level12
@@ -236,6 +238,7 @@ class MainQuest:
         elif side == "C":
             self.layout = self.level.getLayoutCave()
 
+
         self.img_list = self.level.getSprites()
 
         """
@@ -268,6 +271,10 @@ class MainQuest:
                 if self.layout[y][x]==self.level.GROUND:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
+                elif self.layout[y][x]==self.level.CAVEGROUND:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
+                    self.crossable_group.add(ground)
+
                 elif self.layout[y][x]==self.level.GRASS:
                     grass = singleSprite(centerPoint, self.img_list[self.level.GRASS])
                     self.block_group.add(grass)
@@ -280,12 +287,23 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.WALL:
                     wall = singleSprite(centerPoint, self.img_list[self.level.WALL])
                     self.block_group.add(wall)
+                elif self.layout[y][x]==self.level.CAVEWALL:
+                    wall = singleSprite(centerPoint, self.img_list[self.level.CAVEWALL])
+                    self.block_group.add(wall)
+
                 elif self.layout[y][x]==self.level.BREAKABLE_WALL:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
                     self.breakable_group.add(breakableWall)
                 elif self.layout[y][x]==self.level.BROKEN_WALL:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
                     self.breakable_group.add(breakable)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.CAVEWALLBREAKABLE], (self.current_level * 10 + 1), False) #create breakable
+                    self.breakable_group.add(breakableWall)
+                elif self.layout[y][x]==self.level.BROKEN_WALL:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.CAVEWALLBROKEN], (self.current_level * 10 + 1), True) #create breakable
+                    self.breakable_group.add(breakable)
+
                 elif self.layout[y][x]==self.level.PASSAGE_T:
                     passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_T], (self.current_level - 10), "T")#create passage to top
                     self.passage_group.add(passage)
@@ -304,6 +322,7 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.CAVEENTRANCE:
                     cave = Passage(centerPoint, self.img_list[self.level.CAVEENTRANCE], (self.current_level * 10 + 1), "C")#create passage to right
                     self.passage_group.add(cave)
+
                 elif self.layout[y][x]==self.level.BAT_V:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
