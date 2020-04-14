@@ -18,6 +18,7 @@ class Projectile(pygame.sprite.Sprite):
         self.direction = direction
         self.done = False
         self.damage = damage
+        self.dist = 64
 
 
     def countdown(self, count = 1):
@@ -60,7 +61,6 @@ class Projectile(pygame.sprite.Sprite):
         self.done = True
         self.images = ground_image
 
-
 class Ball(Projectile):
 
     def __init__ (self, centerPoint, images, direction, counter = 6, damage = 1):
@@ -69,7 +69,6 @@ class Ball(Projectile):
         """
         Projectile.__init__(self, centerPoint, images, counter, direction, damage)
         self.image = self.images[0]
-
 
 class Javelin(Projectile):
 
@@ -84,7 +83,6 @@ class Javelin(Projectile):
             directions go in same order as image order
             """
             self.image = self.images[self.direction - 1]
-
 
 class Arrow(Projectile):
 

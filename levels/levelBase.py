@@ -49,6 +49,18 @@ class Level:
         self.PASSAGE_C = 'x'
         self.JAVELIN = 'x'
         self.BALL = 'x'
+        self.BLANK = 'x'
+        self.BOMB = 'x'
+        self.BOMBNUM = 'x'
+        self.POTION = 'x'
+        self.POTIONNUM = 'x'
+        self.HEART = 'x'
+
+    def numberImages(self):
+        """
+        Returns a list of troll images
+        """
+        return [load_image('Number0.png'), load_image('Number1.png'), load_image('Number2.png')]
 
     def trollImages(self):
         """
