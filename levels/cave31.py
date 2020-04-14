@@ -21,6 +21,7 @@ class cave31(levelBase.Level):
         self.CAVEWALLBROKEN = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
+        #self.CAVEENTRANCE = 5
         self.BOWANDQUIVER = 6
         self.BOMB = 7
         self.BOMBNUM = 8
@@ -30,35 +31,21 @@ class cave31(levelBase.Level):
         self.HEART2 = 12
         self.HEART3 = 13
 
-    def getLayoutCaveTop(self):
+    def getLayoutCave(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
         return [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1],\
-                [1, 1, 0, 0, 0, 0 ,0 ,0, 0, 4, 1, 1],\
-                [1, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 1, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
-                [1, 1, 0, 6, 0, 0, 0, 0, 0 ,0, 1, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
+                [1, 0, 0, 0, 0, 0 ,0 ,0, 1, 1, 1, 1],\
+                [1, 0, 6, 0 ,0, 0 ,0 ,0, 1, 1, 1, 1],\
+                [1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1],\
+                [1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1],\
+                [1, 0, 0, 6, 0, 0, 0, 0, 1 ,1, 1, 1],\
+                [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],\
+                [5, 0, 0, 0, 0, 0, 1, 1 ,1, 1, 1, 1],\
                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
-    def getLayoutCaveTop(self):
-        """
-        Matrix which would use the previosuly determined characters to show what the level will be
-        """
-        return [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1],\
-                [1, 1, 0, 0, 0, 0 ,0 ,0, 0, 0, 1, 1],\
-                [1, 1, 0, 0 ,0, 0 ,0 ,0, 0, 0, 1, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
-                [1, 1, 0, 6, 0, 0, 0, 0, 0 ,0, 1, 1],\
-                [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
     def getSprites(self):
         """

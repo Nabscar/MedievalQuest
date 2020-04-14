@@ -236,6 +236,7 @@ class MainQuest:
         elif side == "C":
             self.layout = self.level.getLayoutCave()
 
+
         self.img_list = self.level.getSprites()
 
         """
