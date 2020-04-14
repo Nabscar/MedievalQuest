@@ -7,20 +7,21 @@ class cave31(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
 
         self.CAVEGROUND = 0
         self.CAVEWALL = 1
         self.CAVEWALLBREAKABLE = 2
-        self.BOWANDQUIVER = 3
+        self.CAVEWALLBROKEN = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
+        self.BOWANDQUIVER = 3
 
     def getLayoutCave(self):
         """
@@ -46,6 +47,7 @@ class cave31(levelBase.Level):
         ground = load_image('CaveFloor.png')
         wall = load_image('CaveWall.png')
         BreakableWall = load_image('CaveWallBreakable.png')
+        BrokenWall = load_image('CaveWallBroken.png')
         bowAndQuiver = load_image('Tree.png')
         player = self.kingCaveImages()
         passage = load_image('CaveFloor.png')
