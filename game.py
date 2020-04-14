@@ -2,7 +2,7 @@ import os, sys
 sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
 
 import pygame
-import level11
+import level11 from levels
 import level12
 import level13
 import level21
