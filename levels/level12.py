@@ -7,12 +7,12 @@ class level12(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
         self.GROUND = 0
         self.TREE = 1
@@ -22,9 +22,10 @@ class level12(levelBase.Level):
         self.PLAYER_OW = 5
         self.PASSAGE_L = 6
         self.PASSAGE_B = 7
+        self.JAVELIN = 8
 
 
-    def getLayout(self):
+    def getLayoutTop(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
@@ -39,6 +40,21 @@ class level12(levelBase.Level):
                 [1, 2, 2, 0, 0, 0, 5, 0, 1, 1, 1, 1],\
                 [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1]]
 
+    def getLayoutRight(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
+                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],\
+                [1, 2, 2, 0, 0, 0 ,0 ,0, 0, 2 ,2, 1],\
+                [1, 2, 0, 0 ,0, 0 ,0 ,0, 0, 4, 2, 1],\
+                [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
+                [6, 5, 0, 3, 0, 0, 0, 0, 3, 0, 2, 1],\
+                [6, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 2, 1],\
+                [1, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],\
+                [1, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1],\
+                [1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1]]
+
     def getSprites(self):
         """
         Using helpers.py this method will load the png files saved in the data folder
@@ -51,4 +67,5 @@ class level12(levelBase.Level):
         potion = load_image('Potion_Health.png')
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
-        return [ground, tree, grass, troll, potion, player, passage, passage]
+        javelin = self.javelinImages()
+        return [ground, tree, grass, troll, potion, player, passage, passage, javelin]

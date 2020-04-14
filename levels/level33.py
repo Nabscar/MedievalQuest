@@ -7,12 +7,12 @@ class level33(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self,side)
 
         self.GROUND = 0
         self.GRASS = 1
@@ -23,9 +23,9 @@ class level33(levelBase.Level):
         self.PLAYER_OW = 6
         self.PASSAGE_L = 7
         self.PASSAGE_T = 8
-        pass
+        self.JAVELIN = 9
 
-    def getLayout(self):
+    def getLayoutRight(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
@@ -35,6 +35,21 @@ class level33(levelBase.Level):
                 [3, 3, 3, 3, 3, 0 ,0 ,5, 0, 0, 3, 3],\
                 [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
                 [7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [7, 0, 0, 4, 0, 0, 0, 0, 0 ,0, 3, 3],\
+                [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
+                [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
+
+    def getLayoutBottom(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 3, 3],\
+                [2, 2, 2, 2, 3, 0, 0, 0, 6, 0, 3, 3],\
+                [2, 2, 2, 2, 3, 0, 0, 0, 0, 0, 3, 3],\
+                [3, 3, 3, 3, 3, 0 ,0 ,5, 0, 0, 3, 3],\
+                [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
+                [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
                 [7, 0, 0, 4, 0, 0, 0, 0, 0 ,0, 3, 3],\
                 [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3],\
                 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],\
@@ -53,5 +68,6 @@ class level33(levelBase.Level):
         troll = self.trollImages()
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
+        javelin = self.javelinImages()
 
-        return [ground, grass, water, tree, troll, troll, player, passage, passage]
+        return [ground, grass, water, tree, troll, troll, player, passage, passage, javelin]

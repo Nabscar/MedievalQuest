@@ -9,23 +9,23 @@ class Projectile(pygame.sprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player changes Screen
     """
-    def __init__ (self, centerPoint, images, counter):
+    def __init__ (self, centerPoint, images, direction, counter, damage = 1):
         """
         Initializes the special characteristics of the basic projectile
         """
-        basicSprite.Sprite.__init__(self, centerPoint, images)
+        basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.counter = counter
         self.direction = direction
         self.done = False
         self.damage = damage
-        pass
 
-    def countdown(self):
+
+    def countdown(self, count = 1):
         """
         Decreases the counter by one
         """
-        self.counter -= 1
-        pass
+        self.counter -= count
+
 
     def update(self, block_group, breakable_group, character_group, projectile_group):
         if self.direction==1:#down
@@ -49,7 +49,7 @@ class Projectile(pygame.sprite.Sprite):
             For now, we have decided that it is easier (as a start point) to just have it disappear
             """
             self.disappear()
-        pass
+        countdown()
 
     def disappear(self, ground_image):
         """
@@ -60,7 +60,6 @@ class Projectile(pygame.sprite.Sprite):
         self.done = True
         self.images = ground_image
 
-        pass
 
 class Ball(Projectile):
 
@@ -71,7 +70,6 @@ class Ball(Projectile):
         Projectile.__init__(self, centerPoint, images, counter, direction, damage)
         self.image = self.images[0]
 
-        pass
 
 class Javelin(Projectile):
 
@@ -87,7 +85,6 @@ class Javelin(Projectile):
             """
             self.image = self.images[self.direction - 1]
 
-            pass
 
 class Arrow(Projectile):
 
@@ -102,5 +99,3 @@ class Arrow(Projectile):
             directions go in same order as image order
             """
             self.image = self.images[self.direction - 1]
-
-            pass

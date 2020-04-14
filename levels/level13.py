@@ -7,12 +7,12 @@ class level13(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
         self.GROUND = 0
         self.TREE = 1
@@ -22,7 +22,7 @@ class level13(levelBase.Level):
         self.PLAYER_OW = 5
         self.CASTLE = 6
 
-    def getLayout(self):
+    def getLayoutCave(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
