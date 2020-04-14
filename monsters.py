@@ -44,7 +44,7 @@ class Troll(basicSprite.multipleSprite):
         elif self.direction == 4:
             self.image = self.images[5]
 
-        self.dist = 68
+        self.dist = 64
 
         self.thrown = False
 
@@ -180,7 +180,7 @@ class Bat(basicSprite.multipleSprite):
         elif self.direction == 4:
             self.image = self.images[6]
 
-        self.dist = 68
+        self.dist = 64
 
         self.step = 1
 
@@ -304,7 +304,7 @@ class Shooter(basicSprite.multipleSprite):
         elif self.direction == 4:
             self.image = self.images[6]
 
-        self.dist = 68
+        self.dist = 64
 
         self.thrown = False
 

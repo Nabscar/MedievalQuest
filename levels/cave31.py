@@ -7,12 +7,12 @@ class cave31(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
 
         self.CAVEGROUND = 0
@@ -34,8 +34,8 @@ class cave31(levelBase.Level):
                 [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
                 [1, 1, 0, 0, 0, 0, 0, 0, 0 ,0, 1, 1],\
                 [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],\
-                [1, 1, 1, 1, 0, 4, 0, 0 ,1, 1, 1, 1],\
-                [1, 1, 1, 1, 5, 5, 5, 5, 1, 1, 1, 1]]
+                [1, 1, 5, 0, 0, 4, 0, 0 ,1, 1, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
     def getSprites(self):
         """

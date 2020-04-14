@@ -26,14 +26,14 @@ class Player(basicSprite.multipleSprite):
         elif direction == 4:
             self.current_image = self.images[3]
             """
-        self.x_dist = 68
-        self.y_dist = 68
+        self.x_dist = 64
+        self.y_dist = 64
 
         self.xMove = 0
         self.yMove = 0
 
-        self.maxHealth = 3
-        self.currentHealth = 3
+        self.maxHealth = 6
+        self.currentHealth = 6
         self.damage = 1
         self.quiver = False
         self.bombs = 0
@@ -93,7 +93,6 @@ class Player(basicSprite.multipleSprite):
             We hit an Enemy!
             """
             self.EnemyCollide(lstEnemies)
-
 
         if pygame.sprite.spritecollideany(self,block_group):
             """If we hit a block, stop movement"""

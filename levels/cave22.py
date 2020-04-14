@@ -7,12 +7,12 @@ class cave22(levelBase.Level):
     Class that will include this quadrant of the game
     """
 
-    def __init__(self):
+    def __init__(self, side):
         """
         Initialize which character value belongs to which type of block/character in the level file
         """
 
-        levelBase.Level.__init__(self)
+        levelBase.Level.__init__(self, side)
 
         self.CAVEGROUND = 0
         self.CAVEWALL = 1

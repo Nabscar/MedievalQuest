@@ -1,8 +1,7 @@
 import os, sys
 sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
-
 import pygame
-import level11 from levels
+import level11
 import level12
 import level13
 import level21
@@ -13,7 +12,7 @@ import level32
 import level33
 import cave22
 import cave31
-import basicSprite
+from basicSprite import *
 from pygame.locals import *
 from helpers import *
 from playerSprite import Player
@@ -26,7 +25,7 @@ import time
 if not pygame.font: print('Warning, fonts disabled')
 if not pygame.mixer: print('Warning, sound disabled')
 
-BLOCK_SIZE = 68
+BLOCK_SIZE = 64
 
 class MainQuest:
     """
@@ -34,7 +33,7 @@ class MainQuest:
     initialization and creating of the Game.
     """
 
-    def __init__(self, width=816,height=680):
+    def __init__(self, width=768,height=704):
         """
         Initialize PyGame
         """
@@ -129,6 +128,16 @@ class MainQuest:
                 if (len(self.projectile_group.sprites()) > 0):
                     self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
+                """
+                Update the inventory
+                """
+                self.bomb_number.update(self.player.bombs)
+                self.potion_number.update(self.player.potions)
+                self.heart1_group.update(self.player.currentHealth - 3)
+                self.heart2_group.update(self.player.currentHealth - 1)
+                self.heart3_group.update(self.player.currentHealth + 1)
+
+
                 if num != None:
                     self.current_level = num[0]
                     """
@@ -162,6 +171,12 @@ class MainQuest:
                 reclist +=  self.shooter_group.draw(self.screen)
                 reclist +=  self.projectile_group.draw(self.screen)
                 reclist +=  self.player_group.draw(self.screen)
+                reclist +=  self.inventory_group.draw(self.screen)
+                reclist +=  self.bomb_number.draw(self.screen)
+                reclist +=  self.potion_number.draw(self.screen)
+                reclist +=  self.heart1_group.draw(self.screen)
+                reclist +=  self.heart2_group.draw(self.screen)
+                reclist +=  self.heart3_group.draw(self.screen)
 
                 pygame.display.update(reclist)
 
@@ -218,8 +233,6 @@ class MainQuest:
             self.layout = self.level.getLayoutRight()
         elif side == "C":
             self.layout = self.level.getLayoutCave()
-        else:
-            self.layout = self.level.getLayoutTop()
 
         self.img_list = self.level.getSprites()
 
@@ -236,7 +249,12 @@ class MainQuest:
         self.passage_group = pygame.sprite.RenderUpdates()
         self.crossable_group = pygame.sprite.RenderUpdates()
         self.breakable_group = pygame.sprite.RenderUpdates()
-
+        self.inventory_group = pygame.sprite.RenderUpdates()
+        self.bomb_number = pygame.sprite.RenderUpdates()
+        self.potion_number = pygame.sprite.RenderUpdates()
+        self.heart1_group = pygame.sprite.RenderUpdates()
+        self.heart2_group = pygame.sprite.RenderUpdates()
+        self.heart3_group = pygame.sprite.RenderUpdates()
         self.troll_group = pygame.sprite.RenderUpdates()
         self.bat_group = pygame.sprite.RenderUpdates()
         self.shooter_group = pygame.sprite.RenderUpdates()
@@ -255,7 +273,7 @@ class MainQuest:
                     self.crossable_group.add(ground)
                 elif self.layout[y][x]==self.level.GRASS:
                     grass = singleSprite(centerPoint, self.img_list[self.level.GRASS])
-                    self.crossable_group.add(grass)
+                    self.block_group.add(grass)
                 elif self.layout[y][x]==self.level.WATER:
                     water = singleSprite(centerPoint, self.img_list[self.level.WATER])
                     self.block_group.add(water)
@@ -323,7 +341,30 @@ class MainQuest:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
                     self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
-
+                elif self.layout[y][x]==self.level.BLANK:
+                    blank = singleSprite(centerPoint, self.img_list[self.level.BLANK])
+                    self.inventory_group.add(blank)
+                elif self.layout[y][x]==self.level.BOMB:
+                    blank = singleSprite(centerPoint, self.img_list[self.level.BOMB])
+                    self.inventory_group.add(blank)
+                elif self.layout[y][x]==self.level.BOMBNUM:
+                    nums = Numbers(centerPoint, self.img_list[self.level.BOMBNUM], self.player.bombs)
+                    self.bomb_number.add(nums)
+                elif self.layout[y][x]==self.level.POTION:
+                    potion = singleSprite(centerPoint, self.img_list[self.level.POTION])
+                    self.inventory_group.add(potion)
+                elif self.layout[y][x]==self.level.POTIONNUM:
+                    nums = Numbers(centerPoint, self.img_list[self.level.POTIONNUM], self.player.potions)
+                    self.potion_number.add(nums)
+                elif self.layout[y][x]==self.level.HEART1:
+                    heart = Heart(centerPoint, self.img_list[self.level.HEART1])
+                    self.heart1_group.add(heart)
+                elif self.layout[y][x]==self.level.HEART2:
+                    heart = Heart(centerPoint, self.img_list[self.level.HEART2])
+                    self.heart2_group.add(heart)
+                elif self.layout[y][x]==self.level.HEART3:
+                    heart = Heart(centerPoint, self.img_list[self.level.HEART3])
+                    self.heart3_group.add(heart)
 
                 """
                     Not sure how ot do projectiles (not even sure if they are needed here)
