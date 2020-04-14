@@ -1,10 +1,7 @@
 import os, sys
-<<<<<<< HEAD
 sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
 
-=======
-sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
->>>>>>> dd3a5d8ce3e01aecc0f0defd11ed7aa55c7d7cce
+
 import pygame
 import level11
 import level12
@@ -276,6 +273,10 @@ class MainQuest:
                 if self.layout[y][x]==self.level.GROUND:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
+                elif self.layout[y][x]==self.level.CAVEGROUND:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
+                    self.crossable_group.add(ground)
+
                 elif self.layout[y][x]==self.level.GRASS:
                     grass = singleSprite(centerPoint, self.img_list[self.level.GRASS])
                     self.block_group.add(grass)
@@ -290,6 +291,7 @@ class MainQuest:
                     self.block_group.add(wall)
                 elif self.layout[y][x]==self.level.CAVEWALL:
                     wall = singleSprite(centerPoint, self.img_list[self.level.CAVEWALL])
+                    self.block_group.add(wall)
 
                 elif self.layout[y][x]==self.level.BREAKABLE_WALL:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
