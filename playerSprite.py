@@ -17,12 +17,13 @@ class Player(basicSprite.multipleSprite):
         self.direction = direction
         self.coords = coords
 
+        """distance moved with each keystroke"""
         self.x_dist = 64
         self.y_dist = 64
-
+        """Current movement of player"""
         self.xMove = 0
         self.yMove = 0
-
+        """King Characteristics"""
         self.maxHealth = 6
         self.currentHealth = health
         self.damage = 1
@@ -35,7 +36,7 @@ class Player(basicSprite.multipleSprite):
     def MoveKeyDown(self, key):
         """
         This is the function that moves the x and y position of the player
-        depending on what hey they pressed, it will move once update() is called.
+        depending on what they they pressed, it will move once update() is called.
         """
         self.attacking = 0
 
@@ -104,17 +105,21 @@ class Player(basicSprite.multipleSprite):
 
         lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
         if (len(lstBreakable) > 0):
+            """We hit a breakable wall, if it is solid, treat as wall, if it is broken, treat as passage"""
             if lstBreakable[0].broken:
-                return lstBreakable[0].next_screen
+                return lstBreakable[0].next_screen, lstBreakable[0].side
             else:
                 self.rect.move_ip(-self.xMove,-self.yMove)
 
         lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
         if (len(lstProjectiles) > 0):
+            """If we are hit by a projectile, decrease life by one"""
            self.rect.move_ip(-self.xMove,-self.yMove)
            self.currentHealth -= 1
 
         lstPotions = pygame.sprite.spritecollide(self, potion_group, False)
+        """IF we hit potion we add 3 potions to our inventory (unless we hit max, in which case we stop at 9)
+        Also retunr flag so that the potion disappears from map"""
         if(len(lstPotions) > 0):
             if self.potions < 6:
                 self.potions += 3
@@ -124,6 +129,8 @@ class Player(basicSprite.multipleSprite):
             return "Potion"
 
         lstBombs = pygame.sprite.spritecollide(self, bomb_group, False)
+        """IF we hit potion we add 3 bombs to our inventory (unless we hit max, in which case we stop at 9)
+        Also retunr flag so that the potion disappears from map"""
         if(len(lstBombs) > 0):
             if self.bombs < 6:
                 self.bombs += 3

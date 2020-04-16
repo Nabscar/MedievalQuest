@@ -2,7 +2,8 @@ import os, sys
 import pygame
 from pygame.locals import *
 
-def load_image(name, colorkey=None):
+def load_image(name):
+    """Although horrible this nest of try-excepts goes through all the folders of Images until it finds the intended image"""
     fullname = os.path.join('Images', 'Background_Images')
     fullname = os.path.join(fullname, name)
     try:
@@ -46,10 +47,7 @@ def load_image(name, colorkey=None):
                                     print('Cannot load image:' + fullname)
                                     raise SystemExit
 
+    """Create and return the image"""
     image = image.convert()
-    if colorkey is not None:
-        if colorkey is -1:
-            colorkey = image.get_at((0,0))
-        image.set_colorkey(colorkey, RLEACCEL)
     image = pygame.transform.scale(image, (64, 64))
     return image

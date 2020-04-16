@@ -116,6 +116,7 @@ class Troll(basicSprite.multipleSprite):
                 elif self.direction == 4:
                     self.direction = 1
 
+            """The idea of returning the javelin is the following: if there is no throw, then it will return None, else, it will returna  javelin we can add to the update group"""
             return javelin
 
     def throw_javelin(self, centerPoint, javelin_images, direction):

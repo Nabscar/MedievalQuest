@@ -84,6 +84,7 @@ class Numbers(multipleSprite):
         multipleSprite.__init__(self, centerPoint, images)
 
     def update(self, number):
+        """gets a new number and changes the display to that number (0-9)"""
         if number == 0:
             self.image = self.images[0]
         elif number == 1:

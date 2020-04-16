@@ -89,18 +89,20 @@ class MainQuest:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-                #elif event.type == PLAYER_DEAD:
+                elif self.player.currentHealth == 0:
                     """
                     What happens when the player dies
                     """
+                    print("GAME OVER")
+                    sys.exit()
 
-                #elif event.type == WIN:
+                elif self.current_level = 13:
                     """
                     The player Won
                     Quit the Game
                     """
-                    #print("You Won!")
-                    #sys.exit()
+                    print("You Have reached the Castle! You Won!")
+                    sys.exit()
 
                 elif event.type == KEYDOWN:
                     """
@@ -118,17 +120,21 @@ class MainQuest:
                         self.player.MoveKeyDown(event.key)
 
                 """
-                Update the player sprite
+                Update the player sprite and all other sprites
                 """
                 num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.bomb_group)
+
                 if (len(self.troll_group.sprites()) > 0):
                     javelin = self.troll_group.update(self.block_group, self.player.coords, self.img_list[self.level.JAVELIN], self.breakable_group, self.passage_group)
                     if javelin != None:
                         self.projectile_group.add(javelin)
+
                 if (len(self.bat_group.sprites()) > 0):
                     self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+
                 if (len(self.shooter_group.sprites()) > 0):
                     ball = self.shooter_group.update(self.block_group, self.player.coords, self.img_list[self.level.BALL], self.breakable_group, self.passage_group)
+
                 if (len(self.projectile_group.sprites()) > 0):
                     self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
@@ -141,6 +147,7 @@ class MainQuest:
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
 
+                """If the player has collided against something specific, we get a flag as num, depending on the flag, do different things"""
                 if num == "Potion":
                     self.potion_group.empty()
                 elif num == "Bomb":
@@ -228,6 +235,7 @@ class MainQuest:
             self.level = cave31.cave31(side)
 
 
+        """This sets which side the player is entering on. THis helps the level render the player on the appropriate entrance to the screen"""
         if side == "T":
             self.layout = self.level.getLayoutTop()
         elif side == "B":
@@ -243,7 +251,7 @@ class MainQuest:
         self.img_list = self.level.getSprites()
 
         """
-        Create the groups
+        Create the groups for all the updateable sprites
         """
         self.block_group = pygame.sprite.RenderUpdates()
         self.passage_group = pygame.sprite.RenderUpdates()
@@ -262,6 +270,7 @@ class MainQuest:
         self.potion_group = pygame.sprite.RenderUpdates()
         self.bomb_group = pygame.sprite.RenderUpdates()
 
+        """Go through all the level array"""
         for y in range(len(self.layout)):
             for x in range(len(self.layout[y])):
                 """Get the center point for the rects"""
