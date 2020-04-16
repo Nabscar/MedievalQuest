@@ -59,9 +59,9 @@ class level13(levelBase.Level):
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
         blank = load_image("Blank.png")
-        bomb = load_image("Bomb.png")
+        bomb = load_image("BlankBomb.png")
         nums = self.numberImages()
-        potion = load_image("Potion_Health.png")
+        potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
 

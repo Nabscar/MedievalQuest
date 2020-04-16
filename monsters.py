@@ -85,19 +85,19 @@ class Troll(basicSprite.multipleSprite):
                 xMove = -self.dist
                 self.coords = (self.coords[0] - 1, self.coords[1])
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[1]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[2]
             elif self.direction==3:#right
                 xMove = self.dist
                 self.coords = (self.coords[0] + 1, self.coords[1])
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[3]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[4]
             elif self.direction==4:#up
                 yMove = -self.dist
@@ -188,7 +188,6 @@ class Bat(basicSprite.multipleSprite):
             return
         xMove,yMove = 0,0
 
-        self.direction = random.randint(1,4)#set random way to move
 
         """First it check is the enemy can see the player. If he can, then he will move towards the character"""
         if character_coords[0] == self.coords[0] :#Check if enemy sees character horizontally
@@ -337,37 +336,37 @@ class Shooter(basicSprite.multipleSprite):
                 yMove = self.dist
                 self.coords = (self.coords[0], self.coords[1] + 1)
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[0]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[1]
             elif self.direction==2:#Left
                 xMove = self.dist
                 self.coords = (self.coords[0] - 1, self.coords[1])
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[2]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[3]
             elif self.direction==3:#right
                 xMove = -self.dist
                 self.coords = (self.coords[0] + 1, self.coords[1])
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[4]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[5]
             elif self.direction==4:#up
                 yMove = -self.dist
                 self.coords = (self.coords[0], self.coords[1] - 1)
                 if self.step == 1:
-                    step = 2
+                    self.step = 2
                     self.image = self.images[6]
                 elif self.step == 2:
-                    step = 1
+                    self.step = 1
                     self.image = self.images[7]
 
             self.rect.move_ip(xMove,yMove) #This is what actually moves the character

@@ -56,6 +56,7 @@ class Level:
         self.POTIONNUM = 'x'
         self.HEART = 'x'
         self.PICKPOTION = 'x'
+        self.PICKBOMB = 'x'
 
     def numberImages(self):
         """
@@ -119,12 +120,13 @@ class Level:
         basic_player_right = load_image('King_Side_Right.png')
         basic_player_up = load_image('King_Side_Up.png')
 
-        """
-        basic_player_attack_up = load_image('monster_scared_01.png')
-        basic_player_attack_left = load_image('monster_scared_01.png')
-        basic_player_attack_down = load_image('monster_scared_01.png')
-        basic_player_attack_right = load_image('monster_scared_01.png')
 
+        basic_player_attack_down = load_image('King_Attack_Down_Sword.png')
+        basic_player_attack_left = load_image('King_Attack_Left_Sword.png')
+        basic_player_attack_right = load_image('King_Attack_Right_Sword.png')
+        basic_player_attack_up = load_image('King_Attack_Up_Sword.png')
+
+        """
         quiver_player_up = load_image('monster_scared_01.png')
         quiver_player_left = load_image('monster_scared_01.png')
         quiver_player_down = load_image('monster_scared_01.png')
@@ -140,7 +142,9 @@ class Level:
         quiver_player_shoot_down = load_image('monster_scared_01.png')
         quiver_player_shoot_right = load_image('monster_scared_01.png')
         """
-        player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up]
+        basic_player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up, basic_player_attack_down, basic_player_attack_left,basic_player_attack_right, basic_player_attack_up]
+        quiver_player = []
+        player = basic_player + quiver_player
         return player
 
     def kingCaveImages(self):
@@ -152,12 +156,13 @@ class Level:
         basic_player_right = load_image('Cave_King_Side_Right.png')
         basic_player_up = load_image('Cave_King_Side_Up.png')
 
-        """
-        basic_player_attack_up = load_image('monster_scared_01.png')
-        basic_player_attack_left = load_image('monster_scared_01.png')
-        basic_player_attack_down = load_image('monster_scared_01.png')
-        basic_player_attack_right = load_image('monster_scared_01.png')
 
+        basic_player_attack_down = load_image('Cave_King_Attack_Down_Sword.png')
+        basic_player_attack_left = load_image('Cave_King_Attack_Left_Sword.png')
+        basic_player_attack_right = load_image('Cave_King_Attack_Right_Sword.png')
+        basic_player_attack_up = load_image('Cave_King_Attack_Up_Sword.png')
+
+        """
         quiver_player_up = load_image('monster_scared_01.png')
         quiver_player_left = load_image('monster_scared_01.png')
         quiver_player_down = load_image('monster_scared_01.png')
@@ -173,5 +178,7 @@ class Level:
         quiver_player_shoot_down = load_image('monster_scared_01.png')
         quiver_player_shoot_right = load_image('monster_scared_01.png')
         """
-        player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up]
+        basic_player = [basic_player_down, basic_player_left, basic_player_right, basic_player_up, basic_player_attack_down, basic_player_attack_left,basic_player_attack_right, basic_player_attack_up]
+        quiver_player = []
+        player = basic_player + quiver_player
         return player

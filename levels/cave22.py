@@ -15,9 +15,9 @@ class cave22(levelBase.Level):
         levelBase.Level.__init__(self, side)
 
         self.CAVEGROUND = 0
-        self.CAVEWALL = 1
-        self.CAVEWALLBREAKABLE = 2
-        self.BOMB = 3
+        self.WALL = 1
+        self.BREAKABLE_WALL = 2
+        self.PICKBOMB = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
         self.BLANK = 6
@@ -34,7 +34,7 @@ class cave22(levelBase.Level):
         Matrix which would use the previosuly determined characters to show what the level will be
         """
         return [[1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1],\
-                [1, 1, 1, 1, 1, 1, 1, 0, 4, 0, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 0, 5, 0, 1, 1],\
                 [1, 1, 0, 0, 0, 0 ,0 ,0, 0, 0, 1, 1],\
                 [1, 1, 0, 0, 0, 0 ,0 ,0, 0, 0, 1, 1],\
                 [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],\
@@ -53,14 +53,14 @@ class cave22(levelBase.Level):
 
         ground = load_image('CaveFloor.png')
         wall = load_image('CaveWall.png')
-        BreakableWall = load_image('CaveWallBreakable.png')
-        bowAndQuiver = load_image('Tree.png')
+        BreakableWall = [load_image('CaveWallBreakable.png'), load_image('CaveWallBroken.png')]
+        bomb = load_image('CaveBomb.png')
         player = self.kingCaveImages()
         passage = load_image('CaveFloor.png')
         blank = load_image("Blank.png")
-        bomb = load_image("Bomb.png")
+        bomb = load_image("BlankBomb.png")
         nums = self.numberImages()
-        potion = load_image("Potion_Health.png")
+        potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
 
-        return [ground, wall, BreakableWall, bowAndQuiver, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart]
+        return [ground, wall, BreakableWall, bomb, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart]

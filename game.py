@@ -120,7 +120,7 @@ class MainQuest:
                 """
                 Update the player sprite
                 """
-                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group)
+                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.bomb_group)
                 if (len(self.troll_group.sprites()) > 0):
                     javelin = self.troll_group.update(self.block_group, self.player.coords, self.img_list[self.level.JAVELIN], self.breakable_group, self.passage_group)
                     if javelin != None:
@@ -141,9 +141,10 @@ class MainQuest:
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
 
-                if num == "Potions":
-                    self.potion_number.update(self.img_list[self.level.GROUND])
+                if num == "Potion":
                     self.potion_group.empty()
+                elif num == "Bomb":
+                    self.bomb_group.empty()
                 elif num != None:
                     self.current_level = num[0]
                     """
@@ -184,6 +185,7 @@ class MainQuest:
                 reclist +=  self.heart2_group.draw(self.screen)
                 reclist +=  self.heart3_group.draw(self.screen)
                 reclist += self.potion_group.draw(self.screen)
+                reclist += self.bomb_group.draw(self.screen)
 
                 pygame.display.update(reclist)
 
@@ -258,6 +260,7 @@ class MainQuest:
         self.shooter_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
         self.potion_group = pygame.sprite.RenderUpdates()
+        self.bomb_group = pygame.sprite.RenderUpdates()
 
         for y in range(len(self.layout)):
             for x in range(len(self.layout[y])):
@@ -267,6 +270,8 @@ class MainQuest:
                 Read the level array to define what comes in which place of the Screen
                 Create the sprites necessary to fill the parts we just read
                 """
+
+                """Basic grounds"""
                 if self.layout[y][x]==self.level.GROUND:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
@@ -274,6 +279,7 @@ class MainQuest:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
 
+                    """Basic Block groups"""
                 elif self.layout[y][x]==self.level.GRASS:
                     grass = singleSprite(centerPoint, self.img_list[self.level.GRASS])
                     self.block_group.add(grass)
@@ -286,23 +292,16 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.WALL:
                     wall = singleSprite(centerPoint, self.img_list[self.level.WALL])
                     self.block_group.add(wall)
-                elif self.layout[y][x]==self.level.CAVEWALL:
-                    wall = singleSprite(centerPoint, self.img_list[self.level.CAVEWALL])
-                    self.block_group.add(wall)
 
+                    """Breakable Walls"""
                 elif self.layout[y][x]==self.level.BREAKABLE_WALL:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
                     self.breakable_group.add(breakableWall)
                 elif self.layout[y][x]==self.level.BROKEN_WALL:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
                     self.breakable_group.add(breakable)
-                elif self.layout[y][x]==self.level.BREAKABLE_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.CAVEWALLBREAKABLE], (self.current_level * 10 + 1), False) #create breakable
-                    self.breakable_group.add(breakableWall)
-                elif self.layout[y][x]==self.level.BROKEN_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.CAVEWALLBROKEN], (self.current_level * 10 + 1), True) #create breakable
-                    self.breakable_group.add(breakable)
 
+                    """Passages"""
                 elif self.layout[y][x]==self.level.PASSAGE_T:
                     passage = Passage(centerPoint, self.img_list[self.level.PASSAGE_T], (self.current_level - 10), "T")#create passage to top
                     self.passage_group.add(passage)
@@ -322,6 +321,7 @@ class MainQuest:
                     cave = Passage(centerPoint, self.img_list[self.level.CAVEENTRANCE], (self.current_level * 10 + 1), "C")#create passage to right
                     self.passage_group.add(cave)
 
+                    """Enemies"""
                 elif self.layout[y][x]==self.level.BAT_V:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
@@ -352,6 +352,8 @@ class MainQuest:
                     self.crossable_group.add(ground)
                     shooter = Shooter(centerPoint, self.img_list[self.level.SHOOTER_H], (x, y), 2)#create shooter
                     self.shooter_group.add(shooter)
+
+                    """Player"""
                 elif self.layout[y][x]==self.level.PLAYER_OW:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
@@ -359,11 +361,27 @@ class MainQuest:
                         self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
                     else:
                         self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
+                elif self.layout[y][x]==self.level.PLAYER_C:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
+                    self.crossable_group.add(ground)
+                    if self.started:
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
+                    else:
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4)
+
+                    """Projectiles and Items"""
                 elif self.layout[y][x]==self.level.PICKPOTION:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
                     potion = Potion(centerPoint, self.img_list[self.level.PICKPOTION])
                     self.potion_group.add(potion)
+                elif self.layout[y][x]==self.level.PICKBOMB:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
+                    self.crossable_group.add(ground)
+                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
+                    self.bomb_group.add(bomb)
+
+                    """Inventory"""
                 elif self.layout[y][x]==self.level.BLANK:
                     blank = singleSprite(centerPoint, self.img_list[self.level.BLANK])
                     self.inventory_group.add(blank)

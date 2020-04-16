@@ -16,16 +16,7 @@ class Player(basicSprite.multipleSprite):
         self.image_order = ['Basic_Down', 'Basic_Left', 'Basic_Right', 'Basic_Up']
         self.direction = direction
         self.coords = coords
-        """
-        if direction == 1:
-            self.current_image = self.images[0]
-        elif direction == 2:
-            self.current_image = self.images[1]
-        elif direction == 3:
-            self.current_image = self.images[2]
-        elif direction == 4:
-            self.current_image = self.images[3]
-            """
+
         self.x_dist = 64
         self.y_dist = 64
 
@@ -35,9 +26,10 @@ class Player(basicSprite.multipleSprite):
         self.maxHealth = 6
         self.currentHealth = health
         self.damage = 1
-        self.quiver = False
+        self.quiver = 0 #Once he gets the quiver this becomes 8
         self.bombs = bombs
         self.potions = potions
+        self.index = 0
 
 
     def MoveKeyDown(self, key):
@@ -45,34 +37,39 @@ class Player(basicSprite.multipleSprite):
         This is the function that moves the x and y position of the player
         depending on what hey they pressed, it will move once update() is called.
         """
+        self.attacking = 0
 
         if (key == K_d):
             self.xMove += self.x_dist
-            self.image = self.images[2]
+            self.index = 2 + self.quiver
             self.coords = (self.coords[0] + 1, self.coords[1])
         elif (key == K_a):
             self.xMove += -self.x_dist
-            self.image = self.images[1]
+            self.index = 1 + self.quiver
+            self.image = self.images[self.index]
             self.coords = (self.coords[0] - 1, self.coords[1])
         elif (key == K_w):
             self.yMove += -self.y_dist
-            self.image = self.images[3]
+            self.index = 3 + self.quiver
+            self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] - 1)
         elif (key == K_s):
             self.yMove += self.y_dist
-            self.image = self.images[0]
+            self.index = 0 + self.quiver
+            self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] + 1)
         elif (key == K_j):
-            sword_Attack()
+            self.swordAttack()
         elif (key == K_k):
-            shoot_Arrow()
+            self.shootArrow()
         elif (key == K_l):
-            place_Bomb()
+            self.placeBomb()
         elif (key == K_i):
-            drink_potion()
+            self.drinkPotion()
 
 
-    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group):
+
+    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group):
         """
         Called to update the player sprite's position and state
         (state only if we choose to have power-ups)
@@ -123,7 +120,16 @@ class Player(basicSprite.multipleSprite):
             else:
                 self.potions = 9
             self.rect.move_ip(- self.xMove,-self.yMove)
-            return "Potions"
+            return "Potion"
+
+        lstBombs = pygame.sprite.spritecollide(self, bomb_group, False)
+        if(len(lstBombs) > 0):
+            if self.bombs < 6:
+                self.bombs += 3
+            else:
+                self.bombs = 9
+            self.rect.move_ip(- self.xMove,-self.yMove)
+            return "Bomb"
 
         self.xMove = 0
         self.yMove = 0
@@ -150,22 +156,46 @@ class Player(basicSprite.multipleSprite):
 
                     if the players health reaches 0 hes dead
             """
-        pass
+            if self.attacking == 0:
+                self.currentHealth -= 1
 
-    def sword_Attack(self):
+
+    def swordAttack(self):
         """
         This the function that has the character attack with his sword_Attack
         """
-        pass
+        self.image = self.images[self.index + 4]
+        self.attacking == self.index + 1
 
-    def shoot_Arrow(self):
+    def shootArrow(self):
         """
         This the function that has the character shoots his arrow (if he has acquired them)
         """
-        pass
+        if not self.quiver:
+            return
+        """
+        Here we create the arrow, still need to figure it out
+        """
 
-    def place_Bomb(self):
+
+    def placeBomb(self):
         """
         This the function that has the character place his bomb (if he has)
         """
-        pass
+        if self.bombs == 0:
+            return
+        else:
+            self.bombs -= 1
+        """
+        Here we create the bomb, still need to figure it out
+        """
+
+    def drinkPotion(self):
+        """
+        If the player has potions, then drink one
+        Reduce number of potions by one
+        Increase health by one
+        """
+        if self.potions > 0 and self.currentHealth < self.maxHealth:
+            self.currentHealth += 1
+            self.potions -= 1

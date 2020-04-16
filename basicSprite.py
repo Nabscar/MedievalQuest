@@ -46,7 +46,7 @@ class Heart(multipleSprite):
         elif level == 1:
             self.image = self.images[2]
 
-class BombInventory(singleSprite):
+class Bomb(singleSprite):
     """
     This is the class that will make sure that numbers appear in the inventory
     """
@@ -74,10 +74,6 @@ class Potion(singleSprite):
         self.timer = 5
         self.gone = False
 
-    def update(self, ground_image):
-        self.gone = True
-        self.images = ground_image
-
 class Numbers(multipleSprite):
     """
     This is the class that will make sure that numbers appear in the inventory
@@ -89,9 +85,9 @@ class Numbers(multipleSprite):
         if number == 0:
             self.image = self.images[0]
         elif number == 1:
-            self.image = self.image[1]
+            self.image = self.images[1]
         elif number == 2:
-            self.image - self.image[2]
+            self.image = self.images[2]
         elif number == 3:
             self.image = self.images[3]
         elif number == 4:
