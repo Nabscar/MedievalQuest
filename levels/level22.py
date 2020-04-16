@@ -61,6 +61,22 @@ class level22(levelBase.Level):
                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
                 [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
 
+    def getLayoutCave(self):
+        """
+        Matrix which would use the previosuly determined characters to show what the level will be
+        """
+        return [[2, 2, 2, 2, 2, 5, 5, 1, 1, 1, 1, 1],\
+                [2, 3, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1],\
+                [1, 4, 0, 0, 0, 0 ,0 ,0, 0, 0 ,0, 1],\
+                [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0 ,1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],\
+                [1, 1, 1, 0, 0, 0, 0, 0 ,0, 1, 1, 1],\
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],\
+                [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
+
     def getSprites(self):
         """
         Using helpers.py this method will load the png files saved in the data folder

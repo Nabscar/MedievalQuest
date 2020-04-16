@@ -42,6 +42,7 @@ class Player(basicSprite.multipleSprite):
         if (key == K_d):
             self.xMove += self.x_dist
             self.index = 2 + self.quiver
+            self.image = self.images[self.index]
             self.coords = (self.coords[0] + 1, self.coords[1])
         elif (key == K_a):
             self.xMove += -self.x_dist

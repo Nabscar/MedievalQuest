@@ -58,12 +58,14 @@ class Bomb(singleSprite):
     def update(self, ground_image):
         self.timer -= 1
         if self.timer == 0:
-            self.gone(ground_image)
+            self.blow()
             return True
 
-    def gone(self, ground_image):
+    def blow(self):
         self.gone = True
-        self.images = ground_image
+        """
+        Go through the 8 adjoining squares, make sure that: if it hits an enemy, the enemy dies. If it hits a breakable wall, open the wall
+        """
 
 class Potion(singleSprite):
     """

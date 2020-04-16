@@ -362,7 +362,7 @@ class MainQuest:
                     else:
                         self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
                 elif self.layout[y][x]==self.level.PLAYER_C:
-                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
+                    ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
                     if self.started:
                         self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
