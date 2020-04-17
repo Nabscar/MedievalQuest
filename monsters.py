@@ -50,7 +50,7 @@ class Troll(basicSprite.multipleSprite):
 
         self.step = 1
 
-    def update(self, block_group, character_coords, javelin_images, breakable_group, passage_group):
+    def update(self, block_group, character_coords, breakable_group, passage_group):
         """
         This function is the one that will move an dupdate the position of the monsters
         It is called each "cycle" of gameplay to show that they move
@@ -61,22 +61,32 @@ class Troll(basicSprite.multipleSprite):
         xMove,yMove = 0,0
 
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        """The idea of returning the javelin is the following: if there is no throw, then it will return None, else, it will returna  javelin we can add to the update group"""
+
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             diff = character_coords[1] - self.coords[1]
             if diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
-                javelin = self.throw_javelin(self.rect.center, javelin_images, 2)
+                javelin = (self.rect.center, 2, True)#self.throw_javelin(self.rect.center, javelin_images, 2)
                 self.thrown = True
+                #print(javelin)
+                return javelin
             elif diff < 0 and not self.thrown:#Enemy looking right and character is on the right
-                javelin = self.throw_javelin(self.rect.center, javelin_images, 3)
+                javelin = (self.rect.center, 3, True)#self.throw_javelin(self.rect.center, javelin_images, 3)
                 self.thrown = True
+                3#print(javelin)
+                return javelin
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
             diff = character_coords[0] - self.coords[0]
             if diff < 0 and not self.thrown:#Enemy looking up and character is up
-                javelin = self.throw_javelin(self.rect.center, javelin_images, 4)
+                javelin = (self.rect.center, 4, True)#self.throw_javelin(self.rect.center, javelin_images, 4)
                 self.thrown = True
+                #print(javelin)
+                return javelin
             elif diff > 0 and not self.thrown:#Enemy looking down and character is down
-                javelin = self.throw_javelin(self.rect.center, javelin_images, 1)
+                javelin = (self.rect.center, 1, True)#self.throw_javelin(self.rect.center, javelin_images, 1)
                 self.thrown = True
+                #print(javelin)
+                return javelin
         else:#If we didnt see the character, we move
             if self.direction==1:#down
                 yMove = self.dist
@@ -102,7 +112,6 @@ class Troll(basicSprite.multipleSprite):
             elif self.direction==4:#up
                 yMove = -self.dist
                 self.coords = (self.coords[0], self.coords[1] - 1)
-
             self.rect.move_ip(xMove,yMove) #This is what actually moves the character
             if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group):
                 """If we hit a block, don’t move – reverse the movement"""
@@ -115,16 +124,6 @@ class Troll(basicSprite.multipleSprite):
                     self.direction = 2
                 elif self.direction == 4:
                     self.direction = 1
-
-            """The idea of returning the javelin is the following: if there is no throw, then it will return None, else, it will returna  javelin we can add to the update group"""
-            return javelin
-
-    def throw_javelin(self, centerPoint, javelin_images, direction):
-        """
-        This is the function that Throws the Javelin
-        """
-        javelin = Javelin(centerPoint, javelin_images, 5, self.direction)
-        return javelin
 
     def javelin_fell(self):
         """
@@ -319,18 +318,18 @@ class Shooter(basicSprite.multipleSprite):
         if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
             diff = character_coords[0] - self.coords[0]
             if diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
-                shoot_ball(self.centerPoint, javelin_images, 2)
+                shoot_ball(self.centerPoint, ball_image, 2)
                 self.thrown = True
             elif diff < 0 and not self.thrown:#Enemy looking right and character is on the right
-                shoot_ball(self.centerPoint, javelin_images, 3)
+                shoot_ball(self.centerPoint, ball_image, 3)
                 self.thrown = True
         elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
             diff = character_coords[1] - self.coords[1]
             if diff < 0 and not self.thrown:#Enemy looking up and character is up
-                shoot_ball(self.centerPoint, javelin_images, 4)
+                shoot_ball(self.centerPoint, ball_image, 4)
                 self.thrown = True
             elif diff > 0 and not self.thrown:#Enemy looking down and character is down
-                shoot_ball(self.centerPoint, javelin_images, 1)
+                shoot_ball(self.centerPoint, ball_image, 1)
                 self.thrown = True
         else:#If we didnt see the character, we move
             if self.direction==1:#down

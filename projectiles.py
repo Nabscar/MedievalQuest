@@ -9,7 +9,7 @@ class Projectile(pygame.sprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player changes Screen
     """
-    def __init__ (self, centerPoint, images, direction, counter, damage = 1):
+    def __init__ (self,centerPoint, images, direction, counter = 7, damage = 1):
         """
         Initializes the special characteristics of the basic projectile
         """

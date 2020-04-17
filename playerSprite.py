@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction, bombs = 0, potions = 0, health = 6):
+    def __init__ (self, centerPoint, images, coords, direction, bombs = 3, potions = 0, health = 6):
         """
         Initializes the special characteristics of the playable character
         """
@@ -31,6 +31,8 @@ class Player(basicSprite.multipleSprite):
         self.bombs = bombs
         self.potions = potions
         self.index = 0
+        self.bomb = None
+        self.placingBomb = False
 
 
     def MoveKeyDown(self, key):
@@ -74,8 +76,11 @@ class Player(basicSprite.multipleSprite):
     def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group):
         """
         Called to update the player sprite's position and state
-        (state only if we choose to have power-ups)
         """
+        if self.placingBomb == True:
+            self.placingBomb = False
+            return "PlaceBomb"
+
         if ((self.xMove == 0) and (self.yMove == 0)):
             """
             If we aren't moveing just get out of here
@@ -114,8 +119,8 @@ class Player(basicSprite.multipleSprite):
         lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
         if (len(lstProjectiles) > 0):
             """If we are hit by a projectile, decrease life by one"""
-           self.rect.move_ip(-self.xMove,-self.yMove)
-           self.currentHealth -= 1
+            self.rect.move_ip(-self.xMove,-self.yMove)
+            self.currentHealth -= 1
 
         lstPotions = pygame.sprite.spritecollide(self, potion_group, False)
         """IF we hit potion we add 3 potions to our inventory (unless we hit max, in which case we stop at 9)
@@ -190,10 +195,10 @@ class Player(basicSprite.multipleSprite):
         """
         This the function that has the character place his bomb (if he has)
         """
-        if self.bombs == 0:
-            return
-        else:
+        if self.bombs > 0 and self.bomb == None:
             self.bombs -= 1
+            self.placingBomb = True
+
         """
         Here we create the bomb, still need to figure it out
         """

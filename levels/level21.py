@@ -31,6 +31,7 @@ class level21(levelBase.Level):
         self.HEART1 = 14
         self.HEART2 = 15
         self.HEART3 = 16
+        self.KINGBOMB = 17
 
     def getLayoutBottom(self):
         """
@@ -82,5 +83,6 @@ class level21(levelBase.Level):
         nums = self.numberImages()
         potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+        kingbomb = load_image("Bomb.png")
 
-        return [ground, grass, tree, troll, potion, player, passage, passage, javelin, blank, bomb, nums, potion, nums, heart, heart, heart]
+        return [ground, grass, tree, troll, potion, player, passage, passage, javelin, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]

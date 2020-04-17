@@ -96,7 +96,7 @@ class MainQuest:
                     print("GAME OVER")
                     sys.exit()
 
-                elif self.current_level = 13:
+                elif self.current_level == 13:
                     """
                     The player Won
                     Quit the Game
@@ -122,12 +122,21 @@ class MainQuest:
                 """
                 Update the player sprite and all other sprites
                 """
-                num = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.bomb_group)
-
+                player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group)
+                if self.player.bomb != None:
+                    bomb_flag = self.player.bomb.update()
+                else:
+                    bomb_flag = None
                 if (len(self.troll_group.sprites()) > 0):
-                    javelin = self.troll_group.update(self.block_group, self.player.coords, self.img_list[self.level.JAVELIN], self.breakable_group, self.passage_group)
-                    if javelin != None:
+                    javelin = self.troll_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+                    """Still dont know how to make these work
+                    print(javelin)
+                    print(javelin == None)
+                    if not(javelin == None):
+                        temp = Javelin(javelin(0), self.img_list[self.level.JAVELIN],7, javelin(1))
                         self.projectile_group.add(javelin)
+                        print("He threw the javelin!")
+                        """
 
                 if (len(self.bat_group.sprites()) > 0):
                     self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
@@ -138,6 +147,9 @@ class MainQuest:
                 if (len(self.projectile_group.sprites()) > 0):
                     self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
+                if (len(self.bomb_group.sprites()) > 0):
+                    self.bomb_group.update()
+
                 """
                 Update the inventory
                 """
@@ -146,18 +158,25 @@ class MainQuest:
                 self.heart1_group.update(self.player.currentHealth - 3)
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
-
-                """If the player has collided against something specific, we get a flag as num, depending on the flag, do different things"""
-                if num == "Potion":
-                    self.potion_group.empty()
-                elif num == "Bomb":
+                """check bomb_flag"""
+                if bomb_flag == True:
+                    self.player.bomb = None
                     self.bomb_group.empty()
-                elif num != None:
-                    self.current_level = num[0]
+                """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
+                if player_flag == "Potion":
+                    self.potion_group.empty()
+                elif player_flag == "Bomb":
+                    self.pickup_bomb_group.empty()
+                elif player_flag == "PlaceBomb":
+                    bomb = Bomb(self.player.rect.center, self.img_list[self.level.BOMB])
+                    self.player.bomb = bomb
+                    self.bomb_group.add(bomb)
+                elif player_flag != None:
+                    self.current_level = player_flag[0]
                     """
                     Load all of our Sprites
                     """
-                    self.LoadSprites(num[1])
+                    self.LoadSprites(player_flag[1])
                     """
                     Create Background
                     """
@@ -192,7 +211,9 @@ class MainQuest:
                 reclist +=  self.heart2_group.draw(self.screen)
                 reclist +=  self.heart3_group.draw(self.screen)
                 reclist += self.potion_group.draw(self.screen)
+                reclist += self.pickup_bomb_group.draw(self.screen)
                 reclist += self.bomb_group.draw(self.screen)
+
 
                 pygame.display.update(reclist)
 
@@ -268,6 +289,7 @@ class MainQuest:
         self.shooter_group = pygame.sprite.RenderUpdates()
         self.projectile_group = pygame.sprite.RenderUpdates()
         self.potion_group = pygame.sprite.RenderUpdates()
+        self.pickup_bomb_group = pygame.sprite.RenderUpdates()
         self.bomb_group = pygame.sprite.RenderUpdates()
 
         """Go through all the level array"""
@@ -388,7 +410,7 @@ class MainQuest:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
                     bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
-                    self.bomb_group.add(bomb)
+                    self.pickup_bomb_group.add(bomb)
 
                     """Inventory"""
                 elif self.layout[y][x]==self.level.BLANK:

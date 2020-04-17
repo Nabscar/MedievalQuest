@@ -15,7 +15,6 @@ class singleSprite(pygame.sprite.Sprite):
         """Move the rect into the correct position"""
         self.rect.center = centerPoint
 
-
 class multipleSprite(pygame.sprite.Sprite):
     """
     This class will be the initializer for the basic value of any sprite
@@ -52,10 +51,11 @@ class Bomb(singleSprite):
     """
     def __init__(self, centerPoint, images):
         singleSprite.__init__(self, centerPoint, images)
-        self.timer = 5
+        self.timer = 20
         self.gone = False
 
-    def update(self, ground_image):
+    def update(self):
+        print(self.timer)
         self.timer -= 1
         if self.timer == 0:
             self.blow()
