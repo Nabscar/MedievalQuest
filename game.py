@@ -124,7 +124,7 @@ class MainQuest:
                 """
                 player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group)
                 if self.player.bomb != None:
-                    bomb_flag = self.player.bomb.update()
+                    bomb_flag = self.player.bomb.update(self.breakable_group, self.troll_group, self.shooter_group, self.bat_group)
                 else:
                     bomb_flag = None
                 if (len(self.troll_group.sprites()) > 0):
@@ -147,8 +147,7 @@ class MainQuest:
                 if (len(self.projectile_group.sprites()) > 0):
                     self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
 
-                if (len(self.bomb_group.sprites()) > 0):
-                    self.bomb_group.update()
+
 
                 """
                 Update the inventory
@@ -326,10 +325,10 @@ class MainQuest:
 
                     """Breakable Walls"""
                 elif self.layout[y][x]==self.level.BREAKABLE_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), False) #create breakable
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), "C", False) #create breakable
                     self.breakable_group.add(breakableWall)
                 elif self.layout[y][x]==self.level.BROKEN_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), True) #create breakable
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), "C", True) #create breakable
                     self.breakable_group.add(breakable)
 
                     """Passages"""

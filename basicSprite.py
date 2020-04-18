@@ -51,21 +51,36 @@ class Bomb(singleSprite):
     """
     def __init__(self, centerPoint, images):
         singleSprite.__init__(self, centerPoint, images)
-        self.timer = 20
+        self.timer = 10
         self.gone = False
 
-    def update(self):
+    def update(self, breakable_group, troll_group, shooter_group, bat_group):
         print(self.timer)
         self.timer -= 1
         if self.timer == 0:
-            self.blow()
+            self.blow(breakable_group, troll_group, shooter_group, bat_group)
             return True
 
-    def blow(self):
+    def blow(self, breakable_group, troll_group, shooter_group, bat_group):
         self.gone = True
         """
         Go through the 8 adjoining squares, make sure that: if it hits an enemy, the enemy dies. If it hits a breakable wall, open the wall
         """
+        R = (64,0)
+        U = (0,64)
+        L = (-64,0)
+        D = (0, -64)
+        move = [R, U, L, L, D, D, R, R]
+        for i in range(0,7):
+            x = move[i]
+            self.rect.move_ip(x[0], x[1])
+            lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
+            if len(lstBreakable) > 0:
+                for wall in lstBreakable:
+                    wall.destroy()
+            lstTroll = pygame.sprite.spritecollide(self, troll_group, False)
+            lstShooter = pygame.sprite.spritecollide(self, shooter_group, False)
+            lstBat = pygame.sprite.spritecollide(self, bat_group, False)
 
 class Potion(singleSprite):
     """

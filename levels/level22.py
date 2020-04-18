@@ -17,7 +17,7 @@ class level22(levelBase.Level):
         self.GROUND = 0
         self.TREE = 1
         self.WALL = 2
-        self.CAVEENTRANCE = 3
+        self.BREAKABLE_WALL = 3
         self.PLAYER_OW = 4
         self.PASSAGE_T = 5
         self.BLANK = 6
@@ -87,9 +87,7 @@ class level22(levelBase.Level):
         ground= load_image('OW_Ground.png')
         tree = load_image('Tree.png')
         wall = load_image('BrickWall.png')
-        #breakable_wall = [load_image('BreakableWall.png'), load_image('BrokenWall.png')]
-
-        cave  = load_image('CaveEntrance.png')
+        breakable_wall = [load_image('BreakableWall.png'), load_image('BrokenWall.png')]
         player = self.kingOWImages()
         passage = load_image('OW_Ground.png')
         blank = load_image("Blank.png")
@@ -99,4 +97,4 @@ class level22(levelBase.Level):
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
         kingbomb = load_image("Bomb.png")
 
-        return [ground, tree, wall, cave, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]
+        return [ground, tree, wall, breakable_wall, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]
