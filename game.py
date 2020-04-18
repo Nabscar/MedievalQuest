@@ -324,12 +324,21 @@ class MainQuest:
                     self.block_group.add(wall)
 
                     """Breakable Walls"""
-                elif self.layout[y][x]==self.level.BREAKABLE_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), "C", False) #create breakable
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_T:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_T], (self.current_level-10), "T", False) #create breakable
                     self.breakable_group.add(breakableWall)
-                elif self.layout[y][x]==self.level.BROKEN_WALL:
-                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL], (self.current_level * 10 + 1), "C", True) #create breakable
-                    self.breakable_group.add(breakable)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_B:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_B], (self.current_level+10), "B", False) #create breakable
+                    self.breakable_group.add(breakableWall)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_L:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_L], (self.current_level-1), "L", False) #create breakable
+                    self.breakable_group.add(breakableWall)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_R:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_R], (self.current_level+1), "R", False) #create breakable
+                    self.breakable_group.add(breakableWall)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_C:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_C], (self.current_level * 10 + 1), "C", False) #create breakable
+                    self.breakable_group.add(breakableWall)
 
                     """Passages"""
                 elif self.layout[y][x]==self.level.PASSAGE_T:

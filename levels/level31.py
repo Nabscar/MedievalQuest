@@ -19,7 +19,7 @@ class level31(levelBase.Level):
         self.WATER = 2
         self.TREE = 3
         self.WALL = 4
-        self.BREAKABLE_WALL = 5
+        self.BREAKABLE_WALL_R = 5
         self.SHOOTER_V = 6
         self.SHOOTER_H = 7
         self.PLAYER_OW = 8
