@@ -29,21 +29,22 @@ class level13(levelBase.Level):
         self.HEART2 = 12
         self.HEART3 = 13
         self.KINGBOMB = 14
+        self.KINGARROW = 15
 
     def getLayoutCave(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-        return [[6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],\
-                [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],\
-                [1, 0, 0, 0, 0, 0 ,0 ,0, 0, 0 ,0, 1],\
+        return [[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
+                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
+                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
                 [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [1, 3, 5, 0, 0, 0, 0, 0 ,0, 0, 0, 1],\
-                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
+                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
                 [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
 
     def getSprites(self):
@@ -65,5 +66,6 @@ class level13(levelBase.Level):
         potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
         kingbomb = load_image("Bomb.png")
+        kingarrow = self.arrowImages()
 
-        return [ground, tree, wall, cave, boss, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]
+        return [ground, tree, wall, cave, boss, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]

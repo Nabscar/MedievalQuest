@@ -123,10 +123,17 @@ class MainQuest:
                 Update the player sprite and all other sprites
                 """
                 player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group)
+
                 if self.player.bomb != None:
                     bomb_flag = self.player.bomb.update(self.breakable_group, self.troll_group, self.shooter_group, self.bat_group)
                 else:
                     bomb_flag = None
+
+                if self.player.arrow != None:
+                    arrow_flag = self.player.arrow.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
+                else:
+                    arrow_flag = None
+
                 if (len(self.troll_group.sprites()) > 0):
                     javelin = self.troll_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
                     """Still dont know how to make these work
@@ -145,7 +152,7 @@ class MainQuest:
                     ball = self.shooter_group.update(self.block_group, self.player.coords, self.img_list[self.level.BALL], self.breakable_group, self.passage_group)
 
                 if (len(self.projectile_group.sprites()) > 0):
-                    self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group)
+                    self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
 
 
 
@@ -173,6 +180,30 @@ class MainQuest:
 
                     self.player.bomb = None
                     self.bomb_group.empty()
+
+                if arrow_flag != None:
+                    if arrow_flag[0] == "Enemy":
+                        enemies = arrow_flag[1]
+                        print(enemies)
+                        if len(enemies[0]) > 0:
+                            for troll in enemies[0]:
+                                self.troll_group.remove(troll)
+                        if len(enemies[1]) > 0:
+                            for shooter in enemies[1]:
+                                self.shooter_group.remove(shooter)
+                        if len(enemies[2]) > 0:
+                            for bat in enemies[2]:
+                                self.bat_group.remove(bat)
+
+                    elif arrow_flag[0] == "Projectile":
+                        projectiles = arrow_flag[1]
+                        if len(projectiles) > 0:
+                            for projectile in projectiles:
+                                self.projectile_group.remove(projectile)
+
+                    if arrow_flag[0] != "Player":
+                        self.player.arrow = None
+                        self.arrow_group.empty()
                 """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
                 if player_flag == None:
                     holder = 1
@@ -181,9 +212,14 @@ class MainQuest:
                 elif player_flag[0] == "Bomb":
                     self.pickup_bomb_group.remove(player_flag[1])
                 elif player_flag[0] == "PlaceBomb":
-                    bomb = Bomb(self.player.rect.center, self.img_list[self.level.BOMB])
+                    bomb = Bomb(self.player.rect.center, self.img_list[self.level.KINGBOMB])
                     self.player.bomb = bomb
                     self.bomb_group.add(bomb)
+                elif player_flag[0] == "Arrow":
+                    print("SHOOOOT")
+                    arrow = Arrow(self.player.rect.center, self.img_list[self.level.KINGARROW], self.player.direction)
+                    self.player.arrow = arrow
+                    self.arrow_group.add(arrow)
                 elif player_flag[0] == "Attacked":
                     enemies = player_flag[1]
                     if len(enemies[0]) > 0:
@@ -237,6 +273,7 @@ class MainQuest:
                 reclist += self.potion_group.draw(self.screen)
                 reclist += self.pickup_bomb_group.draw(self.screen)
                 reclist += self.bomb_group.draw(self.screen)
+                reclist += self.arrow_group.draw(self.screen)
 
 
                 pygame.display.update(reclist)
@@ -315,6 +352,7 @@ class MainQuest:
         self.potion_group = pygame.sprite.RenderUpdates()
         self.pickup_bomb_group = pygame.sprite.RenderUpdates()
         self.bomb_group = pygame.sprite.RenderUpdates()
+        self.arrow_group = pygame.sprite.RenderUpdates()
 
         """Go through all the level array"""
         for y in range(len(self.layout)):

@@ -31,7 +31,9 @@ class Player(basicSprite.multipleSprite):
         self.potions = potions
         self.index = 0
         self.bomb = None
+        self.arrow = None
         self.placingBomb = False
+        self.shooting = False
         self.attacking = 0
 
 
@@ -79,6 +81,10 @@ class Player(basicSprite.multipleSprite):
             self.placingBomb = False
             return ("PlaceBomb", "bomb")
 
+        if self.shooting == True:
+            self.shooting = False
+            return("Arrow", "arrow")
+
         if ((self.xMove == 0) and (self.yMove == 0) and (self.attacking == 0)):
             """
             If we aren't moveing just get out of here
@@ -96,7 +102,7 @@ class Player(basicSprite.multipleSprite):
             self.xMove += self.dist
         elif self.attacking == 4:
             self.yMove -= self.dist
-            
+
         self.rect.move_ip(self.xMove,self.yMove)
 
         if pygame.sprite.spritecollideany(self,block_group):
@@ -217,8 +223,10 @@ class Player(basicSprite.multipleSprite):
         """
         This the function that has the character shoots his arrow (if he has acquired them)
         """
-        if not self.quiver:
+        if self.quiver == 0:
             return
+        else:
+            self.shooting = True
         """
         Here we create the arrow, still need to figure it out
         """

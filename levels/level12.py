@@ -32,6 +32,7 @@ class level12(levelBase.Level):
         self.HEART2 = 15
         self.HEART3 = 16
         self.KINGBOMB = 17
+        self.KINGARROW = 18
 
 
     def getLayoutTop(self):
@@ -85,5 +86,6 @@ class level12(levelBase.Level):
         potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
         kingbomb = load_image("Bomb.png")
+        kingarrow = self.arrowImages()
 
-        return [ground, tree, grass, troll, potion, player, passage, passage, javelin, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]
+        return [ground, tree, grass, troll, potion, player, passage, passage, javelin, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
