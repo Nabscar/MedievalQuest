@@ -158,7 +158,20 @@ class MainQuest:
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
                 """check bomb_flag"""
-                if bomb_flag == True:
+                print(bomb_flag)
+                if bomb_flag != None:
+                    for i in range(0,7):
+                        enemies = bomb_flag[i]
+                        if len(enemies[0]) > 0:
+                            for troll in enemies[0]:
+                                self.troll_group.remove(troll)
+                        if len(enemies[1]) > 0:
+                            for shooter in enemies[1]:
+                                self.shooter_group.remove(shooter)
+                        if len(enemies[2]) > 0:
+                            for bat in enemies[2]:
+                                self.bat_group.remove(bat)
+
                     self.player.bomb = None
                     self.bomb_group.empty()
                 """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""

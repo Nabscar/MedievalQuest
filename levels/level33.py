@@ -23,7 +23,7 @@ class level33(levelBase.Level):
         self.PLAYER_OW = 6
         self.PASSAGE_L = 7
         self.PASSAGE_T = 8
-        self.JAVELIN = 9
+        self.BLANK = 9
         self.BOMB = 10
         self.BOMBNUM = 11
         self.POTION = 12
@@ -32,6 +32,7 @@ class level33(levelBase.Level):
         self.HEART2 = 15
         self.HEART3 = 16
         self.KINGBOMB = 17
+        self.JAVELIN = 18
 
     def getLayoutRight(self):
         """
@@ -86,4 +87,4 @@ class level33(levelBase.Level):
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
         kingbomb = load_image("Bomb.png")
 
-        return [ground, grass, water, tree, troll, troll, player, passage, passage, javelin, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb]
+        return [ground, grass, water, tree, troll, troll, player, passage, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, javelin]

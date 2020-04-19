@@ -20,7 +20,7 @@ class level13(levelBase.Level):
         self.CAVEENTRANCE = 3
         self.BOSS = 4
         self.PLAYER_OW = 5
-        self.CASTLE = 6
+        self.BLANK = 6
         self.BOMB = 7
         self.BOMBNUM = 8
         self.POTION = 9
