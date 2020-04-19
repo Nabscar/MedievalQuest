@@ -18,8 +18,7 @@ class Player(basicSprite.multipleSprite):
         self.coords = coords
 
         """distance moved with each keystroke"""
-        self.x_dist = 64
-        self.y_dist = 64
+        self.dist = 64
         """Current movement of player"""
         self.xMove = 0
         self.yMove = 0
@@ -33,6 +32,7 @@ class Player(basicSprite.multipleSprite):
         self.index = 0
         self.bomb = None
         self.placingBomb = False
+        self.attacking = 0
 
 
     def MoveKeyDown(self, key):
@@ -43,22 +43,22 @@ class Player(basicSprite.multipleSprite):
         self.attacking = 0
 
         if (key == K_d):
-            self.xMove += self.x_dist
+            self.xMove += self.dist
             self.index = 2 + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0] + 1, self.coords[1])
         elif (key == K_a):
-            self.xMove += -self.x_dist
+            self.xMove -= self.dist
             self.index = 1 + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0] - 1, self.coords[1])
         elif (key == K_w):
-            self.yMove += -self.y_dist
+            self.yMove -= self.dist
             self.index = 3 + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] - 1)
         elif (key == K_s):
-            self.yMove += self.y_dist
+            self.yMove += self.dist
             self.index = 0 + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] + 1)
@@ -71,36 +71,74 @@ class Player(basicSprite.multipleSprite):
         elif (key == K_i):
             self.drinkPotion()
 
-
-
     def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group):
         """
         Called to update the player sprite's position and state
         """
         if self.placingBomb == True:
             self.placingBomb = False
-            return "PlaceBomb"
+            return ("PlaceBomb", "bomb")
 
-        if ((self.xMove == 0) and (self.yMove == 0)):
+        if ((self.xMove == 0) and (self.yMove == 0) and (self.attacking == 0)):
             """
             If we aren't moveing just get out of here
             """
             return
         """
         We're moving!
+        These if-eliffs are if they are attacking
         """
+        if self.attacking == 1:
+            self.yMove += self.dist
+        elif self.attacking == 2:
+            self.xMove -= self.dist
+        elif self.attacking == 3:
+            self.xMove += self.dist
+        elif self.attacking == 4:
+            self.yMove -= self.dist
+            
         self.rect.move_ip(self.xMove,self.yMove)
-
-        lstEnemies = pygame.sprite.spritecollide(self, troll_group, False) + pygame.sprite.spritecollide(self, shooter_group, False) + pygame.sprite.spritecollide(self, bat_group, False)
-        if(len(lstEnemies) > 0):
-            """
-            We hit an Enemy!
-            """
-            self.EnemyCollide(lstEnemies)
 
         if pygame.sprite.spritecollideany(self,block_group):
             """If we hit a block, stop movement"""
             self.rect.move_ip(-self.xMove,-self.yMove)
+        """Collision with enemies is taken care of in the updates of the enemy"""
+        lstTrolls = pygame.sprite.spritecollide(self, troll_group, False)
+        enemies = []
+        if(len(lstTrolls) > 0):
+            """
+            We hit an Enemy!
+            """
+            enemies.append(self.EnemyCollide(lstTrolls))
+        else:
+            enemies.append([])
+        lstShooters = pygame.sprite.spritecollide(self, shooter_group, False)
+        if(len(lstShooters) > 0):
+            """
+            We hit an Enemy!
+            """
+            enemies.append(self.EnemyCollide(lstShooters))
+        else:
+            enemies.append([])
+        lstBats = pygame.sprite.spritecollide(self, bat_group, False)
+        if(len(lstBats) > 0):
+            """
+            We hit an Enemy!
+            """
+            enemies.append(self.EnemyCollide(lstBats))
+        else:
+            enemies.append([])
+        """
+        This moves the player back if he Attacked
+        """
+
+        if self.attacking != 0:
+            self.rect.move_ip(-self.xMove,-self.yMove)
+
+        if len(enemies) > 0 and self.attacking != 0 :
+            self.xMove = 0
+            self.yMove = 0
+            return ("Attacked", enemies)
 
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if (len(lstPassages) > 0):
@@ -131,7 +169,7 @@ class Player(basicSprite.multipleSprite):
             else:
                 self.potions = 9
             self.rect.move_ip(- self.xMove,-self.yMove)
-            return "Potion"
+            return ("Potion", lstPotions[0])
 
         lstBombs = pygame.sprite.spritecollide(self, bomb_group, False)
         """IF we hit potion we add 3 bombs to our inventory (unless we hit max, in which case we stop at 9)
@@ -142,11 +180,10 @@ class Player(basicSprite.multipleSprite):
             else:
                 self.bombs = 9
             self.rect.move_ip(- self.xMove,-self.yMove)
-            return "Bomb"
+            return ("Bomb", lstBombs[0])
 
         self.xMove = 0
         self.yMove = 0
-
 
     def EnemyCollide(self, lstEnemiesHit):
         """
@@ -157,28 +194,24 @@ class Player(basicSprite.multipleSprite):
         if (len(lstEnemiesHit)<=0):
             """If the list is empty, just get out of here"""
             return
+        enemies = []
 
         for enemy in lstEnemiesHit:
             """
             Just in case we somehow hit more than one enemy, we loop through the list
-
-            Here, we need to figure out a couple of things:
-                if it has been hit, check if the user was atacking at to which side
-                    if it was an attack that hit then kill monster
-                    else take one healthpoint out of the player
-
-                    if the players health reaches 0 hes dead
             """
             if self.attacking == 0:
                 self.currentHealth -= 1
-
+            else:
+                enemies.append(enemy)
+        return enemies
 
     def swordAttack(self):
         """
         This the function that has the character attack with his sword_Attack
         """
         self.image = self.images[self.index + 4]
-        self.attacking == self.index + 1
+        self.attacking = self.index + 1
 
     def shootArrow(self):
         """
@@ -189,7 +222,6 @@ class Player(basicSprite.multipleSprite):
         """
         Here we create the arrow, still need to figure it out
         """
-
 
     def placeBomb(self):
         """

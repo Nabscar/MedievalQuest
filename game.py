@@ -158,7 +158,6 @@ class MainQuest:
                 self.heart2_group.update(self.player.currentHealth - 1)
                 self.heart3_group.update(self.player.currentHealth + 1)
                 """check bomb_flag"""
-                print(bomb_flag)
                 if bomb_flag != None:
                     for i in range(0,7):
                         enemies = bomb_flag[i]
@@ -175,14 +174,27 @@ class MainQuest:
                     self.player.bomb = None
                     self.bomb_group.empty()
                 """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
-                if player_flag == "Potion":
-                    self.potion_group.empty()
-                elif player_flag == "Bomb":
-                    self.pickup_bomb_group.empty()
-                elif player_flag == "PlaceBomb":
+                if player_flag == None:
+                    holder = 1
+                elif player_flag[0] == "Potion":
+                    self.potion_group.remove(player_flag[1])
+                elif player_flag[0] == "Bomb":
+                    self.pickup_bomb_group.remove(player_flag[1])
+                elif player_flag[0] == "PlaceBomb":
                     bomb = Bomb(self.player.rect.center, self.img_list[self.level.BOMB])
                     self.player.bomb = bomb
                     self.bomb_group.add(bomb)
+                elif player_flag[0] == "Attacked":
+                    enemies = player_flag[1]
+                    if len(enemies[0]) > 0:
+                        for troll in enemies[0]:
+                            self.troll_group.remove(troll)
+                    if len(enemies[1]) > 0:
+                        for shooter in enemies[1]:
+                            self.shooter_group.remove(shooter)
+                    if len(enemies[2]) > 0:
+                        for bat in enemies[2]:
+                            self.bat_group.remove(bat)
                 elif player_flag != None:
                     self.current_level = player_flag[0]
                     """
