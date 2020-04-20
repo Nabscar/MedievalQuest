@@ -23,20 +23,19 @@ class Projectile(pygame.sprite.Sprite):
         self.xMove = 0
         self.yMove = 0
 
-
-        if self.direction==0:#down
+        print(self.direction)
+        if self.direction==1:#down
             self.yMove = self.dist
-        elif self.direction==1:#Left
+        elif self.direction==2:#Left
             self.xMove = -self.dist
-        elif self.direction==2:#right
+        elif self.direction==3:#right
             self.xMove = -self.dist
-        elif self.direction==3:#up
+        elif self.direction==4:#up
             self.yMove = -self.dist
 
     def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group):
         flag = "done"
         self.counter -= 1
-
         if self.counter == 0:
             return(flag, "done")
 
@@ -46,7 +45,7 @@ class Projectile(pygame.sprite.Sprite):
             return ("Wall", "done")
 
         lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
-        if len(lstProjectiles) > 0:
+        if len(lstProjectiles) > self.projectile:
             return ("Projectile", lstProjectiles)
 
         lstPlayer = pygame.sprite.spritecollide(self, player_group, False)
@@ -78,8 +77,9 @@ class Ball(Projectile):
         """
         Initializes the special characteristics of the ball projectile
         """
-        Projectile.__init__(self, centerPoint, images, counter, direction, damage)
+        Projectile.__init__(self, centerPoint, images, direction, counter, damage)
         self.image = self.images[0]
+        self.projectile = 1
 
 class Javelin(Projectile):
 
@@ -87,13 +87,14 @@ class Javelin(Projectile):
             """
             Initializes the special characteristics of the javelin projectile
             """
-            Projectile.__init__(self, centerPoint, images, counter, direction)
+            Projectile.__init__(self, centerPoint, images, direction, counter, damage)
             self.damage = damage
             self.image_order = ["Down", "Left", "Right", "Up"]
             """
             directions go in same order as image order
             """
             self.image = self.images[self.direction - 1]
+            self.projectile = 1
 
 class Arrow(Projectile):
 
@@ -108,3 +109,4 @@ class Arrow(Projectile):
             directions go in same order as image order
             """
             self.image = self.images[self.direction]
+            self.projectile = 0

@@ -84,7 +84,7 @@ class MainQuest:
             self.bat_group.clear(self.screen,self.background)
             self.shooter_group.clear(self.screen,self.background)
             self.projectile_group.clear(self.screen, self.background)
-
+            event = pygame.event.get()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -154,7 +154,6 @@ class MainQuest:
                 for projectile in self.projectile_group:
                     projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
                     if projectile_flag != None:
-                        print(projectile_flag[0])
                         if projectile_flag[0] != "Enemy":
                             self.projectile_group.remove(projectile)
 
@@ -258,18 +257,18 @@ class MainQuest:
                 reclist = self.block_group.draw(self.screen)
                 reclist += self.passage_group.draw(self.screen)
                 reclist += self.crossable_group.draw(self.screen)
-                reclist +=  self.breakable_group.draw(self.screen)
-                reclist +=  self.troll_group.draw(self.screen)
-                reclist +=  self.bat_group.draw(self.screen)
-                reclist +=  self.shooter_group.draw(self.screen)
-                reclist +=  self.projectile_group.draw(self.screen)
-                reclist +=  self.player_group.draw(self.screen)
-                reclist +=  self.inventory_group.draw(self.screen)
-                reclist +=  self.bomb_number.draw(self.screen)
-                reclist +=  self.potion_number.draw(self.screen)
-                reclist +=  self.heart1_group.draw(self.screen)
-                reclist +=  self.heart2_group.draw(self.screen)
-                reclist +=  self.heart3_group.draw(self.screen)
+                reclist += self.breakable_group.draw(self.screen)
+                reclist += self.troll_group.draw(self.screen)
+                reclist += self.bat_group.draw(self.screen)
+                reclist += self.shooter_group.draw(self.screen)
+                reclist += self.projectile_group.draw(self.screen)
+                reclist += self.player_group.draw(self.screen)
+                reclist += self.inventory_group.draw(self.screen)
+                reclist += self.bomb_number.draw(self.screen)
+                reclist += self.potion_number.draw(self.screen)
+                reclist += self.heart1_group.draw(self.screen)
+                reclist += self.heart2_group.draw(self.screen)
+                reclist += self.heart3_group.draw(self.screen)
                 reclist += self.potion_group.draw(self.screen)
                 reclist += self.pickup_bomb_group.draw(self.screen)
                 reclist += self.bomb_group.draw(self.screen)
@@ -278,6 +277,8 @@ class MainQuest:
 
 
                 pygame.display.update(reclist)
+
+                time,wait(0.01)
 
     def LoadSprites(self, side):
         """

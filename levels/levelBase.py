@@ -91,7 +91,7 @@ class Level:
         """
         Returns a list of ball images
         """
-        return load_image('Shooter_Projectile.png')
+        return [load_image('Shooter_Projectile.png'), load_image('Shooter_Projectile.png'), load_image('Shooter_Projectile.png'), load_image('Shooter_Projectile.png')]
 
     def batImages(self):
         """
