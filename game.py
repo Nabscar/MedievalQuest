@@ -524,7 +524,7 @@ class MainQuest:
 
                     NOt sure how to do boss since he is more than one block big
 
-                elif self.layout[y][x]==self.level.BOSS:
+                elif  self.layout[y][x]==self.level.BOSS:
                     boss = #create boss
                     self.block_group.add(boss)
                     """
