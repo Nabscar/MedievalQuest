@@ -195,6 +195,7 @@ class Player(basicSprite.multipleSprite):
 
         self.xMove = 0
         self.yMove = 0
+        return ("None", "None")
 
     def EnemyCollide(self, lstEnemiesHit):
         """
