@@ -24,9 +24,7 @@ class Troll(basicSprite.multipleSprite):
 
         self.coords = coords
 
-        self.dead = False
 
-        self.attacking = False
         """
         Initialize the direction
         1 = down
@@ -46,48 +44,38 @@ class Troll(basicSprite.multipleSprite):
 
         self.dist = 64
 
-        self.thrown = False
+        self.counter = 0
 
         self.step = 1
 
     def update(self, block_group, character_coords, breakable_group, passage_group):
-        """
-        This function is the one that will move an dupdate the position of the monsters
-        It is called each "cycle" of gameplay to show that they move
-        """
-        javelin = None
-        if self.dead:
-            return
-        xMove,yMove = 0,0
-
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
         """The idea of returning the javelin is the following: if there is no throw, then it will return None, else, it will returna  javelin we can add to the update group"""
 
-        if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
+        if self.counter != 0:
+            self.counter -= 1
+
+        xMove,yMove = 0,0
+
+        """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        if character_coords[0] == self.coords[0]:#they are in th esame vertical
             diff = character_coords[1] - self.coords[1]
-            if diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
-                javelin = (self.rect.center, 2, True)#self.throw_javelin(self.rect.center, javelin_images, 2)
-                self.thrown = True
-                #print(javelin)
-                return javelin
-            elif diff < 0 and not self.thrown:#Enemy looking right and character is on the right
-                javelin = (self.rect.center, 3, True)#self.throw_javelin(self.rect.center, javelin_images, 3)
-                self.thrown = True
-                3#print(javelin)
-                return javelin
-        elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
+            if diff > 0 and  self.counter == 0:#down
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 3))
+            elif diff < 0 and  self.counter == 0:#up
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 0))
+        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
             diff = character_coords[0] - self.coords[0]
-            if diff < 0 and not self.thrown:#Enemy looking up and character is up
-                javelin = (self.rect.center, 4, True)#self.throw_javelin(self.rect.center, javelin_images, 4)
-                self.thrown = True
-                #print(javelin)
-                return javelin
-            elif diff > 0 and not self.thrown:#Enemy looking down and character is down
-                javelin = (self.rect.center, 1, True)#self.throw_javelin(self.rect.center, javelin_images, 1)
-                self.thrown = True
-                #print(javelin)
-                return javelin
-        else:#If we didnt see the character, we move
+            if diff < 0 and  self.counter == 0:#left
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 1))
+            elif diff > 0 and  self.counter == 0:#right
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 2))
+
+        if self.counter == 0:
             if self.direction==1:#down
                 yMove = self.dist
                 self.coords = (self.coords[0], self.coords[1] + 1)
@@ -124,21 +112,6 @@ class Troll(basicSprite.multipleSprite):
                     self.direction = 2
                 elif self.direction == 4:
                     self.direction = 1
-
-    def javelin_fell(self):
-        """
-        This function tells the enemy he can now throw another javelin
-        """
-        self.thrown = False
-
-    def die(self, ground_image):
-        """
-        This function establishes what happens when a enemy is killed
-        this means he is set do dead (so update cant be called) and the image is set as a ground image
-        it is also removed from the enemy_group list
-        """
-        self.dead = True
-        self.images = ground_image
 
 class Bat(basicSprite.multipleSprite):
     """
@@ -300,38 +273,31 @@ class Shooter(basicSprite.multipleSprite):
 
         self.dist = 64
 
-        self.thrown = False
+        self.counter = False
 
         self.step = 1
         pass
 
-    def update(self, block_group, character_coords, ball_image, breakable_group, passage_group):
-        """
-        This function is the one that will move an dupdate the position of the monsters
-        It is called each "cycle" of gameplay to show that they move
-        """
-        if self.dead:
-            return
-        xMove,yMove = 0,0
-
+    def update(self, block_group, character_coords, breakable_group, passage_group):
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
-        if character_coords[0] == self.coords[0]:#Check if enemy sees character horizontally
-            diff = character_coords[0] - self.coords[0]
-            if diff > 0 and not self.thrown:#Enemy looking left and character is on the Left
-                shoot_ball(self.centerPoint, ball_image, 2)
-                self.thrown = True
-            elif diff < 0 and not self.thrown:#Enemy looking right and character is on the right
-                shoot_ball(self.centerPoint, ball_image, 3)
-                self.thrown = True
-        elif character_coords[1] == self.coords[1]:#Check if enemy sees character vertically
+        if character_coords[0] == self.coords[0]:#they are in th esame vertical
             diff = character_coords[1] - self.coords[1]
-            if diff < 0 and not self.thrown:#Enemy looking up and character is up
-                shoot_ball(self.centerPoint, ball_image, 4)
-                self.thrown = True
-            elif diff > 0 and not self.thrown:#Enemy looking down and character is down
-                shoot_ball(self.centerPoint, ball_image, 1)
-                self.thrown = True
-        else:#If we didnt see the character, we move
+            if diff > 0 and  self.counter == 0:#down
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 3))
+            elif diff < 0 and  self.counter == 0:#up
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 0))
+        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
+            diff = character_coords[0] - self.coords[0]
+            if diff < 0 and  self.counter == 0:#left
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 1))
+            elif diff > 0 and  self.counter == 0:#right
+                self.counter = 3
+                return ("Shoot", (self.rect.center, 2))
+
+        if self.counter == 0:
             if self.direction==1:#down
                 yMove = self.dist
                 self.coords = (self.coords[0], self.coords[1] + 1)
@@ -382,26 +348,5 @@ class Shooter(basicSprite.multipleSprite):
                 elif self.direction == 4:
                     self.direction = 1
 
-
-    def shoot_ball(self, centerPoint, ball_image, direction):
-        """
-        This is the function that Throws the Javelin
-        """
-        ball = Ball(centerPoint, ball_image, direction)
-        return ball
-
-    def ball_fell(self):
-        """
-        This function tells the enemy he can now throw another javelin
-        """
-        self.thrown = False
-
-    def die(self, ground_image):
-        """
-        This function establishes what happens when a enemy is killed
-        this means he is set do dead (so update cant be called) and the image is set as a ground image
-        """
-        self.dead = True
-        self.images = ground_image
 
 #class Boss(basicSprite.Sprite):

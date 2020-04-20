@@ -34,7 +34,6 @@ class Projectile(pygame.sprite.Sprite):
             self.yMove = -self.dist
 
     def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group):
-
         flag = "done"
         self.counter -= 1
 
@@ -75,7 +74,7 @@ class Projectile(pygame.sprite.Sprite):
 
 class Ball(Projectile):
 
-    def __init__ (self, centerPoint, images, direction, counter = 2     , damage = 1):
+    def __init__ (self, centerPoint, images, direction, counter = 5, damage = 1):
         """
         Initializes the special characteristics of the ball projectile
         """
@@ -84,7 +83,7 @@ class Ball(Projectile):
 
 class Javelin(Projectile):
 
-        def __init__ (self, centerPoint, images, direction, counter = 3, damage = 1):
+        def __init__ (self, centerPoint, images, direction, counter = 5, damage = 1):
             """
             Initializes the special characteristics of the javelin projectile
             """

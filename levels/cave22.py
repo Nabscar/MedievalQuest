@@ -17,7 +17,7 @@ class cave22(levelBase.Level):
         self.CAVEGROUND = 0
         self.WALL = 1
         self.BREAKABLE_WALL_C = 2
-        self.PICKBOMB = 3
+        self.BOWANDQUIVER = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
         self.BLANK = 6
@@ -56,7 +56,7 @@ class cave22(levelBase.Level):
         ground = load_image('CaveFloor.png')
         wall = load_image('CaveWall.png')
         BreakableWall = [load_image('CaveWallBreakable.png'), load_image('CaveWallBroken.png')]
-        bomb = load_image('CaveBomb.png')
+        bowandquiver = load_image('BowAndQuiver.png')
         player = self.kingCaveImages()
         passage = load_image('CaveFloor.png')
         blank = load_image("Blank.png")
@@ -67,4 +67,4 @@ class cave22(levelBase.Level):
         kingbomb = load_image("CaveBomb.png")
         kingarrow = self.arrowImages()
 
-        return [ground, wall, BreakableWall, bomb, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
+        return [ground, wall, BreakableWall, bowandquiver, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]

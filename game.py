@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
 
 
 import pygame
@@ -122,7 +122,7 @@ class MainQuest:
                 """
                 Update the player sprite and all other sprites
                 """
-                player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group)
+                player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group)
 
                 if self.player.bomb != None:
                     bomb_flag = self.player.bomb.update(self.breakable_group, self.troll_group, self.shooter_group, self.bat_group)
@@ -134,27 +134,29 @@ class MainQuest:
                 else:
                     arrow_flag = None
 
-                if (len(self.troll_group.sprites()) > 0):
-                    javelin = self.troll_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
-                    """Still dont know how to make these work
-                    print(javelin)
-                    print(javelin == None)
-                    if not(javelin == None):
-                        temp = Javelin(javelin(0), self.img_list[self.level.JAVELIN],7, javelin(1))
+                for troll in self.troll_group:
+                    troll_flag = troll.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+                    if troll_flag != None:
+                        info = troll_flag[1]
+                        javelin = Javelin(info[0], self.img_list[self.level.JAVELIN], info[1])
                         self.projectile_group.add(javelin)
-                        print("He threw the javelin!")
-                        """
 
                 if (len(self.bat_group.sprites()) > 0):
                     self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
 
-                if (len(self.shooter_group.sprites()) > 0):
-                    ball = self.shooter_group.update(self.block_group, self.player.coords, self.img_list[self.level.BALL], self.breakable_group, self.passage_group)
+                for shooter in self.shooter_group:
+                    shooter_flag = shooter.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+                    if shooter_flag != None:
+                        info = shooter_flag[1]
+                        ball = Ball(info[0], self.img_list[self.level.BALL], info[1])
+                        self.projectile_group.add(ball)
 
-                if (len(self.projectile_group.sprites()) > 0):
-                    self.projectile_group.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
-
-
+                for projectile in self.projectile_group:
+                    projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
+                    if projectile_flag != None:
+                        print(projectile_flag[0])
+                        if projectile_flag[0] != "Enemy":
+                            self.projectile_group.remove(projectile)
 
                 """
                 Update the inventory
@@ -184,7 +186,6 @@ class MainQuest:
                 if arrow_flag != None:
                     if arrow_flag[0] == "Enemy":
                         enemies = arrow_flag[1]
-                        print(enemies)
                         if len(enemies[0]) > 0:
                             for troll in enemies[0]:
                                 self.troll_group.remove(troll)
@@ -216,7 +217,6 @@ class MainQuest:
                     self.player.bomb = bomb
                     self.bomb_group.add(bomb)
                 elif player_flag[0] == "Arrow":
-                    print("SHOOOOT")
                     arrow = Arrow(self.player.rect.center, self.img_list[self.level.KINGARROW], self.player.direction)
                     self.player.arrow = arrow
                     self.arrow_group.add(arrow)
@@ -274,6 +274,7 @@ class MainQuest:
                 reclist += self.pickup_bomb_group.draw(self.screen)
                 reclist += self.bomb_group.draw(self.screen)
                 reclist += self.arrow_group.draw(self.screen)
+                reclist += self.bowandquiver_group.draw(self.screen)
 
 
                 pygame.display.update(reclist)
@@ -353,6 +354,7 @@ class MainQuest:
         self.pickup_bomb_group = pygame.sprite.RenderUpdates()
         self.bomb_group = pygame.sprite.RenderUpdates()
         self.arrow_group = pygame.sprite.RenderUpdates()
+        self.bowandquiver_group = pygame.sprite.RenderUpdates()
 
         """Go through all the level array"""
         for y in range(len(self.layout)):
@@ -471,7 +473,7 @@ class MainQuest:
                     else:
                         self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4)
 
-                    """Projectiles and Items"""
+                    """Items"""
                 elif self.layout[y][x]==self.level.PICKPOTION:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
@@ -482,6 +484,11 @@ class MainQuest:
                     self.crossable_group.add(ground)
                     bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
                     self.pickup_bomb_group.add(bomb)
+                elif self.layout[y][x]==self.level.BOWANDQUIVER:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
+                    self.crossable_group.add(ground)
+                    bowandquiver = Bomb(centerPoint, self.img_list[self.level.BOWANDQUIVER])
+                    self.bowandquiver_group.add(bowandquiver)
 
                     """Inventory"""
                 elif self.layout[y][x]==self.level.BLANK:

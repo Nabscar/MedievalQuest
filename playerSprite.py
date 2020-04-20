@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction, bombs = 3, potions = 0, health = 6):
+    def __init__ (self, centerPoint, images, coords, direction, bombs = 0, potions = 0, health = 6):
         """
         Initializes the special characteristics of the playable character
         """
@@ -73,7 +73,7 @@ class Player(basicSprite.multipleSprite):
         elif (key == K_i):
             self.drinkPotion()
 
-    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group):
+    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group, bowandquiver_group):
         """
         Called to update the player sprite's position and state
         """
@@ -178,7 +178,7 @@ class Player(basicSprite.multipleSprite):
             return ("Potion", lstPotions[0])
 
         lstBombs = pygame.sprite.spritecollide(self, bomb_group, False)
-        """IF we hit potion we add 3 bombs to our inventory (unless we hit max, in which case we stop at 9)
+        """IF we hit bomb we add 3 bombs to our inventory (unless we hit max, in which case we stop at 9)
         Also retunr flag so that the potion disappears from map"""
         if(len(lstBombs) > 0):
             if self.bombs < 6:
@@ -187,6 +187,11 @@ class Player(basicSprite.multipleSprite):
                 self.bombs = 9
             self.rect.move_ip(- self.xMove,-self.yMove)
             return ("Bomb", lstBombs[0])
+
+        BowAndQuiver = pygame.sprite.spritecollide(self, bowandquiver_group, False)
+        """if we hit the bow and quiver, we change images and unlock the arrow"""
+        if(len(BowAndQuiver) > 0):
+            self.quiver = 8
 
         self.xMove = 0
         self.yMove = 0
