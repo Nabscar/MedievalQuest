@@ -3,7 +3,7 @@
 This is a rundown of the Overall Flow Diagram of our game and how to intepret it.
 
 ## Overall Flow Diagram
-![Alt](Overall_Flow_Diagram.png "Overall Flow Diagram")
+![Alt](Overall_Flow_Diagram_1.png "Overall Flow Diagram")
 
 Here in the Overall Flow Diagram we can see all the imported groups that filter into our game.py file. This is the file that contains our main game class "MainQuest". As for the structure of this diagram, the 4 main imported groups seen are "Projectiles", "Backgrounds", "Sprites", and "Levels".
 
