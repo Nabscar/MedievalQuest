@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
 
 
 import pygame
@@ -85,6 +85,8 @@ class MainQuest:
             self.shooter_group.clear(self.screen,self.background)
             self.projectile_group.clear(self.screen, self.background)
             event = pygame.event.get()
+
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -278,7 +280,7 @@ class MainQuest:
 
                 pygame.display.update(reclist)
 
-                time,wait(0.01)
+                #time,wait(0.01)
 
     def LoadSprites(self, side):
         """
