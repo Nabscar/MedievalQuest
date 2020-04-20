@@ -241,7 +241,7 @@ class MainQuest:
                     if len(enemies[2]) > 0:
                         for bat in enemies[2]:
                             self.bat_group.remove(bat)
-                elif player_flag == "Passage":
+                elif player_flag[0] == "Passage":
                     self.current_level = player_flag[1]
                     """
                     Load all of our Sprites
