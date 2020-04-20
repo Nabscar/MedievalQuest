@@ -149,7 +149,7 @@ class Player(basicSprite.multipleSprite):
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if (len(lstPassages) > 0):
             """If we hit a passage, move player"""
-            return lstPassages[0].next_screen, lstPassages[0].side
+            return ("Passage", lstPassages[0].next_screen, lstPassages[0].side)
 
 
         lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
@@ -232,9 +232,7 @@ class Player(basicSprite.multipleSprite):
             return
         else:
             self.shooting = True
-        """
-        Here we create the arrow, still need to figure it out
-        """
+
 
     def placeBomb(self):
         """
@@ -244,9 +242,7 @@ class Player(basicSprite.multipleSprite):
             self.bombs -= 1
             self.placingBomb = True
 
-        """
-        Here we create the bomb, still need to figure it out
-        """
+
 
     def drinkPotion(self):
         """
