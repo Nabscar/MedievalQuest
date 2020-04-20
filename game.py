@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
 
 
 import pygame
@@ -96,7 +96,7 @@ class MainQuest:
                     print("GAME OVER")
                     sys.exit()
 
-                elif self.current_level = 13:
+                elif self.current_level == 13:
                     """
                     The player Won
                     Quit the Game

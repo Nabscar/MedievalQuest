@@ -111,11 +111,11 @@ class Player(basicSprite.multipleSprite):
             else:
                 self.rect.move_ip(-self.xMove,-self.yMove)
 
-        lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
-        if (len(lstProjectiles) > 0):
-            """If we are hit by a projectile, decrease life by one"""
-           self.rect.move_ip(-self.xMove,-self.yMove)
-           self.currentHealth -= 1
+        #lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
+        #if (len(lstProjectiles) > 0):
+        #    """If we are hit by a projectile, decrease life by one"""
+         #  self.rect.move_ip(-self.xMove,-self.yMove)
+          # self.currentHealth -= 1
 
         lstPotions = pygame.sprite.spritecollide(self, potion_group, False)
         """IF we hit potion we add 3 potions to our inventory (unless we hit max, in which case we stop at 9)
