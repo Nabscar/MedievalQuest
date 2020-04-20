@@ -15,7 +15,6 @@ class singleSprite(pygame.sprite.Sprite):
         """Move the rect into the correct position"""
         self.rect.center = centerPoint
 
-
 class multipleSprite(pygame.sprite.Sprite):
     """
     This class will be the initializer for the basic value of any sprite
@@ -52,20 +51,43 @@ class Bomb(singleSprite):
     """
     def __init__(self, centerPoint, images):
         singleSprite.__init__(self, centerPoint, images)
-        self.timer = 5
+        self.timer = 10
         self.gone = False
 
-    def update(self, ground_image):
+    def update(self, breakable_group, troll_group, shooter_group, bat_group):
         self.timer -= 1
         if self.timer == 0:
-            self.blow()
-            return True
+            enemies = self.blow(breakable_group, troll_group, shooter_group, bat_group)
+            return enemies
 
-    def blow(self):
+    def blow(self, breakable_group, troll_group, shooter_group, bat_group):
         self.gone = True
         """
         Go through the 8 adjoining squares, make sure that: if it hits an enemy, the enemy dies. If it hits a breakable wall, open the wall
         """
+        R = (64,0)
+        U = (0,64)
+        L = (-64,0)
+        D = (0, -64)
+        move = [R, U, L, L, D, D, R, R]
+        enemies = []
+        for i in range(0,7):
+            x = move[i]
+            self.rect.move_ip(x[0], x[1])
+            lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
+            if len(lstBreakable) > 0:
+                for wall in lstBreakable:
+                    wall.destroy()
+            step = []
+            lstTroll = pygame.sprite.spritecollide(self, troll_group, False)
+            step.append(lstTroll)
+            lstShooter = pygame.sprite.spritecollide(self, shooter_group, False)
+            step.append(lstShooter)
+            lstBat = pygame.sprite.spritecollide(self, bat_group, False)
+            step.append(lstBat)
+            enemies.append(step)
+
+        return enemies
 
 class Potion(singleSprite):
     """

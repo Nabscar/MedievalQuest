@@ -2,7 +2,7 @@ import os, sys
 import pygame
 from pygame.locals import *
 
-def load_image(name):
+def load_image(name, x = 64, y = 64):
     """Although horrible this nest of try-excepts goes through all the folders of Images until it finds the intended image"""
     fullname = os.path.join('Images', 'Background_Images')
     fullname = os.path.join(fullname, name)
@@ -49,5 +49,5 @@ def load_image(name):
 
     """Create and return the image"""
     image = image.convert()
-    image = pygame.transform.scale(image, (64, 64))
+    image = pygame.transform.scale(image, (x, y))
     return image

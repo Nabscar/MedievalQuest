@@ -9,61 +9,73 @@ class Projectile(pygame.sprite.Sprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player changes Screen
     """
-    def __init__ (self, centerPoint, images, direction, counter, damage = 1):
+    def __init__ (self,centerPoint, images, direction, counter = 7, damage = 1):
         """
         Initializes the special characteristics of the basic projectile
         """
         basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.counter = counter
-        self.direction = direction
+        self.direction = direction - 1
         self.done = False
         self.damage = damage
         self.dist = 64
+        """Current movement of projectile"""
+        self.xMove = 0
+        self.yMove = 0
 
 
-    def countdown(self, count = 1):
-        """
-        Decreases the counter by one
-        """
-        self.counter -= count
+        if self.direction==0:#down
+            self.yMove = self.dist
+        elif self.direction==1:#Left
+            self.xMove = -self.dist
+        elif self.direction==2:#right
+            self.xMove = -self.dist
+        elif self.direction==3:#up
+            self.yMove = -self.dist
 
+    def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group):
 
-    def update(self, block_group, breakable_group, character_group, projectile_group):
-        if self.direction==1:#down
-            yMove = self.dist
-        elif self.direction==2:#Left
-            xMove = -self.dist
-        elif self.direction==3:#right
-            xMove = -self.dist
-        elif self.direction==4:#up
-            yMove = -self.dist
+        flag = "done"
+        self.counter -= 1
 
-        self.rect.move_ip(xMove,yMove) #This is what actually moves the projectile
-        if (pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group)
-            or pygame.sprite.spritecollideany(self, character_group) or pygame.sprite.spritecollideany(self, passage_group)):
+        if self.counter == 0:
+            return(flag, "done")
+
+        self.rect.move_ip(self.xMove,self.yMove) #This is what actually moves the projectile
+        if (pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group)):
             """If we hit a block or a the player, its done, projectile should disappear"""
-            self.disappear()
+            return ("Wall", "done")
 
-        if (pygame.sprite.spritecollideany(self, projectile_group)):
-            """
-            If we hit a projectile, we want to have different effects depending on which projectiles
-            For now, we have decided that it is easier (as a start point) to just have it disappear
-            """
-            self.disappear()
-        countdown()
+        lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
+        if len(lstProjectiles) > 0:
+            return ("Projectile", lstProjectiles)
 
-    def disappear(self, ground_image):
-        """
-        This function establishes what happens when a projectile should disappear
-        this means it is gone and the image is set as a ground image
-        it is also removed from the projectile_group list
-        """
-        self.done = True
-        self.images = ground_image
+        lstPlayer = pygame.sprite.spritecollide(self, player_group, False)
+        if len(lstPlayer) > 0:
+            return ("Player", lstPlayer)
+
+
+        enemies = []
+        lstTroll = pygame.sprite.spritecollide(self, troll_group, False)
+        if len(lstTroll) > 0:
+            flag = "Enemy"
+        enemies.append(lstTroll)
+        lstShooter = pygame.sprite.spritecollide(self, shooter_group, False)
+        if len(lstShooter) > 0:
+            flag = "Enemy"
+        enemies.append(lstShooter)
+        lstBat = pygame.sprite.spritecollide(self, bat_group, False)
+        if len(lstBat) > 0:
+            flag = "Enemy"
+        enemies.append(lstBat)
+        if flag == "Enemy":
+            return(flag, enemies)
+
+        return None
 
 class Ball(Projectile):
 
-    def __init__ (self, centerPoint, images, direction, counter = 6, damage = 1):
+    def __init__ (self, centerPoint, images, direction, counter = 2     , damage = 1):
         """
         Initializes the special characteristics of the ball projectile
         """
@@ -72,7 +84,7 @@ class Ball(Projectile):
 
 class Javelin(Projectile):
 
-        def __init__ (self, centerPoint, images, direction, counter = 10, damage = 1):
+        def __init__ (self, centerPoint, images, direction, counter = 3, damage = 1):
             """
             Initializes the special characteristics of the javelin projectile
             """
@@ -86,14 +98,14 @@ class Javelin(Projectile):
 
 class Arrow(Projectile):
 
-        def __init__ (self, centerPoint, image, counter = 15, damage = 1):
+        def __init__ (self, centerPoint, images, direction, counter = 5, damage = 1):
             """
             Initializes the special characteristics of the arrow projectile
             """
-            Projectile.__init__(self, centerPoint, images, counter, direction)
+            Projectile.__init__(self, centerPoint, images, direction, counter)
             self.damage = damage
             self.image_order = ["Down", "Left", "Right", "Up"]
             """
             directions go in same order as image order
             """
-            self.image = self.images[self.direction - 1]
+            self.image = self.images[self.direction]

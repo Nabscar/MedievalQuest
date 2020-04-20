@@ -25,7 +25,11 @@ class Level:
         self.WATER = 'x'
         self.TREE = 'x'
         self.WALL = 'x'
-        self.BREAKABLE_WALL = 'x'
+        self.BREAKABLE_WALL_T = 'x'
+        self.BREAKABLE_WALL_R = 'x'
+        self.BREAKABLE_WALL_L = 'x'
+        self.BREAKABLE_WALL_B = 'x'
+        self.BREAKABLE_WALL_C = 'x'
         self.BROKEN_WALL = 'x'
         self.PASSAGE_B = 'x'
         self.PASSAGE_T = 'x'
@@ -95,7 +99,6 @@ class Level:
         """
         return [load_image('Bat_Down1.png'), load_image('Bat_Down2.png'), load_image('Bat_Left1.png'), load_image('Bat_Left2.png'),
                 load_image('Bat_Right1.png'), load_image('Bat_Right2.png'), load_image('Bat_Up1.png'), load_image('Bat_Up2.png')]
-
 
     def bossImages(self):
         """
@@ -182,3 +185,9 @@ class Level:
         quiver_player = []
         player = basic_player + quiver_player
         return player
+
+    def arrowImages(self):
+        """
+        Returns a list of arrow images
+        """
+        return[load_image('Arrow_Down.png'), load_image('Arrow_Left.png'), load_image('Arrow_Right.png'), load_image('Arrow_Up.png')]

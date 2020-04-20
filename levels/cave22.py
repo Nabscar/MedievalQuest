@@ -16,7 +16,7 @@ class cave22(levelBase.Level):
 
         self.CAVEGROUND = 0
         self.WALL = 1
-        self.BREAKABLE_WALL = 2
+        self.BREAKABLE_WALL_C = 2
         self.PICKBOMB = 3
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
@@ -28,6 +28,8 @@ class cave22(levelBase.Level):
         self.HEART1 = 11
         self.HEART2 = 12
         self.HEART3 = 13
+        self.KINGBOMB = 14
+        self.KINGARROW = 15
 
     def getLayoutCave(self):
         """
@@ -62,5 +64,7 @@ class cave22(levelBase.Level):
         nums = self.numberImages()
         potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+        kingbomb = load_image("CaveBomb.png")
+        kingarrow = self.arrowImages()
 
-        return [ground, wall, BreakableWall, bomb, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart]
+        return [ground, wall, BreakableWall, bomb, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]

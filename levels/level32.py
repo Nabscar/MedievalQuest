@@ -19,7 +19,7 @@ class level32(levelBase.Level):
         self.WATER = 2
         self.TREE = 3
         self.WALL = 4
-        self.BREAKABLE_WALL = 5
+        self.BREAKABLE_WALL_T = 5
         self.BAT_V = 6
         self.SHOOTER_H = 7
         self.TROLL_V = 8
@@ -36,6 +36,8 @@ class level32(levelBase.Level):
         self.HEART1 = 19
         self.HEART2 = 20
         self.HEART3 = 21
+        self.KINGBOMB = 22
+        self.KINGARROW = 23
 
     def getLayoutRight(self):
         """
@@ -109,5 +111,7 @@ class level32(levelBase.Level):
         nums = self.numberImages()
         potion = load_image("Blank_Potion_Health.png")
         heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+        kingbomb = load_image("Bomb.png")
+        kingarrow = self.arrowImages()
 
-        return [ground, grass, water, tree, wall, breakableWall, bat, shooter, troll, player, passage, passage, ball, javelin, passage, blank, bomb, nums, potion, nums, heart, heart, heart]
+        return [ground, grass, water, tree, wall, breakableWall, bat, shooter, troll, player, passage, passage, ball, javelin, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]

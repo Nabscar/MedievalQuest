@@ -26,15 +26,15 @@ class BreakableBackground(basicSprite.multipleSprite):
     This class will initialize the Passages. these are specific backgrounds that take you to the next screen
     we consider them sprites so that we can easily change them when the player chagnes Screen
     """
-    def __init__ (self, centerPoint, images, next_screen, broken = False):
+    def __init__ (self, centerPoint, images, next_screen, side, broken = False):
         """
         Initializes breakableBackground
         """
         basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.broken = broken
         self.image_order = ["Unbroken", "Broken"]
-        #self.image = self.images[0]
         self.next_screen = next_screen
+        self.side = side
 
     def destroy(self):
         """
