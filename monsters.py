@@ -60,20 +60,20 @@ class Troll(basicSprite.multipleSprite):
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
         if character_coords[0] == self.coords[0]:#they are in th esame vertical
             diff = character_coords[1] - self.coords[1]
-            if diff > 0 and  self.counter == 0:#right
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 2))
-            elif diff < 0 and  self.counter == 0:#left
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 1))
-        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
-            diff = character_coords[0] - self.coords[0]
-            if diff < 0 and  self.counter == 0:#down
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 3))
-            elif diff > 0 and  self.counter == 0:#up
+            if diff > 0 and  self.counter == 0:#down
                 self.counter = 5
                 return ("Shoot", (self.rect.center, 0))
+            elif diff < 0 and  self.counter == 0:#up
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 3))
+        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
+            diff = character_coords[0] - self.coords[0]
+            if diff < 0 and  self.counter == 0:#left
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 1))
+            elif diff > 0 and  self.counter == 0:#right
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 2))
 
         if self.counter == 0:
             if self.direction==1:#down
@@ -288,22 +288,24 @@ class Shooter(basicSprite.multipleSprite):
         xMove,yMove = 0,0
 
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        print(character_coords)
+        print(self.coords)
         if character_coords[0] == self.coords[0]:#they are in th esame vertical
             diff = character_coords[1] - self.coords[1]
-            if diff > 0 and  self.counter == 0:#right
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 2))
-            elif diff < 0 and  self.counter == 0:#left
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 1))
-        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
-            diff = character_coords[0] - self.coords[0]
-            if diff < 0 and  self.counter == 0:#down
-                self.counter = 5
-                return ("Shoot", (self.rect.center, 3))
-            elif diff > 0 and  self.counter == 0:#up
+            if diff > 0 and  self.counter == 0:#down
                 self.counter = 5
                 return ("Shoot", (self.rect.center, 0))
+            elif diff < 0 and  self.counter == 0:#up
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 3))
+        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
+            diff = character_coords[0] - self.coords[0]
+            if diff < 0 and  self.counter == 0:#left
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 1))
+            elif diff > 0 and  self.counter == 0:#right
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 2))
 
         if self.counter == 0:
             if self.direction==1:#down

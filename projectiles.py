@@ -15,22 +15,21 @@ class Projectile(pygame.sprite.Sprite):
         """
         basicSprite.multipleSprite.__init__(self, centerPoint, images)
         self.counter = counter
-        self.direction = direction - 1
+        self.direction = direction
         self.done = False
         self.damage = damage
         self.dist = 64
         """Current movement of projectile"""
         self.xMove = 0
         self.yMove = 0
-
-        print(self.direction)
-        if self.direction==1:#down
+        print("\t" + str(self.direction))
+        if self.direction==0:#down
             self.yMove = self.dist
-        elif self.direction==2:#Left
+        elif self.direction==1:#Left
             self.xMove = -self.dist
-        elif self.direction==3:#right
-            self.xMove = -self.dist
-        elif self.direction==4:#up
+        elif self.direction==2:#right
+            self.xMove = self.dist
+        elif self.direction==3:#up
             self.yMove = -self.dist
 
     def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group):
@@ -39,7 +38,12 @@ class Projectile(pygame.sprite.Sprite):
         if self.counter == 0:
             return(flag, "done")
 
+        lstPlayer = pygame.sprite.spritecollide(self, player_group, False)
+        if len(lstPlayer) > 0:
+            return ("Player", lstPlayer)
+
         self.rect.move_ip(self.xMove,self.yMove) #This is what actually moves the projectile
+
         if (pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group)):
             """If we hit a block or a the player, its done, projectile should disappear"""
             return ("Wall", "done")
@@ -47,11 +51,6 @@ class Projectile(pygame.sprite.Sprite):
         lstProjectiles = pygame.sprite.spritecollide(self, projectile_group, False)
         if len(lstProjectiles) > self.projectile:
             return ("Projectile", lstProjectiles)
-
-        lstPlayer = pygame.sprite.spritecollide(self, player_group, False)
-        if len(lstPlayer) > 0:
-            return ("Player", lstPlayer)
-
 
         enemies = []
         lstTroll = pygame.sprite.spritecollide(self, troll_group, False)
@@ -68,6 +67,7 @@ class Projectile(pygame.sprite.Sprite):
         enemies.append(lstBat)
         if flag == "Enemy":
             return(flag, enemies)
+
 
         return None
 
@@ -93,7 +93,7 @@ class Javelin(Projectile):
             """
             directions go in same order as image order
             """
-            self.image = self.images[self.direction - 1]
+            self.image = self.images[self.direction]
             self.projectile = 1
 
 class Arrow(Projectile):

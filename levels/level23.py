@@ -17,7 +17,7 @@ class level23(levelBase.Level):
         self.GROUND = 0
         self.TREE = 1
         self.WALL = 2
-        self.BOMB = 3
+        self.PICKBOMB = 3
         self.PLAYER_OW = 4
         self.PASSAGE_B = 5
         self.BLANK = 6
