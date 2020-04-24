@@ -1,6 +1,6 @@
 # Medieval Quest
 
-This is a project thta uses PyGame to create a Medival Quest game in the style of the Original Legend of Zelda.
+This is a project that uses PyGame to create a Medival Quest game in the style of the Original Legend of Zelda.
 
 ## Description
 

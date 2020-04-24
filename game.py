@@ -83,9 +83,16 @@ class MainQuest:
             self.bat_group.clear(self.screen,self.background)
             self.shooter_group.clear(self.screen,self.background)
             self.projectile_group.clear(self.screen, self.background)
+<<<<<<< HEAD
 
             events = pygame.event.get()
             for event in events:
+=======
+            
+            events = pygame.event.get()
+            for event in events:
+
+>>>>>>> 13246c016a7eb44bfe55b48d61b6703c100e3994
                 if event.type == pygame.QUIT:
                     sys.exit()
 
@@ -288,6 +295,12 @@ class MainQuest:
 
                 pygame.display.update(reclist)
 
+<<<<<<< HEAD
+=======
+
+                #pygame.time.wait(120)
+
+>>>>>>> 13246c016a7eb44bfe55b48d61b6703c100e3994
     def LoadSprites(self, side):
         """
         Load all of the sprites that we need
