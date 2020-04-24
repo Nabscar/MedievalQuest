@@ -17,7 +17,7 @@ class cave31(levelBase.Level):
 
         self.CAVEGROUND = 0
         self.WALL = 1
-        self.BREAKABLE_WALL = 2
+        self.BREAKABLE_WALL_F = 2
         self.PLAYER_C = 4
         self.PASSAGE_C = 5
         self.PICKBOMB = 6

@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction, bombs = 0, potions = 0, health = 6):
+    def __init__ (self, centerPoint, images, coords, direction, bombs = 1, potions = 0, health = 6):
         """
         Initializes the special characteristics of the playable character
         """
@@ -156,7 +156,7 @@ class Player(basicSprite.multipleSprite):
         if (len(lstBreakable) > 0):
             """We hit a breakable wall, if it is solid, treat as wall, if it is broken, treat as passage"""
             if lstBreakable[0].broken:
-                return lstBreakable[0].next_screen, lstBreakable[0].side
+                return ("Passage", lstBreakable[0].next_screen, lstBreakable[0].side)
             else:
                 self.rect.move_ip(-self.xMove,-self.yMove)
 

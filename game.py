@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append('/home/oscardegar/Documents/SoftDes/MedievalQuest/levels')
+sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
 
 
 import pygame
@@ -83,15 +83,9 @@ class MainQuest:
             self.bat_group.clear(self.screen,self.background)
             self.shooter_group.clear(self.screen,self.background)
             self.projectile_group.clear(self.screen, self.background)
-<<<<<<< HEAD
-            event = pygame.event.get()
 
-
-            for event in pygame.event.get():
-=======
             events = pygame.event.get()
             for event in events:
->>>>>>> 2c29dce0ef6abe2ac69c0794b368d895ba05e2e7
                 if event.type == pygame.QUIT:
                     sys.exit()
 
@@ -108,6 +102,7 @@ class MainQuest:
                     Quit the Game
                     """
                     print("You Have reached the Castle! You Won!")
+                    pygame.time.wait(10000)
                     sys.exit()
 
                 elif event.type == KEYDOWN:
@@ -293,12 +288,6 @@ class MainQuest:
 
                 pygame.display.update(reclist)
 
-<<<<<<< HEAD
-                #time,wait(0.01)
-=======
-                #pygame.time.wait(120)
->>>>>>> 2c29dce0ef6abe2ac69c0794b368d895ba05e2e7
-
     def LoadSprites(self, side):
         """
         Load all of the sprites that we need
@@ -376,6 +365,8 @@ class MainQuest:
         self.arrow_group = pygame.sprite.RenderUpdates()#arrows player shoots
         self.bowandquiver_group = pygame.sprite.RenderUpdates()#bow and quiver player can pick up
 
+        print(self.current_level)
+
         """Go through all the level array"""
         for y in range(len(self.layout)):
             for x in range(len(self.layout[y])):
@@ -424,6 +415,10 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.BREAKABLE_WALL_C:
                     breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_C], (self.current_level * 10 + 1), "C", False) #create breakable
                     self.breakable_group.add(breakableWall)
+                elif self.layout[y][x]==self.level.BREAKABLE_WALL_F:
+                    breakableWall = BreakableBackground(centerPoint, self.img_list[self.level.BREAKABLE_WALL_F], (13), "C", False) #create breakable
+                    self.breakable_group.add(breakableWall)
+
 
                     """Passages"""
                 elif self.layout[y][x]==self.level.PASSAGE_T:
@@ -536,8 +531,115 @@ class MainQuest:
                     heart = Heart(centerPoint, self.img_list[self.level.HEART3])
                     self.heart3_group.add(heart)
 
-                """
 
+                    """Castle"""
+                elif self.layout[y][x]==self.level.LEFTTOWER:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTTOWER])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.CASTLEGRASS:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.CASTLEGRASS])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTFLAGPOLE:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTFLAGPOLE])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTFLAG:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTFLAG])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTFLAG:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTFLAG])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTFLAGPOLE:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTFLAGPOLE])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTTOWER:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTTOWER])
+                    self.block_group.add(castlepart)
+
+                elif self.layout[y][x]==self.level.LEFTWINDOWLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTWINDOWRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWRIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTBANNERTOPLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERTOPLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTBANNERTOPRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERTOPRIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTTOPWINDOW:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTTOPWINDOW])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTTOPWINDOW:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTTOPWINDOW])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERTOPLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERTOPLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERTOPRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERTOPRIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTWINDOWLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTWINDOWRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWRIGHT])
+                    self.block_group.add(castlepart)
+
+                elif self.layout[y][x]==self.level.LEFTWALL:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWALL])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTFULLWINDOW:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTFULLWINDOW])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTBANNERMIDDLELEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERMIDDLELEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTBANNERMIDDLERIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERMIDDLERIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTWINDOWANDDOOR:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWANDDOOR])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTWINDOWANDDOOR:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWANDDOOR])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERMIDDLELEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERMIDDLELEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERMIDDLERIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERMIDDLERIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTFULLWINDOW:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTFULLWINDOW])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTWALL:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWALL])
+                    self.block_group.add(castlepart)
+
+                elif self.layout[y][x]==self.level.LEFTBANNERBOTTOMLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERBOTTOMLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTBANNERBOTTOMRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERBOTTOMRIGHT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.LEFTDOOR:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTDOOR])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTDOOR:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTDOOR])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERBOTTOMLEFT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERBOTTOMLEFT])
+                    self.block_group.add(castlepart)
+                elif self.layout[y][x]==self.level.RIGHTBANNERBOTTOMRIGHT:
+                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERBOTTOMRIGHT])
+                    self.block_group.add(castlepart)
+
+
+
+
+                    """
                     NOt sure how to do boss since he is more than one block big
 
                 elif  self.layout[y][x]==self.level.BOSS:

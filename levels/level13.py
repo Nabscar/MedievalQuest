@@ -31,13 +31,52 @@ class level13(levelBase.Level):
         self.KINGBOMB = 14
         self.KINGARROW = 15
 
+        self.LEFTTOWER = 16
+        self.CASTLEGRASS = 17
+        self.LEFTFLAGPOLE = 18
+        self.LEFTFLAG = 19
+        self.RIGHTFLAG = 20
+        self.RIGHTFLAGPOLE = 21
+        self.RIGHTTOWER = 22
+
+        self.LEFTWINDOWLEFT = 23
+        self.LEFTWINDOWRIGHT = 24
+        self.LEFTBANNERTOPLEFT = 25
+        self.LEFTBANNERTOPRIGHT = 26
+        self.LEFTTOPWINDOW = 27
+        self.RIGHTTOPWINDOW = 28
+        self.RIGHTBANNERTOPLEFT = 29
+        self.RIGHTBANNERTOPRIGHT = 30
+        self.RIGHTWINDOWLEFT = 31
+        self.RIGHTWINDOWRIGHT = 32
+
+        self.LEFTWALL = 33
+        self.LEFTFULLWINDOW = 34
+        self.LEFTBANNERMIDDLELEFT = 35
+        self.LEFTBANNERMIDDLERIGHT = 36
+        self.LEFTWINDOWANDDOOR = 37
+        self.RIGHTWINDOWANDDOOR = 38
+        self.RIGHTBANNERMIDDLELEFT = 39
+        self.RIGHTBANNERMIDDLERIGHT = 40
+        self.RIGHTFULLWINDOW = 41
+        self.RIGHTWALL = 42
+
+        self.LEFTBANNERBOTTOMLEFT = 43
+        self.LEFTBANNERBOTTOMRIGHT = 44
+        self.LEFTDOOR = 45
+        self.RIGHTDOOR = 46
+        self.RIGHTBANNERBOTTOMLEFT = 47
+        self.RIGHTBANNERBOTTOMRIGHT = 48
+
+
     def getLayoutCave(self):
         """
         Matrix which would use the previosuly determined characters to show what the level will be
         """
-        return [[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
-                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
-                [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
+        return [[16, 16, 17, 18, 19, 17, 17, 20, 21, 17, 22, 22],\
+                [23, 24, 16, 25, 26, 27, 28, 29, 30, 22, 31, 32],\
+                [33, 33, 34, 35, 36 ,37, 38, 39, 40, 41, 42, 42],\
+                [33, 33, 33, 43, 44, 45, 46, 47, 48, 42, 42, 42],\
                 [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
@@ -59,7 +98,6 @@ class level13(levelBase.Level):
         cave = load_image('CaveEntrance.png')
         boss = self.bossImages()
         player = self.kingOWImages()
-        passage = load_image('OW_Ground.png')
         blank = load_image("Blank.png")
         bomb = load_image("BlankBomb.png")
         nums = self.numberImages()
@@ -68,4 +106,15 @@ class level13(levelBase.Level):
         kingbomb = load_image("Bomb.png")
         kingarrow = self.arrowImages()
 
-        return [ground, tree, wall, cave, boss, player, passage, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
+        castle = []
+
+        castle = [load_image('Left_Tower.png'), load_image('Castle_Grass.png'), load_image('Left_Flag_Pole.png'), load_image('Left_Flag.png'), load_image('Right_Flag.png'), load_image('Right_Flag_Pole.png'), load_image('Right_Tower.png'),
+                  load_image('Left_Window_Left.png'), load_image('Left_Window_Right.png'), load_image('Left_Top_Banner_Left.png'), load_image('Left_Top_Banner_Right.png'), load_image('Left_Top_Window.png'), load_image('Right_Top_Window.png'), load_image('Right_Top_Banner_Left.png'), load_image('Right_Top_Banner_Right.png'), load_image('Right_Window_Left.png'), load_image('Right_Window_Right.png'),
+                  load_image('Left_Castle_Wall.png'), load_image('Left_Full_Window.png'), load_image('Left_Middle_Banner_Left.png'), load_image('Left_Middle_Banner_Right.png'), load_image('Left_Window_and_Door.png'), load_image('Right_Window_and_Door.png'), load_image('Right_Middle_Banner_Left.png'), load_image('Right_Middle_Banner_Right.png'), load_image('Right_Full_Window.png'), load_image('Right_Castle_Wall.png'),
+                  load_image('Left_Bottom_Banner_Left.png'), load_image('Left_Bottom_Banner_Right.png'), load_image('Left_Door.png'), load_image('Right_Door.png'), load_image('Right_Bottom_Banner_Left.png'), load_image('Right_Bottom_Banner_Right.png')]
+
+        lt = [ground, tree, wall, cave, boss, player, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
+        lt += castle
+        print(len(castle))
+        print(len(lt))
+        return lt

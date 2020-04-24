@@ -11,6 +11,7 @@ class singleSprite(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         """Set the image and the rect"""
         self.image = image
+        print(image)
         self.rect = image.get_rect()
         """Move the rect into the correct position"""
         self.rect.center = centerPoint

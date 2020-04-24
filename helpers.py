@@ -39,7 +39,7 @@ def load_image(name, x = 64, y = 64):
                             try:
                                 image = pygame.image.load(fullname)
                             except pygame.error:
-                                fullname = os.path.join('Images', 'Boss_Images')
+                                fullname = os.path.join('Images', 'Castle_Images')
                                 fullname = os.path.join(fullname, name)
                                 try:
                                     image = pygame.image.load(fullname)
