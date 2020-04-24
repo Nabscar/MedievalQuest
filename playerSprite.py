@@ -108,6 +108,7 @@ class Player(basicSprite.multipleSprite):
         if pygame.sprite.spritecollideany(self,block_group):
             """If we hit a block, stop movement"""
             self.rect.move_ip(-self.xMove,-self.yMove)
+
         """Collision with enemies is taken care of in the updates of the enemy"""
         lstTrolls = pygame.sprite.spritecollide(self, troll_group, False)
         enemies = []

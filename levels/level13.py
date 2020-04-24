@@ -78,8 +78,8 @@ class level13(levelBase.Level):
                 [33, 33, 34, 35, 36 ,37, 38, 39, 40, 41, 42, 42],\
                 [33, 33, 33, 43, 44, 45, 46, 47, 48, 42, 42, 42],\
                 [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
-                [1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
+                [1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [1, 3, 5, 0, 0, 0, 0, 0 ,0, 0, 0, 1],\
@@ -115,6 +115,4 @@ class level13(levelBase.Level):
 
         lt = [ground, tree, wall, cave, boss, player, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
         lt += castle
-        print(len(castle))
-        print(len(lt))
         return lt
