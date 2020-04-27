@@ -72,6 +72,7 @@ class Bomb(singleSprite):
         D = (0, -64)
         move = [R, U, L, L, D, D, R, R]
         enemies = []
+        boss = 0
         for i in range(0,7):
             x = move[i]
             self.rect.move_ip(x[0], x[1])
@@ -88,7 +89,14 @@ class Bomb(singleSprite):
             step.append(lstBat)
             enemies.append(step)
 
-        return enemies
+            boss = pygame.sprite.spritecollide(self, boss_group, False)
+            if len(boss) > 0:
+                boss = 1
+
+        if boss == 0:
+            return ("Enemy", enemies)
+        else:
+            return ("Boss", boss)
 
 class Potion(singleSprite):
     """

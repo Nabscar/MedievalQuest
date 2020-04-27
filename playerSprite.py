@@ -73,7 +73,7 @@ class Player(basicSprite.multipleSprite):
         elif (key == K_i):
             self.drinkPotion()
 
-    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group, bowandquiver_group):
+    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group, bowandquiver_group, boss_group):
         """
         Called to update the player sprite's position and state
         """
@@ -135,6 +135,14 @@ class Player(basicSprite.multipleSprite):
             enemies.append(self.EnemyCollide(lstBats))
         else:
             enemies.append([])
+        Boss = pygame.sprite.spritecollide(self, boss_group, False)
+        if(len(Boss) > 0):
+            """
+            We hit an Enemy!
+            """
+            boss_hit.append(self.EnemyCollide(Boss))
+        else:
+            boss_hit.append([])
         """
         This moves the player back if he Attacked
         """
@@ -146,6 +154,11 @@ class Player(basicSprite.multipleSprite):
             self.xMove = 0
             self.yMove = 0
             return ("Attacked", enemies)
+
+        if len(boss_hit) > 0 and self.attacking != 0 :
+            self.xMove = 0
+            self.yMove = 0
+            return ("BossHit", boss_hit)
 
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if (len(lstPassages) > 0):
