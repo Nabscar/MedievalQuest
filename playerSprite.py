@@ -73,7 +73,7 @@ class Player(basicSprite.multipleSprite):
         elif (key == K_i):
             self.drinkPotion()
 
-    def update(self, block_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group, bowandquiver_group, boss_group):
+    def update(self, block_group, door_group, passage_group, breakable_group, troll_group, shooter_group, bat_group, projectile_group, potion_group, bomb_group, bowandquiver_group, boss_group):
         """
         Called to update the player sprite's position and state
         """
@@ -105,7 +105,7 @@ class Player(basicSprite.multipleSprite):
 
         self.rect.move_ip(self.xMove,self.yMove)
 
-        if pygame.sprite.spritecollideany(self,block_group):
+        if pygame.sprite.spritecollideany(self,block_group) or pygame.sprite.spritecollideany(self, door_group):
             """If we hit a block, stop movement"""
             self.rect.move_ip(-self.xMove,-self.yMove)
 

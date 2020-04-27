@@ -119,6 +119,11 @@ class MainQuest:
                     Quit the Game
                     """
                     print("You Have reached the Castle! You Won!")
+                    for door in self.door_group:
+                        door.image = door.images[1]
+
+                    self.boss_group.remove(self.boss)
+                    self.Draw()
                     pygame.time.wait(10000)
                     sys.exit()
 
@@ -141,35 +146,8 @@ class MainQuest:
                 Update the player sprite and all other sprites
                 """
                 self.Update()
+                self.Draw()
 
-                """Do the Drawing"""
-                textpos = 0
-                self.screen.blit(self.background, (0, 0))
-
-                reclist = self.block_group.draw(self.screen)
-                reclist += self.passage_group.draw(self.screen)
-                reclist += self.crossable_group.draw(self.screen)
-                reclist += self.breakable_group.draw(self.screen)
-                reclist += self.troll_group.draw(self.screen)
-                reclist += self.bat_group.draw(self.screen)
-                reclist += self.shooter_group.draw(self.screen)
-                reclist += self.projectile_group.draw(self.screen)
-                reclist += self.player_group.draw(self.screen)
-                reclist += self.inventory_group.draw(self.screen)
-                reclist += self.bomb_number.draw(self.screen)
-                reclist += self.potion_number.draw(self.screen)
-                reclist += self.heart1_group.draw(self.screen)
-                reclist += self.heart2_group.draw(self.screen)
-                reclist += self.heart3_group.draw(self.screen)
-                reclist += self.potion_group.draw(self.screen)
-                reclist += self.pickup_bomb_group.draw(self.screen)
-                reclist += self.bomb_group.draw(self.screen)
-                reclist += self.arrow_group.draw(self.screen)
-                reclist += self.bowandquiver_group.draw(self.screen)
-                reclist += self.boss_group.draw(self.screen)
-
-
-                pygame.display.update(reclist)
 
     def LoadSprites(self, side):
         """
@@ -249,6 +227,7 @@ class MainQuest:
         self.bowandquiver_group = pygame.sprite.RenderUpdates()#bow and quiver player can pick up
         self.player_group = pygame.sprite.RenderUpdates()#player
         self.boss_group = pygame.sprite.RenderUpdates()#Boss
+        self.door_group = pygame.sprite.RenderUpdates()
 
 
         """Go through all the level array"""
@@ -490,11 +469,11 @@ class MainQuest:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERMIDDLERIGHT])
                     self.block_group.add(castlepart)
                 elif self.layout[y][x]==self.level.LEFTWINDOWANDDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWANDDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWANDDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTWINDOWANDDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWANDDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWANDDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTBANNERMIDDLELEFT:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERMIDDLELEFT])
                     self.block_group.add(castlepart)
@@ -515,11 +494,11 @@ class MainQuest:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERBOTTOMRIGHT])
                     self.block_group.add(castlepart)
                 elif self.layout[y][x]==self.level.LEFTDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.LEFTDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.RIGHTDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTBANNERBOTTOMLEFT:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERBOTTOMLEFT])
                     self.block_group.add(castlepart)
@@ -563,7 +542,7 @@ class MainQuest:
             self.boss.update(self.block_group, self.passage_group)
 
         """Player update that returns flags"""
-        player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group, self.boss_group)
+        player_flag = self.player.update(self.block_group, self.door_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group, self.boss_group)
 
         """If player has put a bomb, then update it, it may create a flag"""
         if self.player.bomb != None:
@@ -683,6 +662,36 @@ class MainQuest:
 
             pygame.display.flip()
 
+    def Draw(self):
+        """Do the Drawing"""
+        textpos = 0
+        self.screen.blit(self.background, (0, 0))
+
+        reclist = self.block_group.draw(self.screen)
+        reclist += self.passage_group.draw(self.screen)
+        reclist += self.crossable_group.draw(self.screen)
+        reclist += self.breakable_group.draw(self.screen)
+        reclist += self.troll_group.draw(self.screen)
+        reclist += self.bat_group.draw(self.screen)
+        reclist += self.shooter_group.draw(self.screen)
+        reclist += self.projectile_group.draw(self.screen)
+        reclist += self.player_group.draw(self.screen)
+        reclist += self.inventory_group.draw(self.screen)
+        reclist += self.bomb_number.draw(self.screen)
+        reclist += self.potion_number.draw(self.screen)
+        reclist += self.heart1_group.draw(self.screen)
+        reclist += self.heart2_group.draw(self.screen)
+        reclist += self.heart3_group.draw(self.screen)
+        reclist += self.potion_group.draw(self.screen)
+        reclist += self.pickup_bomb_group.draw(self.screen)
+        reclist += self.bomb_group.draw(self.screen)
+        reclist += self.arrow_group.draw(self.screen)
+        reclist += self.bowandquiver_group.draw(self.screen)
+        reclist += self.boss_group.draw(self.screen)
+        reclist += self.door_group.draw(self.screen)
+
+
+        pygame.display.update(reclist)
 
 if __name__ == "__main__":
     MainWindow = MainQuest()
