@@ -66,11 +66,12 @@ class Boss(pygame.sprite.Sprite):
                 self.attack = random.randint(0, 3)
             else:
                 self.attack = 1
-                self.rect.move_ip(self.xMove,self.yMove) #This is 2what actually moves the character
-                if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, passage_group):
-                    """If we hit a block, don’t move – reverse the movement"""
-                    self.rect.move_ip(-self.xMove,-self.yMove)
-                    self.xMove = -self.xMove
+                if random.randint(1,2) == 1:
+                    self.rect.move_ip(self.xMove,self.yMove) #This is 2what actually moves the character
+                    if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, passage_group):
+                        """If we hit a block, don’t move – reverse the movement"""
+                        self.rect.move_ip(-self.xMove,-self.yMove)
+                        self.xMove = -self.xMove
 
 
         """Update level based on current health"""
