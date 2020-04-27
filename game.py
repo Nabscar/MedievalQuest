@@ -356,6 +356,8 @@ class MainQuest:
                     shooter = Shooter(centerPoint, self.img_list[self.level.SHOOTER_H], (x, y), 2)#create shooter
                     self.shooter_group.add(shooter)
                 elif self.layout[y][x]==self.level.BOSS:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
+                    self.crossable_group.add(ground)
                     boss = Boss(centerPoint, self.img_list[self.level.BOSS], (x, y), 0)
                     self.boss = boss
                     self.boss_group.add(boss)
@@ -558,7 +560,7 @@ class MainQuest:
 
         """Update the boss"""
         if self.boss != None:
-            self.boss.update(self.block_group, self.passage_group, self.player_group)
+            self.boss.update(self.block_group, self.passage_group)
 
         """Player update that returns flags"""
         player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group, self.boss_group)
@@ -631,6 +633,7 @@ class MainQuest:
                 self.arrow_group.empty()
 
         """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
+
         if player_flag == None:
             holder = 1
         elif player_flag[0] == "Potion":
@@ -657,7 +660,10 @@ class MainQuest:
                 for bat in enemies[2]:
                     self.bat_group.remove(bat)
         elif player_flag[0] == "BossHit":
-            self.boss.health -= 1
+            if self.boss.attack == 1:
+                self.boss.health -= 1
+            else:
+                self.player.currentHealth -= 1
         elif player_flag[0] == "Passage":
             self.current_level = player_flag[1]
             """

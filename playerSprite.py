@@ -109,56 +109,48 @@ class Player(basicSprite.multipleSprite):
             """If we hit a block, stop movement"""
             self.rect.move_ip(-self.xMove,-self.yMove)
 
-        """Collision with enemies is taken care of in the updates of the enemy"""
+
         lstTrolls = pygame.sprite.spritecollide(self, troll_group, False)
         enemies = []
         if(len(lstTrolls) > 0):
-            """
-            We hit an Enemy!
-            """
             enemies.append(self.EnemyCollide(lstTrolls))
         else:
             enemies.append([])
+
         lstShooters = pygame.sprite.spritecollide(self, shooter_group, False)
         if(len(lstShooters) > 0):
-            """
-            We hit an Enemy!
-            """
             enemies.append(self.EnemyCollide(lstShooters))
         else:
             enemies.append([])
+
         lstBats = pygame.sprite.spritecollide(self, bat_group, False)
         if(len(lstBats) > 0):
-            """
-            We hit an Enemy!
-            """
             enemies.append(self.EnemyCollide(lstBats))
         else:
             enemies.append([])
+
         Boss = pygame.sprite.spritecollide(self, boss_group, False)
+        boss_hit = []
         if(len(Boss) > 0):
-            """
-            We hit an Enemy!
-            """
             boss_hit.append(self.EnemyCollide(Boss))
-        else:
-            boss_hit.append([])
         """
         This moves the player back if he Attacked
         """
-
         if self.attacking != 0:
             self.rect.move_ip(-self.xMove,-self.yMove)
-
-        if len(enemies) > 0 and self.attacking != 0 :
-            self.xMove = 0
-            self.yMove = 0
-            return ("Attacked", enemies)
 
         if len(boss_hit) > 0 and self.attacking != 0 :
             self.xMove = 0
             self.yMove = 0
+            self.attacking = 0
             return ("BossHit", boss_hit)
+
+        if len(enemies) > 0 and self.attacking != 0 :
+            self.xMove = 0
+            self.yMove = 0
+            self.attacking = 0
+            return ("Attacked", enemies)
+
 
         lstPassages = pygame.sprite.spritecollide(self, passage_group, False)
         if (len(lstPassages) > 0):
@@ -188,7 +180,7 @@ class Player(basicSprite.multipleSprite):
                 self.potions += 3
             else:
                 self.potions = 9
-            self.rect.move_ip(- self.xMove,-self.yMove)
+            self.rect.move_ip(-self.xMove,-self.yMove)
             return ("Potion", lstPotions[0])
 
         lstBombs = pygame.sprite.spritecollide(self, bomb_group, False)
@@ -199,7 +191,7 @@ class Player(basicSprite.multipleSprite):
                 self.bombs += 3
             else:
                 self.bombs = 9
-            self.rect.move_ip(- self.xMove,-self.yMove)
+            self.rect.move_ip(-self.xMove,-self.yMove)
             return ("Bomb", lstBombs[0])
 
         BowAndQuiver = pygame.sprite.spritecollide(self, bowandquiver_group, False)
@@ -216,7 +208,6 @@ class Player(basicSprite.multipleSprite):
         This is the function when the player collides into an Enemy
         lstEnemiesHit is a list of Enemies the player has hit
         """
-
         if (len(lstEnemiesHit)<=0):
             """If the list is empty, just get out of here"""
             return

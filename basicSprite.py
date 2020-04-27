@@ -11,7 +11,6 @@ class singleSprite(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         """Set the image and the rect"""
         self.image = image
-        print(image)
         self.rect = image.get_rect()
         """Move the rect into the correct position"""
         self.rect.center = centerPoint
@@ -55,13 +54,13 @@ class Bomb(singleSprite):
         self.timer = 10
         self.gone = False
 
-    def update(self, breakable_group, troll_group, shooter_group, bat_group):
+    def update(self, breakable_group, troll_group, shooter_group, bat_group, boss_group):
         self.timer -= 1
         if self.timer == 0:
-            enemies = self.blow(breakable_group, troll_group, shooter_group, bat_group)
+            enemies = self.blow(breakable_group, troll_group, shooter_group, bat_group, boss_group)
             return enemies
 
-    def blow(self, breakable_group, troll_group, shooter_group, bat_group):
+    def blow(self, breakable_group, troll_group, shooter_group, bat_group, boss_group):
         self.gone = True
         """
         Go through the 8 adjoining squares, make sure that: if it hits an enemy, the enemy dies. If it hits a breakable wall, open the wall
@@ -73,13 +72,16 @@ class Bomb(singleSprite):
         move = [R, U, L, L, D, D, R, R]
         enemies = []
         boss = 0
+
         for i in range(0,7):
             x = move[i]
             self.rect.move_ip(x[0], x[1])
+
             lstBreakable = pygame.sprite.spritecollide(self, breakable_group, False)
             if len(lstBreakable) > 0:
                 for wall in lstBreakable:
                     wall.destroy()
+
             step = []
             lstTroll = pygame.sprite.spritecollide(self, troll_group, False)
             step.append(lstTroll)
@@ -87,16 +89,19 @@ class Bomb(singleSprite):
             step.append(lstShooter)
             lstBat = pygame.sprite.spritecollide(self, bat_group, False)
             step.append(lstBat)
+            if len(step) > 0:
+                flag = "Enemy"
             enemies.append(step)
 
             boss = pygame.sprite.spritecollide(self, boss_group, False)
             if len(boss) > 0:
                 boss = 1
+                flag = "Boss"
 
-        if boss == 0:
-            return ("Enemy", enemies)
-        else:
-            return ("Boss", boss)
+        if flag == "Enemy":
+            return (flag, enemies)
+        elif flag == "Boss":
+            return (flag, boss)
 
 class Potion(singleSprite):
     """

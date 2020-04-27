@@ -47,6 +47,70 @@ class Troll(basicSprite.multipleSprite):
 
         self.step = 1
 
+    def update(self, block_group, character_coords, breakable_group, passage_group):
+        """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        """The idea of returning the javelin is the following: if there is no throw, then it will return None, else, it will returna  javelin we can add to the update group"""
+
+        if self.counter != 0:
+            self.counter -= 1
+
+        xMove,yMove = 0,0
+
+        """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
+        if character_coords[0] == self.coords[0]:#they are in th esame vertical
+            diff = character_coords[1] - self.coords[1]
+            if diff > 0 and  self.counter == 0:#down
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 0))
+            elif diff < 0 and  self.counter == 0:#up
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 3))
+        if character_coords[1] == self.coords[1]:#they are in teh same horizaontal
+            diff = character_coords[0] - self.coords[0]
+            if diff < 0 and  self.counter == 0:#left
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 1))
+            elif diff > 0 and  self.counter == 0:#right
+                self.counter = 5
+                return ("Shoot", (self.rect.center, 2))
+
+        if self.counter == 0:
+            if self.direction==1:#down
+                yMove = self.dist
+                self.coords = (self.coords[0], self.coords[1] + 1)
+            elif self.direction==2:#Left
+                xMove = -self.dist
+                self.coords = (self.coords[0] - 1, self.coords[1])
+                if self.step == 1:
+                    self.step = 2
+                    self.image = self.images[1]
+                elif self.step == 2:
+                    self.step = 1
+                    self.image = self.images[2]
+            elif self.direction==3:#right
+                xMove = self.dist
+                self.coords = (self.coords[0] + 1, self.coords[1])
+                if self.step == 1:
+                    self.step = 2
+                    self.image = self.images[3]
+                elif self.step == 2:
+                    self.step = 1
+                    self.image = self.images[4]
+            elif self.direction==4:#up
+                yMove = -self.dist
+                self.coords = (self.coords[0], self.coords[1] - 1)
+            self.rect.move_ip(xMove,yMove) #This is 2what actually moves the character
+            if pygame.sprite.spritecollideany(self, block_group) or pygame.sprite.spritecollideany(self, breakable_group) or pygame.sprite.spritecollideany(self, passage_group):
+                """If we hit a block, don’t move – reverse the movement"""
+                self.rect.move_ip(-xMove,-yMove)
+                if self.direction == 1:
+                    self.direction = 4
+                elif self.direction == 2:
+                    self.direction = 3
+                elif self.direction == 3:
+                    self.direction = 2
+                elif self.direction == 4:
+                    self.direction = 1
 
 class Bat(basicSprite.multipleSprite):
     """
@@ -161,14 +225,6 @@ class Bat(basicSprite.multipleSprite):
                 self.direction = 2
             elif self.direction == 4:
                 self.direction = 1
-
-    def die(self, ground_image):
-        """
-        This function establishes what happens when a enemy is killed
-        this means he is set do dead (so update cant be called) and the image is set as a ground image
-        """
-        self.dead = True
-        self.images = ground_image
 
 class Shooter(basicSprite.multipleSprite):
     """
@@ -292,6 +348,3 @@ class Shooter(basicSprite.multipleSprite):
                     self.direction = 2
                 elif self.direction == 4:
                     self.direction = 1
-
-
-#class Boss(basicSprite.Sprite):
