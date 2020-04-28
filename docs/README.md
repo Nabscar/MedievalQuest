@@ -10,7 +10,7 @@ The answer came as a roar out of the forest. The monsters had allied before The 
 
 ## Gameplay
 
-<img src="images/king.png" width="425" heigth="500" align="left">
+<img src="images/king.png" width="425" heigth="525" align="left">
 
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
 
