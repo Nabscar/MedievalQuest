@@ -124,7 +124,7 @@ class MainQuest:
                     for door in self.door_group:
                         door.image = door.images[1]
 
-                    self.boss_group.remove(self.boss)
+                    self.boss_group.remove(self.bosstho)
                     self.Draw()
                     pygame.time.wait(10000)
                     sys.exit()
@@ -534,7 +534,7 @@ class MainQuest:
 
         """Update the projectile group, each update gives a flag that basically tells us wether we hit something"""
         for projectile in self.projectile_group:
-            projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
+            projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group, self.boss_group)
             if projectile_flag != None:
                 if projectile_flag[0] != "Enemy":
                     self.projectile_group.remove(projectile)
