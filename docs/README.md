@@ -1,4 +1,4 @@
-# Game for the Brave
+# The Game
 
 ## Plot
 
