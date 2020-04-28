@@ -42,7 +42,7 @@ class Boss(pygame.sprite.Sprite):
         self.xMove = self.dist
         self.yMove = 0
 
-        self.health = 1
+        self.health = 30
 
     def update(self, block_group, passage_group):
         """Updates Image and location to center after previous update"""
