@@ -38,15 +38,15 @@ class Heart(multipleSprite):
         multipleSprite.__init__(self, centerPoint, images)
 
     def update(self, level):
-        if level == 5:
+        if level >= 4:
             self.image = self.images[0]
-        elif level == 4:
-            self.image = self.images[1]
         elif level == 3:
-            self.image = self.images[2]
+            self.image = self.images[1]
         elif level == 2:
-            self.image = self.images[3]
+            self.image = self.images[2]
         elif level == 1:
+            self.image = self.images[3]
+        elif level == 0:
             self.image = self.images[4]
 
 class Bomb(singleSprite):

@@ -279,8 +279,6 @@ class Shooter(basicSprite.multipleSprite):
         xMove,yMove = 0,0
 
         """First it check is the enemy can see the player. If he can, then the character will not move, it will throw the javelin"""
-        print(character_coords)
-        print(self.coords)
         if character_coords[0] == self.coords[0]:#they are in th esame vertical
             diff = character_coords[1] - self.coords[1]
             if diff > 0 and  self.counter == 0:#down

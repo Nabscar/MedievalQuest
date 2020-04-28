@@ -103,7 +103,6 @@ class MainQuest:
 
             events = pygame.event.get()
             for event in events:
-=======
 
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -563,9 +562,9 @@ class MainQuest:
         """
         self.bomb_number.update(self.player.bombs)
         self.potion_number.update(self.player.potions)
-        self.heart1_group.update(self.player.currentHealth - 7)
-        self.heart2_group.update(self.player.currentHealth - 3)
-        self.heart3_group.update(self.player.currentHealth + 1)
+        self.heart1_group.update(self.player.currentHealth - 8)
+        self.heart2_group.update(self.player.currentHealth - 4)
+        self.heart3_group.update(self.player.currentHealth)
 
         """check bomb_flag"""
         if bomb_flag != None:
