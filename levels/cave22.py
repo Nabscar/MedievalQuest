@@ -63,7 +63,7 @@ class cave22(levelBase.Level):
         bomb = load_image("BlankBomb.png")
         nums = self.numberImages()
         potion = load_image("Blank_Potion_Health.png")
-        heart = [load_image("Heart_Full.png"), load_image("Heart_Half.png"), load_image("Heart_Empty.png")]
+        heart = [load_image('Heart_0.png'), load_image("Heart_1.png"), load_image("Heart_2.png"), load_image("Heart_3.png"), load_image("Heart_4.png")]
         kingbomb = load_image("CaveBomb.png")
         kingarrow = self.arrowImages()
 

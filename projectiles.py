@@ -22,7 +22,6 @@ class Projectile(pygame.sprite.Sprite):
         """Current movement of projectile"""
         self.xMove = 0
         self.yMove = 0
-        print("\t" + str(self.direction))
         if self.direction==0:#down
             self.yMove = self.dist
         elif self.direction==1:#Left

@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction, bombs = 1, potions = 0, health = 6):
+    def __init__ (self, centerPoint, images, coords, direction, bombs = 1, potions = 0, health = 12):
         """
         Initializes the special characteristics of the playable character
         """
@@ -23,7 +23,7 @@ class Player(basicSprite.multipleSprite):
         self.xMove = 0
         self.yMove = 0
         """King Characteristics"""
-        self.maxHealth = 6
+        self.maxHealth = 12
         self.currentHealth = health
         self.damage = 1
         self.quiver = 0 #Once he gets the quiver this becomes 8
@@ -176,8 +176,8 @@ class Player(basicSprite.multipleSprite):
         """IF we hit potion we add 3 potions to our inventory (unless we hit max, in which case we stop at 9)
         Also retunr flag so that the potion disappears from map"""
         if(len(lstPotions) > 0):
-            if self.potions < 6:
-                self.potions += 3
+            if self.potions < 7:
+                self.potions += 2
             else:
                 self.potions = 9
             self.rect.move_ip(-self.xMove,-self.yMove)
@@ -239,7 +239,6 @@ class Player(basicSprite.multipleSprite):
         else:
             self.shooting = True
 
-
     def placeBomb(self):
         """
         This the function that has the character place his bomb (if he has)
@@ -248,8 +247,6 @@ class Player(basicSprite.multipleSprite):
             self.bombs -= 1
             self.placingBomb = True
 
-
-
     def drinkPotion(self):
         """
         If the player has potions, then drink one
@@ -257,5 +254,7 @@ class Player(basicSprite.multipleSprite):
         Increase health by one
         """
         if self.potions > 0 and self.currentHealth < self.maxHealth:
-            self.currentHealth += 1
+            self.currentHealth += 4
+            if self.currentHealth > 12:
+                self.currentHealth = 12
             self.potions -= 1

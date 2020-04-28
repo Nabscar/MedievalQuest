@@ -561,8 +561,8 @@ class MainQuest:
         """
         self.bomb_number.update(self.player.bombs)
         self.potion_number.update(self.player.potions)
-        self.heart1_group.update(self.player.currentHealth - 3)
-        self.heart2_group.update(self.player.currentHealth - 1)
+        self.heart1_group.update(self.player.currentHealth - 7)
+        self.heart2_group.update(self.player.currentHealth - 3)
         self.heart3_group.update(self.player.currentHealth + 1)
 
         """check bomb_flag"""
