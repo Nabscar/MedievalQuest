@@ -1,22 +1,44 @@
-# Medieval Quest
+# Game for the Brave
 
-This is a project that uses PyGame to create a Medival Quest game in the style of the Original Legend of Zelda.
+## Plot
 
-## Description
+In a far away place, in another time, a King was the protector of his kingdom. Everyone loved him, because he was the most benevolent King they had had. He cared for every single person in his kingdom and since his first day, vowed to put every life in his kingdom bfore his own. The people, although they loved him, thought this was just hyperbole, the king would not put his life last, he was human, and humans were selfish. 
 
-The plot of the game is the following. 
-In a far away place, in another time, a King was the protector of his kingdom. But then, a swarm of monsters decided to attack. The King, as a great leader, went with his troops to fight the monsters.
-(The Intro is still in progress) 
- 
-After that, the player “wakes up” (as the King) alone and far away from the castle, with no recollection of the fight. 
-The idea of the game is that the player has to take the King back to the castle, and, in the process, defeat the Monster Leader (which we very creatively have called The Boss). At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The visuals of the game will be similar to the original Legend of Zelda, you will see a frame where things might or might not move, and the player can walk to the borders, some of these leading towards other frames in the game. 
+Time passed, and everyone forgot about this promise, the kingdom was at the longest period of peace they had enjoyed, and there was no way to destroy that. Or so they thought. One day, at the crack of dawn, the people woke up to see their king walking the streets, with his trusty sword and bow, a bad of bombs and many more items. He was walking with purpose, like never before, and the people were scared. What was happening? Why was their king armed to the teeth?
 
-The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. 
+The answer came as a roar out of the forest. The monsters had allied before The Boss, a mythical five headed monster that had been rumored ot kill countless soldiers. This was the moment where the people remember their Kings promise, the one they had cast out as an exageration. The moment the King stepped out of the fortress walls, order his men to close them, and told them to keep them that way until he was back the people realized, they king was ready to sacrifice his live to save theirs, and they hope he wouldn't have to, but they couldn't do anything now.
 
-There are 4 enemies throughout the game: Trolls who throw javelins once they see the player, Bats, who follow the player and try to “bite” him, Shooters, which shoot at the player, and The Boss who has 3 different types of attack. We plan on making a good amount of classes for all of these characters and items. 
+## Gameplay
 
-## Visuals
+<img src="images/king.png" width="425" heigth="450" align="left">
 
+<p aling="left">
+This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
+
+At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
+
+The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
+</p>
+<img src="images/enemies.png" width="500" heigth="400" align="right">
+
+There are 4 enemies throughout the game: 
+
+- Trolls <br>
+<nbsp>Throw javelins once they see the player
+  
+- Bats <br>
+<nbsp>Follow the player and try to bite him
+  
+- Shooters<br>
+<nbsp>Shoot balls at the player
+  
+- The Boss <br>
+<nbsp>Has 3 different types of attack<br>
+<nbsp>- Front attack: Both swords forward <br>
+<nbsp>- Side attack: One sword to each side <br>
+<nbsp>- Sweep attack: Swing in front and sides with ax <br>
+
+<br><br><br>
 ## Installation
 
 There are only two things required when installing Medieval Quest. 
@@ -28,6 +50,11 @@ There are only two things required when installing Medieval Quest.
   $ pip install pygame
  ```
 * Second, go to the main game file (`game.py`) and in the second line, change the path takes to the Levels folder to your own path on your computer.
+
+## Sources
+The only external sources used were:
+The Legend of Zelda as a starting idea point
+PyMan tutorial as a architecture tutorial and to see how to develop the game itself
 
  
 ## Usage
