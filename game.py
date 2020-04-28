@@ -88,7 +88,7 @@ class MainQuest:
             events = pygame.event.get()
             for event in events:
 =======
-            
+
             events = pygame.event.get()
             for event in events:
 
