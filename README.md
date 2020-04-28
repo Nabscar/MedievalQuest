@@ -5,8 +5,11 @@ This is a project that uses PyGame to create a Medival Quest game in the style o
 ## Description
 
 The plot of the game is the following. 
-In a far away place, in another time, a King was the protector of his kingdom. But then, a swarm of monsters decided to attack. The King, as a great leader, went with his troops to fight the monsters.
-(The Intro is still in progress) 
+In a far away place, in another time, a King was the protector of his kingdom. Everyone loved him, because he was the most benevolent King they had had. He cared for every single person in his kingdom and since his first day, vowed to put every life in his kingdom bfore his own. The people, although they loved him, thought this was just hyperbole, the king would not put his life last, he was human, and humans were selfish. 
+
+Time passed, and everyone forgot about this promise, the kingdom was at the longest period of peace they had enjoyed, and there was no way to destroy that. Or so they thought. One day, at the crack of dawn, the people woke up to see their king walking the streets, with his trusty sword and bow, a bad of bombs and many more items. He was walking with purpose, like never before, and the people were scared. What was happening? Why was their king armed to the teeth?
+
+The answer came as a roar out of the forest. The monsters had allied before The Boss, a mythical five headed monster that had been rumored ot kill countless soldiers. This was the moment where the people remember their Kings promise, the one they had cast out as an exageration. The moment the King stepped out of the fortress walls, order his men to close them, and told them to keep them that way until he was back the people realized, they king was ready to sacrifice his live to save theirs, and they hope he wouldn't have to, but they couldn't do anything now.
  
 After that, the player “wakes up” (as the King) alone and far away from the castle, with no recollection of the fight. 
 The idea of the game is that the player has to take the King back to the castle, and, in the process, defeat the Monster Leader (which we very creatively have called The Boss). At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The visuals of the game will be similar to the original Legend of Zelda, you will see a frame where things might or might not move, and the player can walk to the borders, some of these leading towards other frames in the game. 
