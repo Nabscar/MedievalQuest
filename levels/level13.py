@@ -19,7 +19,7 @@ class level13(levelBase.Level):
         self.WALL = 2
         self.CAVEENTRANCE = 3
         self.BOSS = 4
-        self.PLAYER_OW = 5
+        self.BLOCK_GROUND = 5
         self.BLANK = 6
         self.BOMB = 7
         self.BOMBNUM = 8
@@ -68,6 +68,8 @@ class level13(levelBase.Level):
         self.RIGHTBANNERBOTTOMLEFT = 47
         self.RIGHTBANNERBOTTOMRIGHT = 48
 
+        self.PLAYER_OW = 49
+
 
     def getLayoutCave(self):
         """
@@ -77,11 +79,11 @@ class level13(levelBase.Level):
                 [23, 24, 16, 25, 26, 27, 28, 29, 30, 22, 31, 32],\
                 [33, 33, 34, 35, 36 ,37, 38, 39, 40, 41, 42, 42],\
                 [33, 33, 33, 43, 44, 45, 46, 47, 48, 42, 42, 42],\
-                [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
-                [1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1],\
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
-                [1, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1],\
-                [1, 3, 5, 0, 0, 0, 0, 0 ,0, 0, 0, 1],\
+                [1, 5, 0, 0 ,0, 0 ,0 ,0, 0, 0, 5, 1],\
+                [1, 5, 0, 0, 0, 0, 4, 0, 0, 0, 5, 1],\
+                [1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1],\
+                [1, 5, 0, 0, 0, 0, 0, 0, 0 ,0, 5, 1],\
+                [1, 3, 49, 0, 0, 0, 0, 0 ,0, 0, 5, 1],\
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
                 [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
 
@@ -112,6 +114,7 @@ class level13(levelBase.Level):
                   load_image('Left_Castle_Wall.png'), load_image('Left_Full_Window.png'), load_image('Left_Middle_Banner_Left.png'), load_image('Left_Middle_Banner_Right.png'), [load_image('Left_Window_and_Door_Closed.png'), load_image('Left_Window_and_Door_Open.png')], [load_image('Right_Window_and_Door_Closed.png'), load_image('Right_Window_and_Door_Open.png')], load_image('Right_Middle_Banner_Left.png'), load_image('Right_Middle_Banner_Right.png'), load_image('Right_Full_Window.png'), load_image('Right_Castle_Wall.png'),
                   load_image('Left_Bottom_Banner_Left.png'), load_image('Left_Bottom_Banner_Right.png'), [load_image('Left_Door_Closed.png'), load_image('Left_Door_Open.png')], [load_image('Right_Door_Closed.png'), load_image('Right_Door_Open.png')], load_image('Right_Bottom_Banner_Left.png'), load_image('Right_Bottom_Banner_Right.png')]
 
-        lt = [ground, tree, wall, cave, boss, player, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
+        lt = [ground, tree, wall, cave, boss, ground, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
         lt += castle
+        lt += [player]
         return lt

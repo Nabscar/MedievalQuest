@@ -123,7 +123,7 @@ class MainQuest:
                     for door in self.door_group:
                         door.image = door.images[1]
 
-                    self.boss_group.remove(self.bosstho)
+                    self.boss_group.remove(self.boss)
                     self.Draw()
                     pygame.time.wait(10000)
                     sys.exit()
@@ -248,6 +248,9 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.CAVEGROUND:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
+                elif self.layout[y][x]==self.level.BLOCK_GROUND:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.BLOCK_GROUND])
+                    self.block_group.add(ground)
 
                     """Basic Block groups"""
                 elif self.layout[y][x]==self.level.GRASS:
@@ -365,8 +368,13 @@ class MainQuest:
                     self.crossable_group.add(ground)
                     potion = Potion(centerPoint, self.img_list[self.level.PICKPOTION])
                     self.potion_group.add(potion)
-                elif self.layout[y][x]==self.level.PICKBOMB:
+                elif self.layout[y][x]==self.level.PICKBOMBC:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
+                    self.crossable_group.add(ground)
+                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
+                    self.pickup_bomb_group.add(bomb)
+                elif self.layout[y][x]==self.level.PICKBOMBOW:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
                     bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
                     self.pickup_bomb_group.add(bomb)

@@ -21,6 +21,7 @@ class Level:
         self.side = side
 
         self.GROUND = 'x'
+        self.BLOCK_GROUND = 'x'
         self.GRASS = 'x'
         self.WATER = 'x'
         self.TREE = 'x'
@@ -61,7 +62,8 @@ class Level:
         self.POTIONNUM = 'x'
         self.HEART = 'x'
         self.PICKPOTION = 'x'
-        self.PICKBOMB = 'x'
+        self.PICKBOMBC = 'x'
+        self.PICKBOMBOW = 'x'
 
         self.LEFTTOWER = 'x'
         self.CASTLEGRASS = 'x'
