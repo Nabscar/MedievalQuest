@@ -18,7 +18,7 @@ At the start of the game, the player can only move and attack with his sword, an
 
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
 
-<img src="images/enemies.png" width="450" heigth="400" align="right">
+<img src="images/enemies.png" width="500" heigth="400" align="right">
 
 There are 4 enemies throughout the game: 
 
