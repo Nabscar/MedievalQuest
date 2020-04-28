@@ -10,14 +10,15 @@ The answer came as a roar out of the forest. The monsters had allied before The 
 
 ## Gameplay
 
-<img src="images/king.png" width="425" heigth="550" align="left">
+<img src="images/king.png" width="425" heigth="450" align="left">
 
+<p aling="left">
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
 
 At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
 
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
-
+</p>
 <img src="images/enemies.png" width="500" heigth="400" align="right">
 
 There are 4 enemies throughout the game: 
