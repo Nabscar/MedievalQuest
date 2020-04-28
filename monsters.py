@@ -5,7 +5,6 @@ from projectiles import Javelin, Ball
 
 """
 This python script creates three classes that create the Monsters
-It should only be missing Boss
 """
 
 class Troll(basicSprite.multipleSprite):
@@ -227,14 +226,6 @@ class Bat(basicSprite.multipleSprite):
             elif self.direction == 4:
                 self.direction = 1
 
-    def die(self, ground_image):
-        """
-        This function establishes what happens when a enemy is killed
-        this means he is set do dead (so update cant be called) and the image is set as a ground image
-        """
-        self.dead = True
-        self.images = ground_image
-
 class Shooter(basicSprite.multipleSprite):
     """
     This is where we create the Shooters
@@ -357,6 +348,3 @@ class Shooter(basicSprite.multipleSprite):
                     self.direction = 2
                 elif self.direction == 4:
                     self.direction = 1
-
-
-#class Boss(basicSprite.Sprite):

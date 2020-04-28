@@ -78,10 +78,9 @@ class level13(levelBase.Level):
                 [33, 33, 34, 35, 36 ,37, 38, 39, 40, 41, 42, 42],\
                 [33, 33, 33, 43, 44, 45, 46, 47, 48, 42, 42, 42],\
                 [1, 0, 0, 0 ,0, 0 ,0 ,0, 0, 0, 0, 1],\
-                [1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],\
+                [1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [1, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 1],\
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],\
                 [1, 3, 5, 0, 0, 0, 0, 0 ,0, 0, 0, 1],\
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],\
                 [6, 7, 8, 6, 9, 10, 6, 6, 11, 12, 13, 6]]
@@ -110,11 +109,9 @@ class level13(levelBase.Level):
 
         castle = [load_image('Left_Tower.png'), load_image('Castle_Grass.png'), load_image('Left_Flag_Pole.png'), load_image('Left_Flag.png'), load_image('Right_Flag.png'), load_image('Right_Flag_Pole.png'), load_image('Right_Tower.png'),
                   load_image('Left_Window_Left.png'), load_image('Left_Window_Right.png'), load_image('Left_Top_Banner_Left.png'), load_image('Left_Top_Banner_Right.png'), load_image('Left_Top_Window.png'), load_image('Right_Top_Window.png'), load_image('Right_Top_Banner_Left.png'), load_image('Right_Top_Banner_Right.png'), load_image('Right_Window_Left.png'), load_image('Right_Window_Right.png'),
-                  load_image('Left_Castle_Wall.png'), load_image('Left_Full_Window.png'), load_image('Left_Middle_Banner_Left.png'), load_image('Left_Middle_Banner_Right.png'), load_image('Left_Window_and_Door.png'), load_image('Right_Window_and_Door.png'), load_image('Right_Middle_Banner_Left.png'), load_image('Right_Middle_Banner_Right.png'), load_image('Right_Full_Window.png'), load_image('Right_Castle_Wall.png'),
-                  load_image('Left_Bottom_Banner_Left.png'), load_image('Left_Bottom_Banner_Right.png'), load_image('Left_Door.png'), load_image('Right_Door.png'), load_image('Right_Bottom_Banner_Left.png'), load_image('Right_Bottom_Banner_Right.png')]
+                  load_image('Left_Castle_Wall.png'), load_image('Left_Full_Window.png'), load_image('Left_Middle_Banner_Left.png'), load_image('Left_Middle_Banner_Right.png'), [load_image('Left_Window_and_Door_Closed.png'), load_image('Left_Window_and_Door_Open.png')], [load_image('Right_Window_and_Door_Closed.png'), load_image('Right_Window_and_Door_Open.png')], load_image('Right_Middle_Banner_Left.png'), load_image('Right_Middle_Banner_Right.png'), load_image('Right_Full_Window.png'), load_image('Right_Castle_Wall.png'),
+                  load_image('Left_Bottom_Banner_Left.png'), load_image('Left_Bottom_Banner_Right.png'), [load_image('Left_Door_Closed.png'), load_image('Left_Door_Open.png')], [load_image('Right_Door_Closed.png'), load_image('Right_Door_Open.png')], load_image('Right_Bottom_Banner_Left.png'), load_image('Right_Bottom_Banner_Right.png')]
 
         lt = [ground, tree, wall, cave, boss, player, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
         lt += castle
-        print(len(castle))
-        print(len(lt))
         return lt

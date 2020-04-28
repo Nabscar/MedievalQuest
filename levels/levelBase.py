@@ -139,15 +139,12 @@ class Level:
         """
         Returns a list of boss images
         """
-        return load_image('OW_Ground.png')
-        """
-        return [[load_image('Boss_Lv0_Front.png'), load_image('Boss_Lv0_Neutral.png'), load_image('Boss_Lv0_Prep.png'), load_image('Boss_Lv0_Sides.png'), load_image('Boss_Lv0_Swing.png')],
-                [load_image('Boss_Lv1_Front.png'), load_image('Boss_Lv1_Neutral.png'), load_image('Boss_Lv1_Prep.png'), load_image('Boss_Lv1_Sides.png'), load_image('Boss_Lv1_Swing.png')],
-                [load_image('Boss_Lv2_Front.png'), load_image('Boss_Lv2_Neutral.png'), load_image('Boss_Lv2_Prep.png'), load_image('Boss_Lv2_Sides.png'), load_image('Boss_Lv2_Swing.png')],
-                [load_image('Boss_Lv3_Front.png'), load_image('Boss_Lv3_Neutral.png'), load_image('Boss_Lv3_Prep.png'), load_image('Boss_Lv3_Sides.png'), load_image('Boss_Lv3_Swing.png')],
-                [load_image('Boss_Lv4_Front.png'), load_image('Boss_Lv4_Neutral.png'), load_image('Boss_Lv4_Prep.png'), load_image('Boss_Lv4_Sides.png'), load_image('Boss_Lv4_Swing.png')],
-                [load_image('Boss_Lv5_Front.png'), load_image('Boss_Lv5_Neutral.png'), load_image('Boss_Lv5_Prep.png'), load_image('Boss_Lv5_Sides.png'), load_image('Boss_Lv5_Swing.png')]]
-        """
+        return [[load_image('Boss_Lv0_Front.png', 192, 256), load_image('Boss_Lv0_Neutral.png', 192, 192), load_image('Boss_Lv0_Prep.png', 256, 192), load_image('Boss_Lv0_Sides.png', 320, 192), load_image('Boss_Lv0_Swing.png', 320, 256)],
+                [load_image('Boss_Lv1_Front.png', 192, 256), load_image('Boss_Lv1_Neutral.png', 192, 192), load_image('Boss_Lv1_Prep.png', 256, 192), load_image('Boss_Lv1_Sides.png', 320, 192), load_image('Boss_Lv1_Swing.png', 320, 256)],
+                [load_image('Boss_Lv2_Front.png', 192, 256), load_image('Boss_Lv2_Neutral.png', 192, 192), load_image('Boss_Lv2_Prep.png', 256, 192), load_image('Boss_Lv2_Sides.png', 320, 192), load_image('Boss_Lv2_Swing.png', 320, 256)],
+                [load_image('Boss_Lv3_Front.png', 192, 256), load_image('Boss_Lv3_Neutral.png', 192, 192), load_image('Boss_Lv3_Prep.png', 256, 192), load_image('Boss_Lv3_Sides.png', 320, 192), load_image('Boss_Lv3_Swing.png', 320, 256)],
+                [load_image('Boss_Lv4_Front.png', 192, 256), load_image('Boss_Lv4_Neutral.png', 192, 192), load_image('Boss_Lv4_Prep.png', 256, 192), load_image('Boss_Lv4_Sides.png', 320, 192), load_image('Boss_Lv4_Swing.png', 320, 256)],
+                [load_image('Boss_Lv5_Front.png', 192, 256), load_image('Boss_Lv5_Neutral.png', 192, 192), load_image('Boss_Lv5_Prep.png', 256, 192), load_image('Boss_Lv5_Sides.png', 320, 192), load_image('Boss_Lv5_Swing.png', 320, 256)]]
 
     def kingOWImages(self):
         """

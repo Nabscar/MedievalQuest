@@ -32,7 +32,7 @@ class Projectile(pygame.sprite.Sprite):
         elif self.direction==3:#up
             self.yMove = -self.dist
 
-    def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group):
+    def update(self, block_group, breakable_group, player_group, projectile_group, troll_group, shooter_group, bat_group, boss_group):
         flag = "done"
         self.counter -= 1
         if self.counter == 0:
@@ -68,6 +68,11 @@ class Projectile(pygame.sprite.Sprite):
         if flag == "Enemy":
             return(flag, enemies)
 
+        boss = pygame.sprite.spritecollide(self, boss_group, False)
+        if len(boss) > 0:
+            flag = "BossHit"
+        if flag == "BossHit":
+            return (flag, boss)
 
         return None
 

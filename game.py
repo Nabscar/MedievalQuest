@@ -1,7 +1,6 @@
 import os, sys
 sys.path.append('/home/nabih/Documents/SoftDes/MedievalQuest/levels')
 
-
 import pygame
 import level11
 import level12
@@ -22,11 +21,13 @@ from monsters import Troll, Bat, Shooter
 from projectiles import Javelin, Ball, Arrow
 from backgrounds import BreakableBackground, Passage
 from basicSprite import singleSprite, multipleSprite
+from bossMonster import Boss #, BossHelper
 
 if not pygame.font: print('Warning, fonts disabled')
 if not pygame.mixer: print('Warning, sound disabled')
 
 BLOCK_SIZE = 64
+BOSS_BLOCK_SIZE = 192
 
 class MainQuest:
     """
@@ -54,7 +55,6 @@ class MainQuest:
         """
         self.current_level = 22
 
-
     def MainLoop(self):
         """
         Load all of our Sprites
@@ -70,7 +70,7 @@ class MainQuest:
         We could draw here parts that would only need to be drawn once
         But since levels change there is no need for that
         """
-
+        self.boss = None
         pygame.display.flip()
         """
         Main Loop of game
@@ -79,20 +79,32 @@ class MainQuest:
             self.started = True
 
             self.player_group.clear(self.screen,self.background)
+            self.block_group.clear(self.screen,self.background)
+            self.passage_group.clear(self.screen,self.background)
+            self.crossable_group.clear(self.screen,self.background)
+            self.breakable_group.clear(self.screen,self.background)
+            self.inventory_group.clear(self.screen,self.background)
+            self.bomb_number.clear(self.screen,self.background)
+            self.potion_number.clear(self.screen,self.background)
+            self.heart1_group.clear(self.screen,self.background)
+            self.heart2_group.clear(self.screen,self.background)
+            self.heart3_group.clear(self.screen,self.background)
             self.troll_group.clear(self.screen,self.background)
             self.bat_group.clear(self.screen,self.background)
             self.shooter_group.clear(self.screen,self.background)
-            self.projectile_group.clear(self.screen, self.background)
-<<<<<<< HEAD
+            self.projectile_group.clear(self.screen,self.background)
+            self.potion_group.clear(self.screen,self.background)
+            self.pickup_bomb_group.clear(self.screen,self.background)
+            self.bomb_group.clear(self.screen,self.background)
+            self.arrow_group.clear(self.screen,self.background)
+            self.bowandquiver_group.clear(self.screen,self.background)
+            self.boss_group.clear(self.screen,self.background)
+
 
             events = pygame.event.get()
             for event in events:
 =======
 
-            events = pygame.event.get()
-            for event in events:
-
->>>>>>> 13246c016a7eb44bfe55b48d61b6703c100e3994
                 if event.type == pygame.QUIT:
                     sys.exit()
 
@@ -103,12 +115,17 @@ class MainQuest:
                     print("GAME OVER")
                     sys.exit()
 
-                elif self.current_level == 13:
+                elif self.boss != None and self.boss.health == 0:
                     """
                     The player Won
                     Quit the Game
                     """
                     print("You Have reached the Castle! You Won!")
+                    for door in self.door_group:
+                        door.image = door.images[1]
+
+                    self.boss_group.remove(self.boss)
+                    self.Draw()
                     pygame.time.wait(10000)
                     sys.exit()
 
@@ -130,177 +147,10 @@ class MainQuest:
                 """
                 Update the player sprite and all other sprites
                 """
-
-                """Update the troll group, each update gives a flag that basically tells us wether we need to create a javelin or not"""
-                for troll in self.troll_group:
-                    troll_flag = troll.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
-                    if troll_flag != None:
-                        info = troll_flag[1]
-                        javelin = Javelin(info[0], self.img_list[self.level.JAVELIN], info[1])
-                        self.projectile_group.add(javelin)
-
-                """Update the bat group, since bats are not ranged, then there are no necessary flags"""
-                if (len(self.bat_group.sprites()) > 0):
-                    self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
-
-                """Update the shooter group, each update gives a flag that basically tells us wether we need to create a ball or not"""
-                for shooter in self.shooter_group:
-                    shooter_flag = shooter.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
-                    if shooter_flag != None:
-                        info = shooter_flag[1]
-                        ball = Ball(info[0], self.img_list[self.level.BALL], info[1])
-                        self.projectile_group.add(ball)
-
-                """Update the projectile group, each update gives a flag that basically tells us wether we hit something"""
-                for projectile in self.projectile_group:
-                    projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
-                    if projectile_flag != None:
-                        if projectile_flag[0] != "Enemy":
-                            self.projectile_group.remove(projectile)
-
-                """Player update that returns flags"""
-                player_flag = self.player.update(self.block_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group)
-
-                """If player has put a bomb, then update it, it may create a flag"""
-                if self.player.bomb != None:
-                    bomb_flag = self.player.bomb.update(self.breakable_group, self.troll_group, self.shooter_group, self.bat_group)
-                else:
-                    bomb_flag = None
-
-                """If player has put a arrow, it may create a flag"""
-                if self.player.arrow != None:
-                    arrow_flag = self.player.arrow.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
-                else:
-                    arrow_flag = None
-
-                """
-                Update the inventory
-                """
-                self.bomb_number.update(self.player.bombs)
-                self.potion_number.update(self.player.potions)
-                self.heart1_group.update(self.player.currentHealth - 3)
-                self.heart2_group.update(self.player.currentHealth - 1)
-                self.heart3_group.update(self.player.currentHealth + 1)
-                """check bomb_flag"""
-                if bomb_flag != None:
-                    for i in range(0,7):
-                        enemies = bomb_flag[i]
-                        if len(enemies[0]) > 0:
-                            for troll in enemies[0]:
-                                self.troll_group.remove(troll)
-                        if len(enemies[1]) > 0:
-                            for shooter in enemies[1]:
-                                self.shooter_group.remove(shooter)
-                        if len(enemies[2]) > 0:
-                            for bat in enemies[2]:
-                                self.bat_group.remove(bat)
-
-                    self.player.bomb = None
-                    self.bomb_group.empty()
-
-                """check arrow_flag"""
-                if arrow_flag != None:
-                    if arrow_flag[0] == "Enemy":
-                        enemies = arrow_flag[1]
-                        if len(enemies[0]) > 0:
-                            for troll in enemies[0]:
-                                self.troll_group.remove(troll)
-                        if len(enemies[1]) > 0:
-                            for shooter in enemies[1]:
-                                self.shooter_group.remove(shooter)
-                        if len(enemies[2]) > 0:
-                            for bat in enemies[2]:
-                                self.bat_group.remove(bat)
-
-                    elif arrow_flag[0] == "Projectile":
-                        projectiles = arrow_flag[1]
-                        if len(projectiles) > 0:
-                            for projectile in projectiles:
-                                self.projectile_group.remove(projectile)
-
-                    if arrow_flag[0] != "Player":
-                        self.player.arrow = None
-                        self.arrow_group.empty()
-
-                """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
-                if player_flag == None:
-                    holder = 1
-                elif player_flag[0] == "Potion":
-                    self.potion_group.remove(player_flag[1])
-                elif player_flag[0] == "Bomb":
-                    self.pickup_bomb_group.remove(player_flag[1])
-                elif player_flag[0] == "PlaceBomb":
-                    bomb = Bomb(self.player.rect.center, self.img_list[self.level.KINGBOMB])
-                    self.player.bomb = bomb
-                    self.bomb_group.add(bomb)
-                elif player_flag[0] == "Arrow":
-                    arrow = Arrow(self.player.rect.center, self.img_list[self.level.KINGARROW], self.player.direction)
-                    self.player.arrow = arrow
-                    self.arrow_group.add(arrow)
-                elif player_flag[0] == "Attacked":
-                    enemies = player_flag[1]
-                    if len(enemies[0]) > 0:
-                        for troll in enemies[0]:
-                            self.troll_group.remove(troll)
-                    if len(enemies[1]) > 0:
-                        for shooter in enemies[1]:
-                            self.shooter_group.remove(shooter)
-                    if len(enemies[2]) > 0:
-                        for bat in enemies[2]:
-                            self.bat_group.remove(bat)
-                elif player_flag[0] == "Passage":
-                    self.current_level = player_flag[1]
-                    """
-                    Load all of our Sprites
-                    """
-                    self.LoadSprites(player_flag[2])
-                    """
-                    Create Background
-                    """
-                    self.background = pygame.Surface(self.screen.get_size())
-                    self.background = self.background.convert()
-                    self.background.fill((0,0,0))
-                    """
-                    We could draw here parts that would only need to be drawn once
-                    But since levels change there is no need for that
-                    """
-
-                    pygame.display.flip()
-
-                """Do the Drawing"""
-                textpos = 0
-                self.screen.blit(self.background, (0, 0))
-
-                reclist = self.block_group.draw(self.screen)
-                reclist += self.passage_group.draw(self.screen)
-                reclist += self.crossable_group.draw(self.screen)
-                reclist += self.breakable_group.draw(self.screen)
-                reclist += self.troll_group.draw(self.screen)
-                reclist += self.bat_group.draw(self.screen)
-                reclist += self.shooter_group.draw(self.screen)
-                reclist += self.projectile_group.draw(self.screen)
-                reclist += self.player_group.draw(self.screen)
-                reclist += self.inventory_group.draw(self.screen)
-                reclist += self.bomb_number.draw(self.screen)
-                reclist += self.potion_number.draw(self.screen)
-                reclist += self.heart1_group.draw(self.screen)
-                reclist += self.heart2_group.draw(self.screen)
-                reclist += self.heart3_group.draw(self.screen)
-                reclist += self.potion_group.draw(self.screen)
-                reclist += self.pickup_bomb_group.draw(self.screen)
-                reclist += self.bomb_group.draw(self.screen)
-                reclist += self.arrow_group.draw(self.screen)
-                reclist += self.bowandquiver_group.draw(self.screen)
+                self.Update()
+                self.Draw()
 
 
-                pygame.display.update(reclist)
-
-<<<<<<< HEAD
-=======
-
-                #pygame.time.wait(120)
-
->>>>>>> 13246c016a7eb44bfe55b48d61b6703c100e3994
     def LoadSprites(self, side):
         """
         Load all of the sprites that we need
@@ -377,8 +227,10 @@ class MainQuest:
         self.bomb_group = pygame.sprite.RenderUpdates()#bombs player puts down
         self.arrow_group = pygame.sprite.RenderUpdates()#arrows player shoots
         self.bowandquiver_group = pygame.sprite.RenderUpdates()#bow and quiver player can pick up
+        self.player_group = pygame.sprite.RenderUpdates()#player
+        self.boss_group = pygame.sprite.RenderUpdates()#Boss
+        self.door_group = pygame.sprite.RenderUpdates()
 
-        print(self.current_level)
 
         """Go through all the level array"""
         for y in range(len(self.layout)):
@@ -484,6 +336,13 @@ class MainQuest:
                     self.crossable_group.add(ground)
                     shooter = Shooter(centerPoint, self.img_list[self.level.SHOOTER_H], (x, y), 2)#create shooter
                     self.shooter_group.add(shooter)
+                elif self.layout[y][x]==self.level.BOSS:
+                    ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
+                    self.crossable_group.add(ground)
+                    boss = Boss(centerPoint, self.img_list[self.level.BOSS], (x, y), 0)
+                    self.boss = boss
+                    self.boss_group.add(boss)
+                    self.boss_group.add(self.boss)
 
                     """Player"""
                 elif self.layout[y][x]==self.level.PLAYER_OW:
@@ -612,11 +471,11 @@ class MainQuest:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERMIDDLERIGHT])
                     self.block_group.add(castlepart)
                 elif self.layout[y][x]==self.level.LEFTWINDOWANDDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWANDDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.LEFTWINDOWANDDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTWINDOWANDDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWANDDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.RIGHTWINDOWANDDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTBANNERMIDDLELEFT:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERMIDDLELEFT])
                     self.block_group.add(castlepart)
@@ -637,11 +496,11 @@ class MainQuest:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTBANNERBOTTOMRIGHT])
                     self.block_group.add(castlepart)
                 elif self.layout[y][x]==self.level.LEFTDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.LEFTDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.LEFTDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTDOOR:
-                    castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTDOOR])
-                    self.block_group.add(castlepart)
+                    castlepart = multipleSprite(centerPoint, self.img_list[self.level.RIGHTDOOR])
+                    self.door_group.add(castlepart)
                 elif self.layout[y][x]==self.level.RIGHTBANNERBOTTOMLEFT:
                     castlepart = singleSprite(centerPoint, self.img_list[self.level.RIGHTBANNERBOTTOMLEFT])
                     self.block_group.add(castlepart)
@@ -650,18 +509,191 @@ class MainQuest:
                     self.block_group.add(castlepart)
 
 
+        self.player_group.add(self.player)
+
+    def Update(self):
+        """Update the troll group, each update gives a flag that basically tells us wether we need to create a javelin or not"""
+        for troll in self.troll_group:
+            troll_flag = troll.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+            if troll_flag != None:
+                info = troll_flag[1]
+                javelin = Javelin(info[0], self.img_list[self.level.JAVELIN], info[1])
+                self.projectile_group.add(javelin)
+
+        """Update the bat group, since bats are not ranged, then there are no necessary flags"""
+        if (len(self.bat_group.sprites()) > 0):
+            self.bat_group.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+
+        """Update the shooter group, each update gives a flag that basically tells us wether we need to create a ball or not"""
+        for shooter in self.shooter_group:
+            shooter_flag = shooter.update(self.block_group, self.player.coords, self.breakable_group, self.passage_group)
+            if shooter_flag != None:
+                info = shooter_flag[1]
+                ball = Ball(info[0], self.img_list[self.level.BALL], info[1])
+                self.projectile_group.add(ball)
+
+        """Update the projectile group, each update gives a flag that basically tells us wether we hit something"""
+        for projectile in self.projectile_group:
+            projectile_flag = projectile.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group)
+            if projectile_flag != None:
+                if projectile_flag[0] != "Enemy":
+                    self.projectile_group.remove(projectile)
+
+        """Update the boss"""
+        if self.boss != None:
+            self.boss.update(self.block_group, self.passage_group)
+
+        """Player update that returns flags"""
+        player_flag = self.player.update(self.block_group, self.door_group, self.passage_group, self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.projectile_group, self.potion_group, self.pickup_bomb_group, self.bowandquiver_group, self.boss_group)
+
+        """If player has put a bomb, then update it, it may create a flag"""
+        if self.player.bomb != None:
+            bomb_flag = self.player.bomb.update(self.breakable_group, self.troll_group, self.shooter_group, self.bat_group, self.boss_group)
+        else:
+            bomb_flag = None
+
+        """If player has put a arrow, it may create a flag"""
+        if self.player.arrow != None:
+            arrow_flag = self.player.arrow.update(self.block_group, self.breakable_group, self.player_group, self.projectile_group, self.troll_group, self.shooter_group, self.bat_group, self.boss_group)
+        else:
+            arrow_flag = None
+
+        """
+        Update the inventory
+        """
+        self.bomb_number.update(self.player.bombs)
+        self.potion_number.update(self.player.potions)
+        self.heart1_group.update(self.player.currentHealth - 3)
+        self.heart2_group.update(self.player.currentHealth - 1)
+        self.heart3_group.update(self.player.currentHealth + 1)
+
+        """check bomb_flag"""
+        if bomb_flag != None:
+            if bomb_flag[0] == "Enemy":
+                for i in range(0,7):
+                    enemies = bomb_flag[1][i]
+                    if len(enemies[0]) > 0:
+                        for troll in enemies[0]:
+                            self.troll_group.remove(troll)
+                    if len(enemies[1]) > 0:
+                        for shooter in enemies[1]:
+                            self.shooter_group.remove(shooter)
+                    if len(enemies[2]) > 0:
+                        for bat in enemies[2]:
+                            self.bat_group.remove(bat)
+            if bomb_flag[0] == "Boss":
+                self.boss.health -= 1
+
+            self.player.bomb = None
+            self.bomb_group.empty()
+
+        """check arrow_flag"""
+        if arrow_flag != None:
+            if arrow_flag[0] == "Enemy":
+                enemies = arrow_flag[1]
+                if len(enemies[0]) > 0:
+                    for troll in enemies[0]:
+                        self.troll_group.remove(troll)
+                if len(enemies[1]) > 0:
+                    for shooter in enemies[1]:
+                        self.shooter_group.remove(shooter)
+                if len(enemies[2]) > 0:
+                    for bat in enemies[2]:
+                        self.bat_group.remove(bat)
+            if arrow_flag[0] == "BossHit":
+                self.boss.health -= 1
+
+            elif arrow_flag[0] == "Projectile":
+                projectiles = arrow_flag[1]
+                if len(projectiles) > 0:
+                    for projectile in projectiles:
+                        self.projectile_group.remove(projectile)
+
+            if arrow_flag[0] != "Player":
+                self.player.arrow = None
+                self.arrow_group.empty()
+
+        """If the player has collided against something specific, we get a flag as player_flag, depending on the flag, do different things"""
+
+        if player_flag == None:
+            holder = 1
+        elif player_flag[0] == "Potion":
+            self.potion_group.remove(player_flag[1])
+        elif player_flag[0] == "Bomb":
+            self.pickup_bomb_group.remove(player_flag[1])
+        elif player_flag[0] == "PlaceBomb":
+            bomb = Bomb(self.player.rect.center, self.img_list[self.level.KINGBOMB])
+            self.player.bomb = bomb
+            self.bomb_group.add(bomb)
+        elif player_flag[0] == "Arrow":
+            arrow = Arrow(self.player.rect.center, self.img_list[self.level.KINGARROW], self.player.direction)
+            self.player.arrow = arrow
+            self.arrow_group.add(arrow)
+        elif player_flag[0] == "Attacked":
+            enemies = player_flag[1]
+            if len(enemies[0]) > 0:
+                for troll in enemies[0]:
+                    self.troll_group.remove(troll)
+            if len(enemies[1]) > 0:
+                for shooter in enemies[1]:
+                    self.shooter_group.remove(shooter)
+            if len(enemies[2]) > 0:
+                for bat in enemies[2]:
+                    self.bat_group.remove(bat)
+        elif player_flag[0] == "BossHit":
+            if self.boss.attack == 1:
+                self.boss.health -= 1
+            else:
+                self.player.currentHealth -= 1
+        elif player_flag[0] == "Passage":
+            self.current_level = player_flag[1]
+            """
+            Load all of our Sprites
+            """
+            self.LoadSprites(player_flag[2])
+            """
+            Create Background
+            """
+            self.background = pygame.Surface(self.screen.get_size())
+            self.background = self.background.convert()
+            self.background.fill((0,0,0))
+            """
+            We could draw here parts that would only need to be drawn once
+            But since levels change there is no need for that
+            """
+
+            pygame.display.flip()
+
+    def Draw(self):
+        """Do the Drawing"""
+        textpos = 0
+        self.screen.blit(self.background, (0, 0))
+
+        reclist = self.block_group.draw(self.screen)
+        reclist += self.passage_group.draw(self.screen)
+        reclist += self.crossable_group.draw(self.screen)
+        reclist += self.breakable_group.draw(self.screen)
+        reclist += self.troll_group.draw(self.screen)
+        reclist += self.bat_group.draw(self.screen)
+        reclist += self.shooter_group.draw(self.screen)
+        reclist += self.projectile_group.draw(self.screen)
+        reclist += self.player_group.draw(self.screen)
+        reclist += self.inventory_group.draw(self.screen)
+        reclist += self.bomb_number.draw(self.screen)
+        reclist += self.potion_number.draw(self.screen)
+        reclist += self.heart1_group.draw(self.screen)
+        reclist += self.heart2_group.draw(self.screen)
+        reclist += self.heart3_group.draw(self.screen)
+        reclist += self.potion_group.draw(self.screen)
+        reclist += self.pickup_bomb_group.draw(self.screen)
+        reclist += self.bomb_group.draw(self.screen)
+        reclist += self.arrow_group.draw(self.screen)
+        reclist += self.bowandquiver_group.draw(self.screen)
+        reclist += self.boss_group.draw(self.screen)
+        reclist += self.door_group.draw(self.screen)
 
 
-                    """
-                    NOt sure how to do boss since he is more than one block big
-
-                elif  self.layout[y][x]==self.level.BOSS:
-                    boss = #create boss
-                    self.block_group.add(boss)
-                    """
-
-        self.player_group=pygame.sprite.RenderUpdates(self.player)
-
+        pygame.display.update(reclist)
 
 if __name__ == "__main__":
     MainWindow = MainQuest()
