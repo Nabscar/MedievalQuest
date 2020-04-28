@@ -10,19 +10,35 @@ The answer came as a roar out of the forest. The monsters had allied before The 
 
 ## Gameplay
 
+<img src="images/king.png" width="350" align="right">
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.
+
 
 At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
 
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
 
-There are 4 enemies throughout the game: 
-- Trolls who throw javelins once they see the player
-- Bats, who follow the player and try to “bite” him
-- Shooters, which shoot at the player
-- The Boss who has 3 different types of attack
+<img src="images/enemies.png" width="350" align="right">
 
-## Visuals
+There are 4 enemies throughout the game: 
+
+- Trolls <br>
+<nbsp>Throw javelins once they see the player
+  
+- Bats <br>
+<nbsp>Follow the player and try to bite him
+  
+- Shooters<br>
+<nbsp>Shoot balls at the player
+  
+- The Boss <br>
+<nbsp>Has 3 different types of attack<br>
+<nbsp>- Front attack: Both swords forward <br>
+<nbsp>- Side attack: One sword to each side <br>
+<nbsp>- Sweep attack: Swing in front and sides with ax <br>
+  
+
+
 
 ## Installation
 
