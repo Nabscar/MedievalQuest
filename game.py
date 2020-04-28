@@ -100,8 +100,10 @@ class MainQuest:
             self.bowandquiver_group.clear(self.screen,self.background)
             self.boss_group.clear(self.screen,self.background)
 
+
             events = pygame.event.get()
             for event in events:
+=======
 
                 if event.type == pygame.QUIT:
                     sys.exit()
