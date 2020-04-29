@@ -1,4 +1,4 @@
-# Game for the Brave
+# The Game
 
 ## Plot
 
@@ -24,19 +24,19 @@ The layout of the game is a 3x3 screen of frames (of which the player only sees 
 There are 4 enemies throughout the game: 
 
 - Trolls <br>
-<nbsp>Throw javelins once they see the player
+<nbsp>    Throw javelins once they see the player <br>
   
 - Bats <br>
-<nbsp>Follow the player and try to bite him
+<nbsp>    Follow the player and try to bite him <br>
   
 - Shooters<br>
-<nbsp>Shoot balls at the player
+<nbsp>    Shoot balls at the player <br>
   
 - The Boss <br>
-<nbsp>Has 3 different types of attack<br>
-<nbsp>- Front attack: Both swords forward <br>
-<nbsp>- Side attack: One sword to each side <br>
-<nbsp>- Sweep attack: Swing in front and sides with ax <br>
+<nbsp>    Has 3 different types of attack<br>
+<nbsp>    - Front attack: Both swords forward <br>
+<nbsp>    - Side attack: One sword to each side <br>
+<nbsp>    - Sweep attack: Swing in front and sides with ax <br>
 
 <br><br><br>
 ## Installation
