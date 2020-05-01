@@ -2,6 +2,8 @@
 
 ## Goal of this project
 
+Our goal for this project was to create an interactive fun game for people to play so that they would be ale to invest their time in quarentine towards an entretaining idea.
+
 ## Game Information
 
 ### Plot
@@ -14,16 +16,15 @@ The answer came as a roar out of the forest. The monsters had allied before The 
 
 ### Gameplay
 
-<img src="images/king.png" width="425" heigth="450" align="left">
-
-<p aling="left">
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
 
 At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
 
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
-</p>
-<img src="images/enemies.png" width="500" heigth="400" align="right">
+
+<img src="images/king.png" width="30%" float="left">
+<img src="images/levelLayoutIdeation.png" width="30%" float="center">
+<img src="images/enemies.png" width="30%"  float="right">
 
 There are 4 enemies throughout the game: 
 
@@ -60,7 +61,13 @@ python game.py
 in the terminal. Once you have done this, a screen will pop up showing you the first frame of the game. Now in game, you only need to use WASD to move (W is forwards, A if Left, S is Backwards, and D is Right) and the use J to attack with your sword, K to shoot your arrows (once acquired), L to place bombs (if you have them), and I to use Health Potions (If you have them)
 
 ## Implementation Information
-Code doesn’t tell a story by itself. Use more effective methods such as flowcharts and architectural, class, or sequence diagrams to explain how your code works. You could consider including or linking to snippets of code to highlight a particularly crucial segment.
+The easiest way to explain our code is throught a series of nested flow diagrams. The biggest one the shows the <b>overall architecture and run of the code</b> is this one.<br>
+<img src="images/Overall.png">
+As you can see, the most important part of this one is the <b>MainQuest</b>, which can be seen in more detail in teh following diagram.<br>
+<img src="images/MainQuest.png">
+As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, you can see how <b>MainLoop</b> runs, and on the right, you can see how <b>LoadSprites</b> works.
+<img src="images/MainLoop.png" width="48%" align="left">
+<img src="images/LoadSprites.png" width="48%" align="right">
   
  ## Results 
  <video width="320" height="240" controls>
@@ -76,5 +83,5 @@ Tell an illustrative story about the process of creating your software, showing 
 
 ## Attributions
 The only external sources used were:
-- The Legend of Zelda as a starting idea point <br>
+- <a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a> as a starting idea point <br>
 - PyMan tutorial as a architecture tutorial and to see how to develop the game itself
