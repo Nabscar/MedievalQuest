@@ -1,5 +1,7 @@
 # The Game
 
+[GamePlay](https://sd2020spring.github.io/Medieval-Quest/GamePlay/)
+
 ## Goal of this project
 
 Our goal for this project was to create an interactive fun game for people to play so that they would be ale to invest their time in quarentine towards an entretaining idea.
