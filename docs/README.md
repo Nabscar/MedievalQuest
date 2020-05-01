@@ -49,8 +49,8 @@ There are only two things required when installing Medieval Quest.
 
 ## Sources
 The only external sources used were:
-The Legend of Zelda as a starting idea point
-PyMan tutorial as a architecture tutorial and to see how to develop the game itself
+- The Legend of Zelda as a starting idea point <br>
+- PyMan tutorial as a architecture tutorial and to see how to develop the game itself
 
  
 ## Usage
@@ -59,4 +59,4 @@ The usage of this game is really simple. Once the Installation procedure has bee
 ```
 python game.py
 ```
-in the terminal. Once you have done this, a screen will pop up showing you the first frame of the game. Now in game, you only need to use WASD to move (W is forwards, A if Left, S is Backwards, and D is Right) and the use J to attack with your sword, K to shoot your arrows (onse acquired), L to place bombs (if you have them), and I to use Health Potions (If you have them)
+in the terminal. Once you have done this, a screen will pop up showing you the first frame of the game. Now in game, you only need to use WASD to move (W is forwards, A if Left, S is Backwards, and D is Right) and the use J to attack with your sword, K to shoot your arrows (once acquired), L to place bombs (if you have them), and I to use Health Potions (If you have them)
