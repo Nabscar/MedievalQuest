@@ -1,7 +1,7 @@
 ---
 theme: jekyll-theme-merlot
 filename: GamePlay.md
-layout: page
+layout: default
 permalink: /GamePlay/
 --- 
 # Medieval Quest GamePlay
