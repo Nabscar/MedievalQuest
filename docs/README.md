@@ -14,18 +14,17 @@ Time passed, and everyone forgot about this promise, the kingdom was at the long
 
 The answer came as a roar out of the forest. The monsters had allied before The Boss, a mythical five headed monster that had been rumored ot kill countless soldiers. This was the moment where the people remember their Kings promise, the one they had cast out as an exageration. The moment the King stepped out of the fortress walls, order his men to close them, and told them to keep them that way until he was back the people realized, they king was ready to sacrifice his live to save theirs, and they hope he wouldn't have to, but they couldn't do anything now.
 
-### Gameplay
+### GamePlay
 
 <img src="images/king.png" align="left" width="50%">
-<p align="right">
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
 
 At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
-</p>
+
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
 
 <img src="images/enemies.png" align="right" width="50%">
-<p align="left">
+
 There are 4 enemies throughout the game: 
 
 - Trolls, who throw javelins once they see the player <br>
@@ -38,7 +37,7 @@ There are 4 enemies throughout the game:
   * Front attack: Both swords forward <br>
   * Side attack: One sword to each side <br>
   * Sweep attack: Swing in front and sides with ax <br>
-</p>
+
 
 ### Installation
 
