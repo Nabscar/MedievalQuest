@@ -25,9 +25,9 @@
     <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
     <div class="shell">
 
-      <header style="width:1000px">
-        <span class="ribbon-outer" style="width:1000px">
-          <span class="ribbon-inner" style="width:1000px">
+      <header style="width:1000px; left-margin:-320px"">
+        <span class="ribbon-outer" style="width:1000px; left-margin:-320px">
+          <span style="width:1000px; left-margin:-320px">
             <h1>{{ site.title | default: site.github.repository_name }}</h1>
             <h2>{{ site.description | default: site.github.project_tagline }}</h2>
           </span>
@@ -37,33 +37,33 @@
       </header>
 
       {% if site.show_downloads %}
-        <section id="downloads">
-          <span class="inner">
+        <section id="downloads" style="width:1000px; left-margin:-320px">
+          <span class="inner" style="width:1000px; left-margin:-320px">
             <a href="{{ site.github.zip_url }}" class="zip"><em>download</em> .ZIP</a><a href="{{ site.github.tar_url }}" class="tgz"><em>download</em> .TGZ</a>
           </span>
         </section>
       {% else %}
-        <div id="no-downloads">
-          <span class="inner">
+        <div id="no-downloads" style="width:1000px; left-margin:-320px">
+          <span class="inner" style="width:1000px; left-margin:-320px">
           </span>
         </div>
       {% endif %}
 
 
-      <span class="banner-fix" style="width:1000px"></span>
+      <span class="banner-fix" style="width:1000px; left-margin:-320px"></span>
 
 
-      <section id="main_content" style="width:1000px">
+      <section id="main_content" style="width:1000px; left-margin:-320px">
         {{ content }}
       </section>
 
-      <footer style="width:1000px">
-        <span class="ribbon-outer" style="width:1000px">
-          <span class="ribbon-inner" style="width:1000px">
+      <footer style="width:1000px; left-margin:-320px">
+        <span class="ribbon-outer" style="width:1000px; left-margin:-320px">
+          <span class="ribbon-inner" style="width:1000px; left-margin:-320px">
             <p>this project by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> can be found on <a href="{{ site.github.repository_url }}">GitHub</a></p>
           </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
+          <span class="left-tail" style="width:1000px; left-margin:-320px"></span>
+          <span class="right-tail" style="width:1000px; left-margin:-320px"></span>
         </span>
         <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
         <span class="octocat"></span>
