@@ -60,7 +60,8 @@ python game.py
 in the terminal. Once you have done this, a screen will pop up showing you the first frame of the game. Now in game, you only need to use WASD to move (W is forwards, A if Left, S is Backwards, and D is Right) and the use J to attack with your sword, K to shoot your arrows (once acquired), L to place bombs (if you have them), and I to use Health Potions (If you have them)
 
 <br>
- ## Results 
+
+## Results 
  <video>
   <source src="images/gameplay.mp4" type="video/mp4">
 </video> 
@@ -80,7 +81,7 @@ As you can see, the most important part of this one is the <b>MainQuest</b>, whi
 <img src="images/MainQuest.png">
 As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, you can see how <b>MainLoop</b> runs, and on the right, you can see how <b>LoadSprites</b> works.
 <img src="images/MainLoop.png" width="45%" align="left">
-<img src="images/LoadSprites.png" width="45%" height="470px"align="right">
+<img src="images/LoadSprites.png" width="45%" height="470px" align="right">
 
 ### Visual Design
 In our case, we both had very similar ideas to what our game should look like, so we just started working on images which eventually developed into bakcgrounds, enemies, and the player.
