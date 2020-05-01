@@ -28,18 +28,23 @@ permalink: /Architecture/
   Potions (If you have them)
   </p>
 
+  <h3>Project evolution/narrative</h3>
+  <p><b>Medieval Quest was a game that evolved in a very simple and straightforward manner. When we started, we started 
+  working on three different fronts:</b></p>
+
   <h4>Architecture</h4>
   <p>
   For the architecture of the game, we were able to very easily settle on what we currently use. We started by listing 
-  the classes we would need and separate them in different inheritance levels. 
+  the classes we would need and separated them in different inheritance levels. 
   <img src="images/architecture.png">
-  This slowly evolved into our current achitecture.The easiest way to explain it is throught a series of nested flow 
-  diagrams. The biggest one the shows the <b>overall architecture and run of the code</b> is this one.<br>
+  This slowly evolved into our current architecture.The easiest way to explain it is through a series of nested flow 
+  diagrams. The biggest one shows the <b>overall architecture and run of the code</b> through this diagram.<br>
   <img src="images/Overall.png">
-  As you can see, the most important part of this one is the <b>MainQuest</b>, which can be seen in more detail in the 
+  As you can see, the most important part of this diagram is the <b>MainQuest</b>, which can be seen in more detail in the 
   following diagram.<br>
   <img src="images/MainQuest.png">
-  As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, you can see how <b>LoadSprites</b> runs, and on the right, you can see how <b>MainLoop</b> works.
+  As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, 
+  you can see how <b>LoadSprites</b> works, and on the right, you can see how <b>MainLoop</b> works.
   <img src="images/LoadSprites.png" width="45%" align="left">
   <img src="images/MainLoop.png" width="45%" align="right">
   </p>
