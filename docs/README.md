@@ -22,9 +22,7 @@ At the start of the game, the player can only move and attack with his sword, an
 
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
 
-<img src="images/king.png" width="30%" float="left">
-<img src="images/levelLayoutIdeation.png" width="30%" float="center">
-<img src="images/enemies.png" width="30%"  float="right">
+<img src="images/kingLevelsEnemies.png">
 
 There are 4 enemies throughout the game: 
 
@@ -39,7 +37,6 @@ There are 4 enemies throughout the game:
   * Side attack: One sword to each side <br>
   * Sweep attack: Swing in front and sides with ax <br>
 
-<br><br><br>
 ### Installation
 
 There are only two things required when installing Medieval Quest. 
@@ -66,9 +63,10 @@ The easiest way to explain our code is throught a series of nested flow diagrams
 As you can see, the most important part of this one is the <b>MainQuest</b>, which can be seen in more detail in teh following diagram.<br>
 <img src="images/MainQuest.png">
 As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, you can see how <b>MainLoop</b> runs, and on the right, you can see how <b>LoadSprites</b> works.
-<img src="images/MainLoop.png" width="48%" align="left">
-<img src="images/LoadSprites.png" width="48%" align="right">
-  
+<img src="images/MainLoop.png" width="45%" align="left">
+<img src="images/LoadSprites.png" width="45%" align="right">
+
+<br><br><br>
  ## Results 
  <video width="320" height="240" controls>
   <source src="movie.mp4" type="images/gameplay.mp4">
