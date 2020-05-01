@@ -16,14 +16,16 @@ The answer came as a roar out of the forest. The monsters had allied before The 
 
 ### Gameplay
 
+<img src="images/king.png" align="left" width="50%">
+<p align="right">
 This is how the story transpired up until the moment the player comes in. The moment the game start, the palyer is in the middle of the woods, having lost everything but his trusty sword, and he has to battle his way back to the castle, which has, right outside the gates, a waiting Boss who wants to take controll of the kingdom.<br>
 
 At the start of the game, the player can only move and attack with his sword, and eventually, he is able to get Bombs, Potions and a Bow&Arrow. The Bombs and Potions have a counter at the bottom, a counter that shows how many of these the player has left. The Arrows for the Bow are unlimited.
-
+</p>
 The layout of the game is a 3x3 screen of frames (of which the player only sees one at a time) and two separate frames that are caves, which the player can access at different points in the game. What the player does to access these is walk up to the different parts of the border of the screen that lead to other frames, and when he collides with these, the player will be transported to the new screen.
 
-<img src="images/kingLevelsEnemies.png">
-
+<img src="images/enemies.png" align="right" width="50%">
+<p align="left">
 There are 4 enemies throughout the game: 
 
 - Trolls, who throw javelins once they see the player <br>
@@ -36,6 +38,7 @@ There are 4 enemies throughout the game:
   * Front attack: Both swords forward <br>
   * Side attack: One sword to each side <br>
   * Sweep attack: Swing in front and sides with ax <br>
+</p>
 
 ### Installation
 
@@ -64,16 +67,16 @@ As you can see, the most important part of this one is the <b>MainQuest</b>, whi
 <img src="images/MainQuest.png">
 As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, you can see how <b>MainLoop</b> runs, and on the right, you can see how <b>LoadSprites</b> works.
 <img src="images/MainLoop.png" width="45%" align="left">
-<img src="images/LoadSprites.png" width="45%" align="right">
+<img src="images/LoadSprites.png" width="45%" height="470px"align="right">
 
-<br><br><br>
+<br>
  ## Results 
- <video width="320" height="240" controls>
-  <source src="movie.mp4" type="images/gameplay.mp4">
+ <video>
+  <source src="images/gameplay.mp4" type="video/mp4">
 </video> 
 
 ## Software Impact Statement 
-Reflect on the ethical considerations you made throughout the design process, starting with project ideation and the priorities you set for your team. You should think of all of the stakeholders that might be impacted by your project and unintended consequences of the deployment of your software in real world scenarios. Discuss strategies for mitigating these issues.
+In our specific case, the ethical considerations of our project weren't so impactful. Since we just wanted to create a fun game for people to play with, our stakeholder were the players. The only impact on them would be having an amazing time when playing, and deciding they want more. There are no big unintended consequences qwee could think of when developing this software in real world scenarios. The only unitended consequence we could think of would be creating an amazing franchise of games that redefines gaming for all ages (just like The Legend of Zelda, the game which gave us our idea, did).
 
 ## Project evolution/narrative 
 Tell an illustrative story about the process of creating your software, showing how it improved over time. This may draw upon what you learned from the two peer technical reviews and from the code review. Consider the use of screenshots or other tools to demonstrate how your project evolved.
