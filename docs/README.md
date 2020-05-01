@@ -30,22 +30,22 @@ There are 4 enemies throughout the game:
 - Shooters, who shoot balls at the player <br>
   
 - The Boss, who has 3 different types of attack<br>
-<nbsp>    - Front attack: Both swords forward <br>
-<nbsp>    - Side attack: One sword to each side <br>
-<nbsp>    - Sweep attack: Swing in front and sides with ax <br>
+  * Front attack: Both swords forward <br>
+  * Side attack: One sword to each side <br>
+  * Sweep attack: Swing in front and sides with ax <br>
 
 <br><br><br>
 ## Installation
 
 There are only two things required when installing Medieval Quest. 
-* First, make sure to have PyGame installed.
+1. Make sure to have PyGame installed.
   To install pygame in Linux run the following commands:
  ```
   $ apt-get build-dep python-pygame
   $ apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
   $ pip install pygame
  ```
-* Second, go to the main game file (`game.py`) and in the second line, change the path takes to the Levels folder to your own path on your computer.
+2. Go to the main game file (`game.py`) and in the second line, change the path takes to the Levels folder to your own path on your computer.
 
 ## Sources
 The only external sources used were:
