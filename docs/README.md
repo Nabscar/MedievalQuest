@@ -83,6 +83,8 @@ As you can see,<b>MainQuest</b> has to very important parts, which can both be s
 <img src="images/MainLoop.png" width="45%" align="left">
 <img src="images/LoadSprites.png" width="45%" align="right">
 
+<br><br>
+
 ### Visual Design
 In our case, we both had very similar ideas to what our game should look like, so we just started working on images which eventually developed into bakcgrounds, enemies, and the player.
 <img src="images/visuals.png">
