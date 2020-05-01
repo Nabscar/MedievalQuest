@@ -1,5 +1,5 @@
 ---
-theme: jelkyll-theme-merlot
+theme: jekyll-theme-merlot
 filename: GamePlay.md
 layout: page
 permalink: /GamePlay/
