@@ -1,5 +1,6 @@
 # The Game
 
+[Home](https://sd2020spring.github.io/Medieval-Quest/)
 [GamePlay](https://sd2020spring.github.io/Medieval-Quest/GamePlay/)
 
 ## Goal of this project
