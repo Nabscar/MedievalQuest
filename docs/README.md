@@ -8,9 +8,11 @@
 
 ## Goal of this project
 
-Our goal for this project was to create an interactive fun game for people to play so that they would be ale to invest their time in quarentine towards an entretaining idea.
+Our goal for this project was to create an interactive fun game for people to play, so that they would be able to invest their time in quarentine towards an entretaining idea.
 
 ## Game Information
+
+<br>
 
 ## Results 
  <video>
@@ -18,11 +20,7 @@ Our goal for this project was to create an interactive fun game for people to pl
 </video> 
 
 ## Software Impact Statement 
-In our specific case, the ethical considerations of our project weren't so impactful. Since we just wanted to create a fun game for people to play with, our stakeholder were the players. The only impact on them would be having an amazing time when playing, and deciding they want more. There are no big unintended consequences qwee could think of when developing this software in real world scenarios. The only unitended consequence we could think of would be creating an amazing franchise of games that redefines gaming for all ages (just like The Legend of Zelda, the game which gave us our idea, did).
-
-## Project evolution/narrative 
-
-Medieval Quest was a game that evolved in a very simple and straightforward manner. When we started, we started working on three different fronts:
+In our specific case, the ethical considerations of our project weren't so impactful. Since we just wanted to create a fun game for people to play with, our stakeholder were the players. The only impact on them would be having an amazing time when playing, and deciding they want more. There are no big unintended consequences we could think of when developing this software in real world scenarios. The only unitended consequence we could think of would be creating an amazing franchise of games that redefines gaming for all ages (just like The Legend of Zelda, the game which gave us our idea, did).
 
 ## Attributions
 The only external sources used were:
