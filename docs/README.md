@@ -2,8 +2,9 @@
 
 [Home](https://sd2020spring.github.io/Medieval-Quest/)
 
-
 [GamePlay](https://sd2020spring.github.io/Medieval-Quest/GamePlay/)
+
+[Architecture](https://sd2020spring.github.io/Medieval-Quest/Architecture/)
 
 ## Goal of this project
 
