@@ -371,12 +371,12 @@ class MainQuest:
                 elif self.layout[y][x]==self.level.PICKBOMBC:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
-                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
+                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMBC])
                     self.pickup_bomb_group.add(bomb)
                 elif self.layout[y][x]==self.level.PICKBOMBOW:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
-                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMB])
+                    bomb = Bomb(centerPoint, self.img_list[self.level.PICKBOMBOW])
                     self.pickup_bomb_group.add(bomb)
                 elif self.layout[y][x]==self.level.BOWANDQUIVER:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
