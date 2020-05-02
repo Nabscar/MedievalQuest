@@ -1,0 +1,72 @@
+---
+theme: jekyll-theme-merlot
+layout: default
+permalink: /Architecture/
+---
+<!DOCTYPE>
+<html>
+  <head>
+    <h1>Architecture</h1>
+  </head>
+
+<p><a href="https://sd2020spring.github.io/Medieval-Quest/">Home</a></p>
+<p><a href="https://sd2020spring.github.io/Medieval-Quest/GamePlay/">GamePlay</a></p>
+<p><a href="https://sd2020spring.github.io/Medieval-Quest/Architecture/">Architecture</a></p>
+
+<body>
+  <h6>Here you will find the structure of the code for the game and diagrams illustrating how to interpret the classses and
+  functions you will find</h6>
+  
+  <h4>Usage</h4>
+  <p>
+  The usage of this game is really simple. Once the Installation procedure has been done, just go to the folder 
+  where game.py is in your computer and run
+  <pre><code>python game.py</code></pre>
+  in the terminal. Once you have done this, a screen will pop up showing you the first frame of the game. Now in game, 
+  you only need to use WASD to move (W is forwards, A if Left, S is Backwards, and D is Right) and the use J to attack 
+  with your sword, K to shoot your arrows (once acquired), L to place bombs (if you have them), and I to use Health 
+  Potions (If you have them)
+  </p>
+
+  <h3>Project evolution/narrative</h3>
+  <p><b>Medieval Quest was a game that evolved in a very simple and straightforward manner. When we started, we started 
+  working on three different fronts:</b></p>
+
+  <h4>Architecture</h4>
+  <p>
+  For the architecture of the game, we were able to very easily settle on what we currently use. We started by listing 
+  the classes we would need and separated them in different inheritance levels. 
+  <img src="images/architecture.png">
+  This slowly evolved into our current architecture.The easiest way to explain it is through a series of nested flow 
+  diagrams. The biggest one shows the <b>overall architecture and run of the code</b> through this diagram.<br>
+  <img src="images/Overall.png">
+  As you can see, the most important part of this diagram is the <b>MainQuest</b>, which can be seen in more detail in the 
+  following diagram.<br>
+  <img src="images/MainQuest.png">
+  As you can see,<b>MainQuest</b> has to very important parts, which can both be seen in more detail below. On the left, 
+  you can see how <b>LoadSprites</b> works, and on the right, you can see how <b>MainLoop</b> works.
+  <img src="images/LoadSprites.png" width="45%" align="left">
+  <img src="images/MainLoop.png" width="45%" align="right">
+  </p>
+  
+  <h4>Visual Origin</h4>
+  <p>
+  In our case, we both had very similar ideas to what our game should look like, 
+  so we just started working on images which eventually developed into bakcgrounds, enemies, and the player.
+  <img src="images/visuals.png">
+  </p>
+  
+  <h4>Game Layout</h4>
+  <p>
+  The game layout was fairly easy to do. When we started we settled on the idea of a 3x3 grid of frames, 
+  since this was a big enough number for the world to feel semi-developed, but small enough for it to be 
+  achievable between the two of us. We also decided we should have caves, and both of us agreed that two 
+  caves seemed to be the right number of caves for our 3x3 world. Initially our overall design was the following:
+  <img src="images/LayoutV1.png">
+  Which afterwards evolved into this design (Which is the hand-drawn sketch of the design we actually use for our levels):
+  <img src="images/levelLayoutIdeation.png">
+  </p>
+  
+</body>
+
+</html>
