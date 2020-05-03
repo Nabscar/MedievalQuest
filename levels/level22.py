@@ -17,7 +17,7 @@ class level22(levelBase.Level):
         self.GROUND = 0
         self.TREE = 1
         self.WALL = 2
-        self.BREAKABLE_WALL_F = 3
+        self.BREAKABLE_WALL_C = 3
         self.PLAYER_OW = 4
         self.PASSAGE_T = 5
         self.BLANK = 6

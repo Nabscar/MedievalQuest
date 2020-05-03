@@ -112,5 +112,5 @@ class Arrow(Projectile):
             """
             directions go in same order as image order
             """
-            self.image = self.images[self.direction]
+            self.image = self.images[self.direction ]
             self.projectile = 0

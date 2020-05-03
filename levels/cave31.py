@@ -69,4 +69,4 @@ class cave31(levelBase.Level):
         kingbomb = load_image("CaveBomb.png")
         kingarrow = self.arrowImages()
 
-        return [ground, wall, BreakableWall,blank,player, passage, pickbomb, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]
+        return [ground, wall, BreakableWall, blank, player, passage, pickbomb, blank, bomb, nums, potion, nums, heart, heart, heart, kingbomb, kingarrow]

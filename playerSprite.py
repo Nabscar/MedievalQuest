@@ -8,7 +8,7 @@ class Player(basicSprite.multipleSprite):
     This is the sprite or the playable character
     """
 
-    def __init__ (self, centerPoint, images, coords, direction, bombs = 1, potions = 0, health = 12):
+    def __init__ (self, centerPoint, images, coords, direction, quiver = 0, bombs = 0, potions = 0, health = 12):
         """
         Initializes the special characteristics of the playable character
         """
@@ -26,7 +26,7 @@ class Player(basicSprite.multipleSprite):
         self.maxHealth = 12
         self.currentHealth = health
         self.damage = 1
-        self.quiver = 0 #Once he gets the quiver this becomes 8
+        self.quiver = quiver #Once he gets the quiver this becomes 8
         self.bombs = bombs
         self.potions = potions
         self.index = 0
@@ -43,25 +43,30 @@ class Player(basicSprite.multipleSprite):
         depending on what they they pressed, it will move once update() is called.
         """
         self.attacking = 0
+        print(self.quiver)
 
         if (key == K_d):
             self.xMove += self.dist
-            self.index = 2 + self.quiver
+            self.direction = 2
+            self.index = self.direction + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0] + 1, self.coords[1])
         elif (key == K_a):
             self.xMove -= self.dist
-            self.index = 1 + self.quiver
+            self.direction = 1
+            self.index = self.direction + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0] - 1, self.coords[1])
         elif (key == K_w):
             self.yMove -= self.dist
-            self.index = 3 + self.quiver
+            self.direction = 3
+            self.index = self.direction + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] - 1)
         elif (key == K_s):
             self.yMove += self.dist
-            self.index = 0 + self.quiver
+            self.direction = 0
+            self.index = self.direction + self.quiver
             self.image = self.images[self.index]
             self.coords = (self.coords[0], self.coords[1] + 1)
         elif (key == K_j):
@@ -198,6 +203,9 @@ class Player(basicSprite.multipleSprite):
         """if we hit the bow and quiver, we change images and unlock the arrow"""
         if(len(BowAndQuiver) > 0):
             self.quiver = 8
+            self.xMove = 0
+            self.yMove = 0
+            return ("BowAndQuiver", BowAndQuiver[0])
 
         self.xMove = 0
         self.yMove = 0
@@ -237,6 +245,7 @@ class Player(basicSprite.multipleSprite):
         if self.quiver == 0:
             return
         else:
+            self.image = self.images[self.index + 8]
             self.shooting = True
 
     def placeBomb(self):

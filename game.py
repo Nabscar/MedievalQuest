@@ -351,16 +351,16 @@ class MainQuest:
                     ground = singleSprite(centerPoint, self.img_list[self.level.GROUND])
                     self.crossable_group.add(ground)
                     if self.started:
-                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4, self.player.quiver, self.player.bombs, self.player.potions, self.player.currentHealth)
                     else:
-                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4)
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_OW], (x,y), 4, 0)
                 elif self.layout[y][x]==self.level.PLAYER_C:
                     ground = singleSprite(centerPoint, self.img_list[self.level.CAVEGROUND])
                     self.crossable_group.add(ground)
                     if self.started:
-                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4, self.player.bombs, self.player.potions, self.player.currentHealth)
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4, self.player.quiver, self.player.bombs, self.player.potions, self.player.currentHealth)
                     else:
-                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4)
+                        self.player = Player(centerPoint, self.img_list[self.level.PLAYER_C], (x,y), 4, 0)
 
                     """Items"""
                 elif self.layout[y][x]==self.level.PICKPOTION:
@@ -628,6 +628,8 @@ class MainQuest:
             self.potion_group.remove(player_flag[1])
         elif player_flag[0] == "Bomb":
             self.pickup_bomb_group.remove(player_flag[1])
+        elif player_flag[0] == "BowAndQuiver":
+            self.bowandquiver_group.remove(player_flag[1])
         elif player_flag[0] == "PlaceBomb":
             bomb = Bomb(self.player.rect.center, self.img_list[self.level.KINGBOMB])
             self.player.bomb = bomb
