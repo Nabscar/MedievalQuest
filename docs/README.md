@@ -28,3 +28,4 @@ In our specific case, the ethical considerations of our project weren't so impac
 The only external sources used were:
 - <a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a> as a starting idea point <br>
 - PyMan tutorial as a architecture tutorial and to see how to develop the game itself
+
