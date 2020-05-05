@@ -11,7 +11,7 @@
 Our goal for this project was to create an interactive fun game for people to play, so that they would be able to invest their time in quarentine towards an entretaining idea.
 
 ## Game Information
-
+<video src="images/mechanicsVideo.mp4" width="320" height="200" controls preload></video>
 <br>
 
 ## Results 
