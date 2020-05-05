@@ -11,7 +11,7 @@
 Our goal for this project was to create an interactive fun game for people to play, so that they would be able to invest their time in quarentine towards an entretaining idea.
 
 ## Game Information
-MedievalQuest is a adventure rpg that takes place in a kingdom in a far away place, in another time, where the King, you, will be tasked with saving what he holds dear to his soul, his Kingdom. Along this journey you will encounter many foes and be tasked with some challeneges that only a true King will be able to overcome. If you dare accept the fate of this hero, head over to [GamePlay](https://sd2020spring.github.io/Medieval-Quest/GamePlay/), and install MedievalQuest!
+MedievalQuest is an Adventure RPG that takes place in a kingdom in a far away place, in another time, where the King, you, will be tasked with saving what he holds dear to his soul, his Kingdom. Along this journey you will encounter many foes and be tasked with some challeneges that only a true King will be able to overcome. If you dare accept the fate of this hero, head over to [GamePlay](https://sd2020spring.github.io/Medieval-Quest/GamePlay/), and install MedievalQuest!
 <br>
 
 ## Results 
