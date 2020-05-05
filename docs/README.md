@@ -15,7 +15,8 @@ Our goal for this project was to create an interactive fun game for people to pl
 <br>
 
 ## Results 
-[![](http://img.youtube.com/vi/gs-uSgbGnQo/0.jpg)](http://www.youtube.com/watch?v=gs-uSgbGnQo "")
+ <iframe src="http://www.youtube.com/watch?v=gs-uSgbGnQo"
+   width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
 
 Here is a video that displays what how the game plays and the usage of items such as your bombs, potions, or your bow. 
 However, the final frame/boss frame is removed and kept a surprise for the player to reach on their own.
