@@ -46,7 +46,7 @@ class Heart(multipleSprite):
             self.image = self.images[2]
         elif level == 1:
             self.image = self.images[3]
-        elif level == 0:
+        elif level <= 0:
             self.image = self.images[4]
 
 class Bomb(singleSprite):
