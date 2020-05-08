@@ -43,7 +43,6 @@ class Player(basicSprite.multipleSprite):
         depending on what they they pressed, it will move once update() is called.
         """
         self.attacking = 0
-        print(self.quiver)
 
         if (key == K_d):
             self.xMove += self.dist
